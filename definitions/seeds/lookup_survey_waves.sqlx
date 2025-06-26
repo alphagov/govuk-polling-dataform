@@ -5,9 +5,18 @@ config {
 SELECT
   *
 FROM
-  UNNEST(
-    -- Define an array of structs. Each struct is a row in your table.
-    ARRAY<STRUCT<name STRING, provider STRING, start_date DATE, end_date DATE>>[ ('wave 1',
-      'BMG',
-      NULL,
-      NULL) ] )
+  UNNEST( ARRAY<STRUCT<name STRING, provider STRING, start_date DATE, end_date DATE>>[
+    ('wave 1', 'BMG', NULL, NULL),
+    ('wave 2', 'BMG', NULL, NULL),
+    ('wave 3', 'BMG', NULL, NULL),
+    ('wave 4', 'BMG', NULL, NULL),
+    ('wave 5', 'BMG', NULL, NULL),
+    ('wave 6', 'BMG', NULL, NULL),
+    ('wave 7', 'BMG', NULL, NULL),
+    ('wave 8', 'BMG', NULL, NULL),
+    ('wave 9', 'BMG', NULL, NULL),
+    ('wave 10', 'BMG', NULL, NULL),
+    ('wave 11', 'BMG', NULL, NULL),
+    ('wave 12', 'BMG', NULL, NULL),
+    ('wave 13', 'BMG', NULL, NULL)
+    ] )

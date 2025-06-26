@@ -1,5 +1,5 @@
 config {
-    type: "view",
+    type: "table",
     assertions: {
         uniqueKey: ["name", "response_id"],
         nonNull: ["name", "response_id"]
