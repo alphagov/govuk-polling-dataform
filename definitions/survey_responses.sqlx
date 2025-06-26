@@ -1,0 +1,28 @@
+config {
+    type: "table",
+    database: "govuk-polling",
+    schema: "synthetic_polling",
+    assertions: {
+        uniqueKey: ["survey_wave_id", "response_id"],
+        nonNull: ["id", "survey_wave_id"]
+    },
+}
+
+SELECT
+  TO_HEX(MD5(CONCAT(src.name, src.response_id))) AS id,
+  survey_waves.id AS survey_wave_id,
+  src.response_id,
+  src.date,
+  src.weight,
+  src.quartile_country,
+  src.gender,
+  src.age,
+  src.qualification_2020,
+  src.gor_code,
+  src.ethnicity
+FROM
+  ${ref("cleaned_wavescombined")} src
+LEFT JOIN
+  ${ref("survey_waves")} survey_waves
+USING
+  (name)

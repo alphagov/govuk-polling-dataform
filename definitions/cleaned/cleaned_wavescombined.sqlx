@@ -1,0 +1,22 @@
+config {
+    type: "view",
+    assertions: {
+        uniqueKey: ["name", "response_id"],
+        nonNull: ["name", "response_id"]
+    },
+}
+
+SELECT
+  Date AS date,
+  LOWER(Wave) AS name,
+  responseid AS response_id,
+  respid AS resp_id,
+  CAST(WEIGHT AS FLOAT64) AS weight,
+  quartile_country,
+  gender,
+  age,
+  qualification2020 AS qualification_2020,
+  gor_code,
+  ethnicity
+FROM
+  ${ref("representative_synthetic_wavescombined")}
