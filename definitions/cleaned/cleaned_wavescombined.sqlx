@@ -7,16 +7,15 @@ config {
 }
 
 SELECT
-  Date AS date,
-  LOWER(Wave) AS name,
-  responseid AS response_id,
-  respid AS resp_id,
+  DATE(Date) AS date,
+  TRIM(LOWER(Wave)) AS name,
+  TRIM(CAST(responseid AS STRING)) AS response_id,
   CAST(WEIGHT AS FLOAT64) AS weight,
-  quartile_country,
-  gender,
-  age,
-  qualification2020 AS qualification_2020,
-  gor_code,
-  ethnicity
+  TRIM(CAST(quartile_country AS STRING)) AS quartile_country,
+  TRIM(CAST(gender AS STRING)) AS gender,
+  TRIM(CAST(age AS STRING)) AS age,
+  TRIM(CAST(qualification2020 AS STRING)) AS qualification_2020,
+  TRIM(CAST(gor_code AS STRING)) AS gor_code,
+  TRIM(CAST(ethnicity AS STRING)) AS ethnicity
 FROM
   ${ref("representative_synthetic_wavescombined")}
