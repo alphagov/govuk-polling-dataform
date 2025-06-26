@@ -3,8 +3,8 @@ config {
     database: "govuk-polling",
     schema: "synthetic_polling",
     assertions: {
-        uniqueKey: ["survey_wave_id", "response_id"],
-        nonNull: ["id", "survey_wave_id"]
+        uniqueKey: ["id"],
+        nonNull: ["id", "survey_wave_id", "response_id"]
     },
 }
 

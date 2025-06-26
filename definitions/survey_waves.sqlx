@@ -3,7 +3,7 @@ config {
     database: "govuk-polling",
     schema: "synthetic_polling",
     assertions: {
-        uniqueKey: ["name"],
+        uniqueKey: ["id"],
         nonNull: ["id", "name"]
     },
 }
