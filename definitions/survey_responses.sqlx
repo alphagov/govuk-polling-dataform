@@ -21,7 +21,7 @@ SELECT
   src.gor_code,
   src.ethnicity
 FROM
-  ${ref("cleaned_wavescombined")} src
+  ${ref("stg_wavescombined")} src
 LEFT JOIN
   ${ref("survey_waves")} survey_waves
 USING

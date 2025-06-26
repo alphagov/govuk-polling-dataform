@@ -1,5 +1,5 @@
 config {
-    type: "table",
+    type: "view",
     assertions: {
         uniqueKey: ["name", "response_id"],
         nonNull: ["name", "response_id"]
@@ -18,4 +18,10 @@ SELECT
   TRIM(CAST(gor_code AS STRING)) AS gor_code,
   TRIM(CAST(ethnicity AS STRING)) AS ethnicity
 FROM
-  ${ref("representative_synthetic_wavescombined")}
+  (
+    SELECT * FROM ${ref("stg_wave_13")}
+
+    UNION ALL
+
+    SELECT * FROM ${ref("stg_wave_12")}
+  )

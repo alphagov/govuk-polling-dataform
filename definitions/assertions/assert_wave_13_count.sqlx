@@ -1,0 +1,11 @@
+config {
+  type: "assertion",
+  description: "Asserts that the country_lookup table has exactly 1570 rows."
+}
+
+SELECT
+  COUNT(*) AS actual_row_count
+FROM
+  ${ref("stg_wave_13")}
+HAVING
+  actual_row_count != 1570
