@@ -25,20 +25,25 @@ erDiagram
         STRING survey_wave_id FK
         DATE date
         FLOAT weight
-        STRING quartile_country
+        INTEGER imd_quartile_country
         STRING gender
-        STRING age
+        STRING age_group
         STRING qualification_2020
-        STRING gor_code
         STRING ethnicity
     }
 
     survey_waves ||--o{ survey_responses : "has"
 ```
 
-### Running the test suite
+### Development
 
 TBC
+
+### Deployment
+Once you PR is reviewed and approved, merge into `main`.
+
+The production release configuration is based on `main` and will compile once a day. To manually compile, go to [Release Configurations](https://console.cloud.google.com/bigquery/dataform/locations/europe-west2/repositories/polling/details/release-scheduling?hl=en&inv=1&invt=Ab1Ofw&project=gds-bq-reporting).
+Then select the `production` configuration and `Start Execution`.
 
 ## Licence
 
