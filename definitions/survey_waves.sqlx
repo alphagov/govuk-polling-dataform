@@ -1,0 +1,30 @@
+config {
+    type: "table",
+    database: "govuk-polling",
+    schema: "synthetic_polling",
+    assertions: {
+        uniqueKey: ["id"],
+        nonNull: ["id", "name"]
+    },
+}
+
+WITH
+  waves AS (
+  SELECT
+    name
+  FROM
+    ${ref("stg_wavescombined")}
+  QUALIFY
+    ROW_NUMBER() OVER (PARTITION BY name) = 1 )
+SELECT
+  TO_HEX(MD5(waves.name)) AS id,
+  waves.name,
+  waves_lookup.provider,
+  waves_lookup.start_date,
+  waves_lookup.end_date
+FROM
+  waves
+LEFT JOIN
+  ${ref("lookup_survey_waves")} AS waves_lookup
+USING
+  (name)

@@ -1,0 +1,27 @@
+config {
+    type: "view",
+    assertions: {
+        uniqueKey: ["name", "response_id"],
+        nonNull: ["name", "response_id"]
+    },
+}
+
+SELECT
+  DATE(Date) AS date,
+  TRIM(LOWER(Wave)) AS name,
+  TRIM(CAST(responseid AS STRING)) AS response_id,
+  CAST(WEIGHT AS FLOAT64) AS weight,
+  TRIM(CAST(quartile_country AS STRING)) AS quartile_country,
+  TRIM(CAST(gender AS STRING)) AS gender,
+  TRIM(CAST(age AS STRING)) AS age,
+  TRIM(CAST(qualification2020 AS STRING)) AS qualification_2020,
+  TRIM(CAST(gor_code AS STRING)) AS gor_code,
+  TRIM(CAST(ethnicity AS STRING)) AS ethnicity
+FROM
+  (
+    SELECT * FROM ${ref("stg_wave_13")}
+
+    UNION ALL
+
+    SELECT * FROM ${ref("stg_wave_12")}
+  )
