@@ -14,11 +14,10 @@ SELECT
   src.response_id,
   src.date,
   src.weight,
-  src.quartile_country,
+  src.imd_quartile_country,
   src.gender,
-  src.age,
+  lookup_age_group.age_group,
   src.qualification_2020,
-  src.gor_code,
   src.ethnicity
 FROM
   ${ref("stg_wavescombined")} src
@@ -26,3 +25,8 @@ LEFT JOIN
   ${ref("survey_waves")} survey_waves
 USING
   (name)
+LEFT JOIN
+  ${ref("lookup_age_group")} lookup_age_group
+USING
+    (provider, age_code)
+

@@ -1,0 +1,23 @@
+config {
+  type: "table",
+  assertions : {
+    uniqueKey: ["provider", "age_code"]
+  },
+  description: "A centralized lookup table to map provider-specific age codes to standardized age groups."
+}
+
+SELECT
+  *
+FROM
+  UNNEST(
+    ARRAY<STRUCT<provider STRING, age_code STRING, age_group STRING>>[
+      -- Rule set for provider 'BMG'
+      ('BMG', '2', '18 to 24'),
+      ('BMG', '3', '25 to 34'),
+      ('BMG', '4', '35 to 44'),
+      ('BMG', '5', '45 to 54'),
+      ('BMG', '6', '55 to 64'),
+      ('BMG', '7', '65 to 74'),
+      ('BMG', '8', '75+')
+    ]
+  )

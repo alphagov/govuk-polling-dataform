@@ -1,6 +1,5 @@
 defaultProject: gds-bq-reporting
 defaultLocation: europe-west2
-defaultDataset: processing
+defaultDataset: polling_processing
 defaultAssertionDataset: dataform_assertions
 dataformCoreVersion: 3.0.24
-namePrefix: polling
