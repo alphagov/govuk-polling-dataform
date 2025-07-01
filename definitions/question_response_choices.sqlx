@@ -1,0 +1,28 @@
+config {
+    type: "table",
+    database: "govuk-polling",
+    schema: "synthetic_polling",
+    assertions: {
+        uniqueKey: ["question_response_choice_id"],
+        nonNull: ["question_response_choice_id", "choice_value", "choice_text"]
+    },
+}
+
+WITH
+response_choices AS (
+  SELECT
+    survey_response_id,
+    survey_wave_id,
+    src_question_id,
+    src_question_response_id,
+    choice_value
+  FROM ${ref("stg_unpack_question_responses")}
+)
+SELECT
+    TO_HEX(MD5(CONCAT(responses.survey_response_id, questions.question_id))) AS question_response_choice_id,
+    *,
+FROM response_choices
+LEFT JOIN ${ref("question_responses")}
+    USING (survey_response_id, src_question_id)
+LEFT JOIN ${ref("questions")}
+    USING (survey_wave_id, src_question_id)

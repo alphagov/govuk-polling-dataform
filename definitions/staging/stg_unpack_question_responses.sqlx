@@ -1,0 +1,43 @@
+config {
+    type: "view",
+    assertions: {
+        uniqueKey: ["survey_response_id", "src_question_id", "src_question_response_id"],
+        nonNull: [],
+        rowConditions: []
+    },
+}
+
+  -- This table will have duplicate rows for multi-select responses
+  -- multi-select responses are in columns that contain an underscore, e.g. ql7_1, ql7_2
+WITH
+  unpivoted AS (
+  SELECT
+    survey_response_id,
+    src_question_id_with_multi_suffix,
+    survey_wave_id,
+    NULLIF(choice_value, '') AS choice_value
+  FROM
+    ${ref("stg_bmg_all_waves")}
+  UNPIVOT
+    (
+      -- TODO: can we derive this list from the lookup somehow - seems brittle
+      choice_value FOR src_question_id_with_multi_suffix IN (ql5,
+        ql7,
+        ql7a_1,
+        ql7a_2,
+        ql7a_3,
+        ql7a_4,
+        ql7a_5,
+        ql7a_6
+        )
+    )
+  )
+SELECT
+  survey_response_id,
+  REGEXP_EXTRACT(src_question_id_with_multi_suffix, r'[^_]+') AS src_question_id,
+  -- we will give single-select choices a value of 1 to indicate it is 1 of 1 possible choices
+  COALESCE(REGEXP_EXTRACT(src_question_id_with_multi_suffix, r'_(.*)'), '1') AS src_question_response_id,
+  survey_wave_id,
+  choice_value
+FROM
+  unpivoted

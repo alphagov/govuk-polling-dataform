@@ -1,0 +1,26 @@
+config {
+    type: "table",
+    description: "A table containing survey questions. Ensure any questions added here are also added to the UNPIVOT statement in question_responses",
+    columns: {
+      survey_wave_id: "The identifier for the survey wave. Get this from the survey_waves table.",
+      src_question_id: "The unique identifier for a question in the source survey.",
+      question_text: "The text of the survey question.",
+      question_type: "The type of answer expected for the question (e.g., 'single')."
+    },
+    assertions : {
+      uniqueKey: ["survey_wave_id", "src_question_id"],
+      rowConditions: [
+        "question_type IN ('single', 'multi')"
+    ]
+    }
+}
+
+SELECT
+  *
+FROM
+  UNNEST( ARRAY<STRUCT<survey_wave_id STRING, src_question_id STRING, question_text STRING, question_type STRING>>[
+    -- wave 13 questions
+    ('99bf804dece246925945905b20b33854', 'ql5', 'Thinking about the last time you used GOV.UK, how satisfied or dissatisfied were you with your experience?', 'single'),
+    ('99bf804dece246925945905b20b33854', 'ql7', 'Still thinking about the last time you used GOV.UK, which device did you use?', 'single'),
+    ('99bf804dece246925945905b20b33854', 'ql7a', 'To what extent do you agree with each of the following?', 'multi')
+    ] )

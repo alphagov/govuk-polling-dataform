@@ -1,0 +1,26 @@
+config {
+    type: "table",
+    description: "A table containing possible question response choices.",
+    columns: {
+      question_id: "The identifier for the question in a specific survey wave. Get this from the questions table.",
+      choice_value: "The coded value received in the data.",
+      choice_text: "The text which was presented the user when making a selection.",
+    },
+    assertions : {
+      uniqueKey: ["question_id", "choice_value"],
+    }
+}
+
+SELECT
+  *
+FROM
+  UNNEST( ARRAY<STRUCT<question_id STRING, choice_value STRING, choice_text STRING>>[
+    -- bmg wave 13 questions
+    -- ql5
+    ('fdffbe47c37426d2450fa81e3438a971', '1', 'Very satisfied'),
+    ('fdffbe47c37426d2450fa81e3438a971', '2', 'Fairly satisfied'),
+    ('fdffbe47c37426d2450fa81e3438a971', '3', 'Neither satisfied nor dissatisfied'),
+    ('fdffbe47c37426d2450fa81e3438a971', '4', 'Fairly dissatisfied'),
+    ('fdffbe47c37426d2450fa81e3438a971', '5', 'Very dissatisfied'),
+    ('fdffbe47c37426d2450fa81e3438a971', '6', "Don't know")
+    ] )

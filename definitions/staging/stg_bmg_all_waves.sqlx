@@ -1,0 +1,73 @@
+config {
+    type: "view",
+    assertions: {
+        uniqueKey: ["survey_response_id"],
+        nonNull: ["survey_response_id", "survey_wave_id"],
+        rowConditions: [
+            "age_code IN ('2', '3', '4', '5', '6', '7', '8')"
+        ]
+    },
+}
+WITH bmg_all_waves AS (
+    SELECT * FROM ${ref("stg_wave_13")}
+
+    UNION ALL
+
+    SELECT * FROM ${ref("stg_wave_12")}
+), bmg_all_waves_cleaned AS (
+SELECT
+  -- survey response data
+  DATE(Date) AS date,
+  TRIM(LOWER(Wave)) AS wave_name,
+  TRIM(CAST(responseid AS STRING)) AS src_response_id,
+  CAST(WEIGHT AS FLOAT64) AS weight,
+  CAST(quartile_country AS INTEGER) AS imd_quartile_country,
+  TRIM(CAST(gender AS STRING)) AS gender,
+  NULLIF(TRIM(CAST(age AS STRING)), '') AS age_code,
+  TRIM(CAST(qualification2020 AS STRING)) AS qualification_2020,
+  TRIM(CAST(gor_code AS STRING)) AS gor_code,
+  TRIM(CAST(ethnicity AS STRING)) AS ethnicity,
+  -- single answer questions
+  TRIM(CAST(NULLIF(ql5, ' ') AS STRING)) AS ql5,
+  TRIM(CAST(NULLIF(ql7, ' ') AS STRING)) AS ql7,
+  -- multi answer questions
+  -- ql7a
+  TRIM(CAST(NULLIF(ql7a_1, ' ') AS STRING)) AS ql7a_1,
+  TRIM(CAST(NULLIF(ql7a_2, ' ') AS STRING)) AS ql7a_2,
+  TRIM(CAST(NULLIF(ql7a_3, ' ') AS STRING)) AS ql7a_3,
+  TRIM(CAST(NULLIF(ql7a_4, ' ') AS STRING)) AS ql7a_4,
+  TRIM(CAST(NULLIF(ql7a_5, ' ') AS STRING)) AS ql7a_5,
+  TRIM(CAST(NULLIF(ql7a_6, ' ') AS STRING)) AS ql7a_6,
+  NULL AS ql7a_7, -- not available in waves_combined yet TODO: fix
+  NULL AS ql7a_8 -- not available in waves_combined yet TODO: fix
+FROM bmg_all_waves
+)
+SELECT
+  -- surrogate keys
+  TO_HEX(MD5(CONCAT(wave_name, src_response_id))) AS survey_response_id,
+  TO_HEX(MD5(wave_name)) AS survey_wave_id,
+  -- survey response data
+  date,
+  wave_name,
+  src_response_id,
+  weight,
+  imd_quartile_country,
+  gender,
+  age_code,
+  qualification_2020,
+  gor_code,
+  ethnicity,
+  -- single answer questions
+  ql5,
+  ql7,
+  -- multi answer questions
+  -- ql7a
+  ql7a_1,
+  ql7a_2,
+  ql7a_3,
+  ql7a_4,
+  ql7a_5,
+  ql7a_6,
+  ql7a_7,
+  ql7a_8
+FROM bmg_all_waves_cleaned

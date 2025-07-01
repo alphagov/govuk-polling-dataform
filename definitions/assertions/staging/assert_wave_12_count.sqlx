@@ -1,6 +1,6 @@
 config {
   type: "assertion",
-  description: "Asserts that the country_lookup table has exactly 1593 rows."
+  description: "Asserts that the table has exactly 1593 rows."
 }
 
 SELECT

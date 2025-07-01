@@ -3,23 +3,29 @@ config {
     assertions : {
       uniqueKey: ["name", "provider"]
     },
+    columns: {
+      name: "The name of the survey wave (all lowercase).",
+      provider: "The name of the organisation performing the polling (all lowercase).",
+      start_date: "The date the polling for this wave started.",
+      end_date: "The date the polling for this wave ended."
+    }
 }
 
 SELECT
   *
 FROM
   UNNEST( ARRAY<STRUCT<name STRING, provider STRING, start_date DATE, end_date DATE>>[
-    ('wave 1', 'BMG', NULL, NULL),
-    ('wave 2', 'BMG', NULL, NULL),
-    ('wave 3', 'BMG', NULL, NULL),
-    ('wave 4', 'BMG', NULL, NULL),
-    ('wave 5', 'BMG', NULL, NULL),
-    ('wave 6', 'BMG', NULL, NULL),
-    ('wave 7', 'BMG', NULL, NULL),
-    ('wave 8', 'BMG', NULL, NULL),
-    ('wave 9', 'BMG', NULL, NULL),
-    ('wave 10', 'BMG', NULL, NULL),
-    ('wave 11', 'BMG', NULL, NULL),
-    ('wave 12', 'BMG', NULL, NULL),
-    ('wave 13', 'BMG', NULL, NULL)
+    ('wave 1', 'bmg', NULL, NULL),
+    ('wave 2', 'bmg', NULL, NULL),
+    ('wave 3', 'bmg', NULL, NULL),
+    ('wave 4', 'bmg', NULL, NULL),
+    ('wave 5', 'bmg', NULL, NULL),
+    ('wave 6', 'bmg', NULL, NULL),
+    ('wave 7', 'bmg', NULL, NULL),
+    ('wave 8', 'bmg', NULL, NULL),
+    ('wave 9', 'bmg', NULL, NULL),
+    ('wave 10', 'bmg', NULL, NULL),
+    ('wave 11', 'bmg', NULL, NULL),
+    ('wave 12', 'bmg', NULL, NULL),
+    ('wave 13', 'bmg', NULL, NULL)
     ] )
