@@ -1,0 +1,18 @@
+config {
+    type: "declaration",
+    database: "govuk-polling",
+    schema: "synthetic_polling",
+    name: "representative_synthetic_wavescombined_v2",
+    description: "Raw data for combined representative synthetic waves from govuk-polling project.",
+}
+-- publish("representative_synthetic_wavescombined_alias") {
+--   description: "An alias for the long table name"
+-- config {
+--     type: "declaration",
+--     database: "govuk-polling",
+--     schema: "synthetic_polling",
+--     name: "representative_synthetic_wavescombined_v2",
+--     description: "Raw data for combined representative synthetic waves from govuk-polling project.",
+-- }
+--   query: `SELECT * FROM ${ref("representative_synthetic_wavescombined_v2")}`
+}

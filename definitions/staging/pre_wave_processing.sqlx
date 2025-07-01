@@ -1,0 +1,10 @@
+config {
+    type: "view",
+}
+
+SELECT
+  combined.*,
+  topic.topics_array
+FROM
+  ${ref("representative_synthetic_wavescombined_v2")} combined
+LEFT JOIN ${ref("stg_agg_topics")} topic on  combined.responseid =topic.responseid

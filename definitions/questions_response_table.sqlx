@@ -1,0 +1,31 @@
+-- I am planning on splitting this into question and question response tables
+config {
+    type: "table",
+    database: "govuk-polling",
+    schema: "synthetic_polling",
+    assertions: {
+        uniqueKey: ["id"],
+        nonNull: ["id", "survey_wave_id", "response_id"]
+    },
+}
+SELECT
+  TO_HEX(MD5(CONCAT(src.name, src.response_id))) AS id,
+  survey_waves.id AS survey_wave_id,
+  src.response_id,
+  src.date,
+  src.weight,
+  src.imd_quartile_country,
+  src.gender,
+  lookup_age_group.age_group,
+  src.qualification_2020,
+  src.ethnicity
+FROM
+  ${ref("stg_wavescombined")} src
+LEFT JOIN
+  ${ref("survey_waves")} survey_waves
+USING
+  (name)
+LEFT JOIN
+  ${ref("lookup_age_group")} lookup_age_group
+USING
+    (provider, age_code)
