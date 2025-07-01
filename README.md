@@ -23,6 +23,7 @@ erDiagram
     survey_responses {
         STRING survey_response_id PK
         STRING survey_wave_id FK
+        STRING src_response_id
         DATE date
         FLOAT weight
         INTEGER imd_quartile_country
@@ -35,8 +36,7 @@ erDiagram
     question_responses {
         STRING question_response_id PK
         STRING survey_response_id FK
-        STRING question_id FK
-        STRING question_response_choice_id FK
+        STRING src_question_id
     }
 
     questions {
@@ -49,14 +49,16 @@ erDiagram
 
     question_response_choices {
         STRING question_response_choice_id PK
-        STRING choice_text
+        STRING question_response_id FK
+        STRING question_id FK
         STRING choice_value
+        STRING choice_text
     }
 
     survey_waves ||--o{ survey_responses : ""
     survey_responses ||--o{ question_responses : ""
-    questions ||--o{ question_responses : ""
     question_response_choices ||--o{ question_responses : ""
+    questions ||--o{ question_responses : ""
 ```
 
 ### Development

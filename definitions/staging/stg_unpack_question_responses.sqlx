@@ -1,19 +1,18 @@
 config {
     type: "view",
     assertions: {
-        uniqueKey: ["survey_response_id", "src_question_id", "src_question_response_id"],
-        nonNull: [],
+        uniqueKey: ["survey_response_id", "src_question_id", "src_question_response_id", "choice_value"],
+        nonNull: ["survey_response_id", "src_question_id", "src_question_response_id", "choice_value"],
         rowConditions: []
     },
 }
 
   -- This table will have duplicate rows for multi-select responses
-  -- multi-select responses are in columns that contain an underscore, e.g. ql7_1, ql7_2
 WITH
   unpivoted AS (
   SELECT
     survey_response_id,
-    src_question_id_with_multi_suffix,
+    src_response,
     survey_wave_id,
     NULLIF(choice_value, '') AS choice_value
   FROM
@@ -21,23 +20,39 @@ WITH
   UNPIVOT
     (
       -- TODO: can we derive this list from the lookup somehow - seems brittle
-      choice_value FOR src_question_id_with_multi_suffix IN (ql5,
+      choice_value FOR src_response IN (ql5,
         ql7,
         ql7a_1,
         ql7a_2,
         ql7a_3,
         ql7a_4,
         ql7a_5,
-        ql7a_6
+        ql7a_6,
+        ql7a_7,
+        ql7a_8,
+        ql1a_3,
+        ql1c_3_1
         )
     )
   )
 SELECT
   survey_response_id,
-  REGEXP_EXTRACT(src_question_id_with_multi_suffix, r'[^_]+') AS src_question_id,
-  -- we will give single-select choices a value of 1 to indicate it is 1 of 1 possible choices
-  COALESCE(REGEXP_EXTRACT(src_question_id_with_multi_suffix, r'_(.*)'), '1') AS src_question_response_id,
-  survey_wave_id,
-  choice_value
+  unpivoted.survey_wave_id,
+  unpivoted.src_response AS src_question_response_id,
+  questions.src_question_id AS src_question_id,
+  questions.question_type,
+  CASE
+    WHEN questions.question_type = 'single' THEN choice_value
+    WHEN questions.question_type = 'multi' THEN REGEXP_EXTRACT(unpivoted.src_response, r'_([^_]*)$')
+  END AS choice_value
 FROM
   unpivoted
+LEFT JOIN
+    ${ref("questions")} questions
+    -- TODO: think about whether there is a lookup for this as could be brittle
+    ON REGEXP_CONTAINS(unpivoted.src_response, '^' || questions.src_question_id || '(_|$)')
+WHERE
+    -- single response coded values come through in choice_value fine
+    questions.question_type = 'single'
+    -- multi response are one-hot encoded so that only '1' are required responses
+    OR (questions.question_type = 'multi' AND choice_value = '1')

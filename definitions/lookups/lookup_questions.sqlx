@@ -22,5 +22,14 @@ FROM
     -- wave 13 questions
     ('99bf804dece246925945905b20b33854', 'ql5', 'Thinking about the last time you used GOV.UK, how satisfied or dissatisfied were you with your experience?', 'single'),
     ('99bf804dece246925945905b20b33854', 'ql7', 'Still thinking about the last time you used GOV.UK, which device did you use?', 'single'),
-    ('99bf804dece246925945905b20b33854', 'ql7a', 'To what extent do you agree with each of the following?', 'multi')
+    ('99bf804dece246925945905b20b33854', 'ql7a_1', 'The information on GOV.UK is accurate and reliable', 'single'),
+    ('99bf804dece246925945905b20b33854', 'ql7a_2', 'I can typically find what I am looking for on GOV.UK', 'single'),
+    ('99bf804dece246925945905b20b33854', 'ql7a_3', "I don't trust GOV.UK to handle my personal data in a safe and secure manner", 'single'),
+    ('99bf804dece246925945905b20b33854', 'ql7a_4', 'I would feel comfortable using one GOV.UK account (i.e. GOV.UK One Login) to access different government services', 'single'),
+    ('99bf804dece246925945905b20b33854', 'ql7a_5', "It's difficult to use GOV.UK to access government services", 'single'),
+    ('99bf804dece246925945905b20b33854', 'ql7a_6', 'I expect GOV.UK information to be politically neutral', 'single'),
+    ('99bf804dece246925945905b20b33854', 'ql7a_7', 'The information on GOV.UK is easy to understand', 'single'),
+    ('99bf804dece246925945905b20b33854', 'ql7a_8', 'I have the digital skills to use GOV.UK', 'single'),
+    ('99bf804dece246925945905b20b33854', 'ql1a', 'Which of the following topics, if any, have you sought information about in the last year?', 'multi'),
+    ('99bf804dece246925945905b20b33854', 'ql1c_3', 'Which of the following sources, if any, did you use to find information about this topic?', 'multi')
     ] )

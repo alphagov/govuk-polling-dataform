@@ -4,7 +4,7 @@ config {
     schema: "synthetic_polling",
     assertions: {
         uniqueKey: ["question_response_id"],
-        nonNull: ["question_response_id", "question_id", "survey_response_id"]
+        nonNull: ["question_response_id", "src_question_id", "survey_response_id"]
     },
 }
 

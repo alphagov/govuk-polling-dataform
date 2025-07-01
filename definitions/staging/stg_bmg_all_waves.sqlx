@@ -11,9 +11,9 @@ config {
 WITH bmg_all_waves AS (
     SELECT * FROM ${ref("stg_wave_13")}
 
-    UNION ALL
+    -- UNION ALL
 
-    SELECT * FROM ${ref("stg_wave_12")}
+    -- SELECT * FROM ${ref("stg_wave_12")}
 ), bmg_all_waves_cleaned AS (
 SELECT
   -- survey response data
@@ -28,18 +28,17 @@ SELECT
   TRIM(CAST(gor_code AS STRING)) AS gor_code,
   TRIM(CAST(ethnicity AS STRING)) AS ethnicity,
   -- single answer questions
-  TRIM(CAST(NULLIF(ql5, ' ') AS STRING)) AS ql5,
-  TRIM(CAST(NULLIF(ql7, ' ') AS STRING)) AS ql7,
+  NULLIF(TRIM(CAST(ql5 AS STRING)), '') AS ql5,
+  NULLIF(TRIM(CAST(ql7 AS STRING)), '') AS ql7,
+  NULLIF(TRIM(CAST(ql7a_1 AS STRING)), '') AS ql7a_1,
+  NULLIF(TRIM(CAST(ql7a_2 AS STRING)), '') AS ql7a_2,
+  NULLIF(TRIM(CAST(ql7a_3 AS STRING)), '') AS ql7a_3,
+  NULLIF(TRIM(CAST(ql7a_4 AS STRING)), '') AS ql7a_4,
+  NULLIF(TRIM(CAST(ql7a_5 AS STRING)), '') AS ql7a_5,
+  NULLIF(TRIM(CAST(ql7a_6 AS STRING)), '') AS ql7a_6,
+  NULLIF(TRIM(CAST(ql7a_7 AS STRING)), '') AS ql7a_7,
+  NULLIF(TRIM(CAST(ql7a_8 AS STRING)), '') AS ql7a_8
   -- multi answer questions
-  -- ql7a
-  TRIM(CAST(NULLIF(ql7a_1, ' ') AS STRING)) AS ql7a_1,
-  TRIM(CAST(NULLIF(ql7a_2, ' ') AS STRING)) AS ql7a_2,
-  TRIM(CAST(NULLIF(ql7a_3, ' ') AS STRING)) AS ql7a_3,
-  TRIM(CAST(NULLIF(ql7a_4, ' ') AS STRING)) AS ql7a_4,
-  TRIM(CAST(NULLIF(ql7a_5, ' ') AS STRING)) AS ql7a_5,
-  TRIM(CAST(NULLIF(ql7a_6, ' ') AS STRING)) AS ql7a_6,
-  NULL AS ql7a_7, -- not available in waves_combined yet TODO: fix
-  NULL AS ql7a_8 -- not available in waves_combined yet TODO: fix
 FROM bmg_all_waves
 )
 SELECT
@@ -60,8 +59,6 @@ SELECT
   -- single answer questions
   ql5,
   ql7,
-  -- multi answer questions
-  -- ql7a
   ql7a_1,
   ql7a_2,
   ql7a_3,
@@ -69,5 +66,8 @@ SELECT
   ql7a_5,
   ql7a_6,
   ql7a_7,
-  ql7a_8
+  ql7a_8,
+    -- multi answer questions
+  '1' AS ql1a_3,
+  '2' AS ql1c_3_1
 FROM bmg_all_waves_cleaned
