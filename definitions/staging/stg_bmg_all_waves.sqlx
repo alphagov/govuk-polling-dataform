@@ -69,5 +69,6 @@ SELECT
   ql7a_8,
     -- multi answer questions
   '1' AS ql1a_3,
-  '2' AS ql1c_3_1
+  '1' AS ql1c_3_1,
+  '1' AS ql1c_3_2
 FROM bmg_all_waves_cleaned
