@@ -360,6 +360,166 @@ FROM
     ('76cc5a196eed53370dc15d760f342e46', 'ql1c_20_10', '1', "Word of mouth"),
     ('76cc5a196eed53370dc15d760f342e46', 'ql1c_20_11', '1', "AI chatbot (e.g. ChatGPT, Copilot, Gemini)"),
     ('76cc5a196eed53370dc15d760f342e46', 'ql1c_20_95', '1', "Other"),
+    -- ql2_3
+    ('18904eb80e8557a279ba372daac678a0', 'ql2_3', '1', 'Daily'),
+    ('18904eb80e8557a279ba372daac678a0', 'ql2_3', '2', 'Several times a week'),
+    ('18904eb80e8557a279ba372daac678a0', 'ql2_3', '3', 'About once a week'),
+    ('18904eb80e8557a279ba372daac678a0', 'ql2_3', '4', 'About once a month'),
+    ('18904eb80e8557a279ba372daac678a0', 'ql2_3', '5', 'About once every six months'),
+    ('18904eb80e8557a279ba372daac678a0', 'ql2_3', '6', 'About once a year'),
+    ('18904eb80e8557a279ba372daac678a0', 'ql2_3', '7', 'Less often'),
+    ('18904eb80e8557a279ba372daac678a0', 'ql2_3', '8', 'Never used it'),
+    ('18904eb80e8557a279ba372daac678a0', 'ql2_3', '9', "Don't Know"),
+    -- ql2_4
+    ('d9044f0727865ca8c9d1601a51f061d4', 'ql2_4', '1', 'Daily'),
+    ('d9044f0727865ca8c9d1601a51f061d4', 'ql2_4', '2', 'Several times a week'),
+    ('d9044f0727865ca8c9d1601a51f061d4', 'ql2_4', '3', 'About once a week'),
+    ('d9044f0727865ca8c9d1601a51f061d4', 'ql2_4', '4', 'About once a month'),
+    ('d9044f0727865ca8c9d1601a51f061d4', 'ql2_4', '5', 'About once every six months'),
+    ('d9044f0727865ca8c9d1601a51f061d4', 'ql2_4', '6', 'About once a year'),
+    ('d9044f0727865ca8c9d1601a51f061d4', 'ql2_4', '7', 'Less often'),
+    ('d9044f0727865ca8c9d1601a51f061d4', 'ql2_4', '8', 'Never used it'),
+    ('d9044f0727865ca8c9d1601a51f061d4', 'ql2_4', '9', "Don't Know"),
+    -- ql2_5
+    ('94a8ce6ac7215acb2bb3d0bf36bdff2b', 'ql2_5', '1', 'Daily'),
+    ('94a8ce6ac7215acb2bb3d0bf36bdff2b', 'ql2_5', '2', 'Several times a week'),
+    ('94a8ce6ac7215acb2bb3d0bf36bdff2b', 'ql2_5', '3', 'About once a week'),
+    ('94a8ce6ac7215acb2bb3d0bf36bdff2b', 'ql2_5', '4', 'About once a month'),
+    ('94a8ce6ac7215acb2bb3d0bf36bdff2b', 'ql2_5', '5', 'About once every six months'),
+    ('94a8ce6ac7215acb2bb3d0bf36bdff2b', 'ql2_5', '6', 'About once a year'),
+    ('94a8ce6ac7215acb2bb3d0bf36bdff2b', 'ql2_5', '7', 'Less often'),
+    ('94a8ce6ac7215acb2bb3d0bf36bdff2b', 'ql2_5', '8', 'Never used it'),
+    ('94a8ce6ac7215acb2bb3d0bf36bdff2b', 'ql2_5', '9', "Don't Know"),
+    -- ql2_6
+    ('19ff6ecf6d0771e734bd41f2c8a94e77', 'ql2_6', '1', 'Daily'),
+    ('19ff6ecf6d0771e734bd41f2c8a94e77', 'ql2_6', '2', 'Several times a week'),
+    ('19ff6ecf6d0771e734bd41f2c8a94e77', 'ql2_6', '3', 'About once a week'),
+    ('19ff6ecf6d0771e734bd41f2c8a94e77', 'ql2_6', '4', 'About once a month'),
+    ('19ff6ecf6d0771e734bd41f2c8a94e77', 'ql2_6', '5', 'About once every six months'),
+    ('19ff6ecf6d0771e734bd41f2c8a94e77', 'ql2_6', '6', 'About once a year'),
+    ('19ff6ecf6d0771e734bd41f2c8a94e77', 'ql2_6', '7', 'Less often'),
+    ('19ff6ecf6d0771e734bd41f2c8a94e77', 'ql2_6', '8', 'Never used it'),
+    ('19ff6ecf6d0771e734bd41f2c8a94e77', 'ql2_6', '9', "Don't know"),
+
+    -- ql4a
+    ('9db6fb01a5b144fc0f0b7f4a6adae4c5', 'ql4a_1', '1', 'Apply for/renew a driving licence'),
+    ('9db6fb01a5b144fc0f0b7f4a6adae4c5', 'ql4a_2', '1', 'Apply for/renew a passport'),
+    ('9db6fb01a5b144fc0f0b7f4a6adae4c5', 'ql4a_3', '1', 'Sign in to check universal credit'),
+    ('9db6fb01a5b144fc0f0b7f4a6adae4c5', 'ql4a_4', '1', 'Check/Pay for vehicle tax'),
+    ('9db6fb01a5b144fc0f0b7f4a6adae4c5', 'ql4a_5', '1', 'Check MOT status/history'),
+    ('9db6fb01a5b144fc0f0b7f4a6adae4c5', 'ql4a_6', '1', 'Register to vote'),
+    ('9db6fb01a5b144fc0f0b7f4a6adae4c5', 'ql4a_7', '1', 'Get information about a company'),
+    ('9db6fb01a5b144fc0f0b7f4a6adae4c5', 'ql4a_10', '1', 'Manage student finance account'),
+    ('9db6fb01a5b144fc0f0b7f4a6adae4c5', 'ql4a_11', '1', 'File a self-assessment tax return'),
+    ('9db6fb01a5b144fc0f0b7f4a6adae4c5', 'ql4a_12', '1', 'Check a state pension'),
+    ('9db6fb01a5b144fc0f0b7f4a6adae4c5', 'ql4a_13', '1', 'Check an energy performance certificate (EPC)'),
+    ('9db6fb01a5b144fc0f0b7f4a6adae4c5', 'ql4a_14', '1', 'Manage a tax-free childcare account'),
+    ('9db6fb01a5b144fc0f0b7f4a6adae4c5', 'ql4a_95', '1', 'Other'),
+    ('9db6fb01a5b144fc0f0b7f4a6adae4c5', 'ql4a_96', '1', 'None of these'),
+
+    -- ql4b_1
+    ('08251170aa211bce5e8562a673e181b6', 'ql4b_1', '1', 'Very easy'),
+    ('08251170aa211bce5e8562a673e181b6', 'ql4b_1', '2', 'Fairly easy'),
+    ('08251170aa211bce5e8562a673e181b6', 'ql4b_1', '3', 'Neither easy or difficult'),
+    ('08251170aa211bce5e8562a673e181b6', 'ql4b_1', '4', 'Fairly difficult'),
+    ('08251170aa211bce5e8562a673e181b6', 'ql4b_1', '5', 'Very difficult'),
+    ('08251170aa211bce5e8562a673e181b6', 'ql4b_1', '6', "Don't know"),
+
+    -- ql4b_2
+    ('0af939f73ba80067d4af6bbd54af16bb', 'ql4b_2', '1', 'Very easy'),
+    ('0af939f73ba80067d4af6bbd54af16bb', 'ql4b_2', '2', 'Fairly easy'),
+    ('0af939f73ba80067d4af6bbd54af16bb', 'ql4b_2', '3', 'Neither easy or difficult'),
+    ('0af939f73ba80067d4af6bbd54af16bb', 'ql4b_2', '4', 'Fairly difficult'),
+    ('0af939f73ba80067d4af6bbd54af16bb', 'ql4b_2', '5', 'Very difficult'),
+    ('0af939f73ba80067d4af6bbd54af16bb', 'ql4b_2', '6', "Don't know"),
+
+    -- ql4b_3
+    ('9138f7de4be1f6b689afcd346aa96514', 'ql4b_3', '1', 'Very easy'),
+    ('9138f7de4be1f6b689afcd346aa96514', 'ql4b_3', '2', 'Fairly easy'),
+    ('9138f7de4be1f6b689afcd346aa96514', 'ql4b_3', '3', 'Neither easy or difficult'),
+    ('9138f7de4be1f6b689afcd346aa96514', 'ql4b_3', '4', 'Fairly difficult'),
+    ('9138f7de4be1f6b689afcd346aa96514', 'ql4b_3', '5', 'Very difficult'),
+    ('9138f7de4be1f6b689afcd346aa96514', 'ql4b_3', '6', "Don't know"),
+
+    -- ql4b_4
+    ('715d69c243e8333d3f62ca3a20047c8f', 'ql4b_4', '1', 'Very easy'),
+    ('715d69c243e8333d3f62ca3a20047c8f', 'ql4b_4', '2', 'Fairly easy'),
+    ('715d69c243e8333d3f62ca3a20047c8f', 'ql4b_4', '3', 'Neither easy or difficult'),
+    ('715d69c243e8333d3f62ca3a20047c8f', 'ql4b_4', '4', 'Fairly difficult'),
+    ('715d69c243e8333d3f62ca3a20047c8f', 'ql4b_4', '5', 'Very difficult'),
+    ('715d69c243e8333d3f62ca3a20047c8f', 'ql4b_4', '6', "Don't know"),
+
+    -- ql4b_5
+    ('402aa6d5f4a7f7f2638f8b1a3402ab0f', 'ql4b_5', '1', 'Very easy'),
+    ('402aa6d5f4a7f7f2638f8b1a3402ab0f', 'ql4b_5', '2', 'Fairly easy'),
+    ('402aa6d5f4a7f7f2638f8b1a3402ab0f', 'ql4b_5', '3', 'Neither easy or difficult'),
+    ('402aa6d5f4a7f7f2638f8b1a3402ab0f', 'ql4b_5', '4', 'Fairly difficult'),
+    ('402aa6d5f4a7f7f2638f8b1a3402ab0f', 'ql4b_5', '5', 'Very difficult'),
+    ('402aa6d5f4a7f7f2638f8b1a3402ab0f', 'ql4b_5', '6', "Don't know"),
+
+    -- ql4b_6
+    ('5b825786b02762a24425784092976c86', 'ql4b_6', '1', 'Very easy'),
+    ('5b825786b02762a24425784092976c86', 'ql4b_6', '2', 'Fairly easy'),
+    ('5b825786b02762a24425784092976c86', 'ql4b_6', '3', 'Neither easy or difficult'),
+    ('5b825786b02762a24425784092976c86', 'ql4b_6', '4', 'Fairly difficult'),
+    ('5b825786b02762a24425784092976c86', 'ql4b_6', '5', 'Very difficult'),
+    ('5b825786b02762a24425784092976c86', 'ql4b_6', '6', "Don't know"),
+
+    -- ql4b_7
+    ('44bc718c8372e08484033dc12767043a', 'ql4b_7', '1', 'Very easy'),
+    ('44bc718c8372e08484033dc12767043a', 'ql4b_7', '2', 'Fairly easy'),
+    ('44bc718c8372e08484033dc12767043a', 'ql4b_7', '3', 'Neither easy or difficult'),
+    ('44bc718c8372e08484033dc12767043a', 'ql4b_7', '4', 'Fairly difficult'),
+    ('44bc718c8372e08484033dc12767043a', 'ql4b_7', '5', 'Very difficult'),
+    ('44bc718c8372e08484033dc12767043a', 'ql4b_7', '6', "Don't know"),
+
+    -- ql4b_10
+    ('82065226d8ea306bb2db86da49f2572d', 'ql4b_10', '1', 'Very easy'),
+    ('82065226d8ea306bb2db86da49f2572d', 'ql4b_10', '2', 'Fairly easy'),
+    ('82065226d8ea306bb2db86da49f2572d', 'ql4b_10', '3', 'Neither easy or difficult'),
+    ('82065226d8ea306bb2db86da49f2572d', 'ql4b_10', '4', 'Fairly difficult'),
+    ('82065226d8ea306bb2db86da49f2572d', 'ql4b_10', '5', 'Very difficult'),
+    ('82065226d8ea306bb2db86da49f2572d', 'ql4b_10', '6', "Don't know"),
+
+    -- ql4b_11
+    ('1fbe1254579e40a84ad045db87115276', 'ql4b_11', '1', 'Very easy'),
+    ('1fbe1254579e40a84ad045db87115276', 'ql4b_11', '2', 'Fairly easy'),
+    ('1fbe1254579e40a84ad045db87115276', 'ql4b_11', '3', 'Neither easy or difficult'),
+    ('1fbe1254579e40a84ad045db87115276', 'ql4b_11', '4', 'Fairly difficult'),
+    ('1fbe1254579e40a84ad045db87115276', 'ql4b_11', '5', 'Very difficult'),
+    ('1fbe1254579e40a84ad045db87115276', 'ql4b_11', '6', "Don't know"),
+
+    -- ql4b_12
+    ('fb9ee5169c97e19132fc9629c3b3fdee', 'ql4b_12', '1', 'Very easy'),
+    ('fb9ee5169c97e19132fc9629c3b3fdee', 'ql4b_12', '2', 'Fairly easy'),
+    ('fb9ee5169c97e19132fc9629c3b3fdee', 'ql4b_12', '3', 'Neither easy or difficult'),
+    ('fb9ee5169c97e19132fc9629c3b3fdee', 'ql4b_12', '4', 'Fairly difficult'),
+    ('fb9ee5169c97e19132fc9629c3b3fdee', 'ql4b_12', '5', 'Very difficult'),
+    ('fb9ee5169c97e19132fc9629c3b3fdee', 'ql4b_12', '6', "Don't know"),
+
+    -- ql4b_13
+    ('8d26020f83856d6fc0ff031a09e0df6f', 'ql4b_13', '1', 'Very easy'),
+    ('8d26020f83856d6fc0ff031a09e0df6f', 'ql4b_13', '2', 'Fairly easy'),
+    ('8d26020f83856d6fc0ff031a09e0df6f', 'ql4b_13', '3', 'Neither easy or difficult'),
+    ('8d26020f83856d6fc0ff031a09e0df6f', 'ql4b_13', '4', 'Fairly difficult'),
+    ('8d26020f83856d6fc0ff031a09e0df6f', 'ql4b_13', '5', 'Very difficult'),
+    ('8d26020f83856d6fc0ff031a09e0df6f', 'ql4b_13', '6', "Don't know"),
+
+    -- ql4b_14
+    ('359376c863a618b579bfc4b5f7f612bd', 'ql4b_14', '1', 'Very easy'),
+    ('359376c863a618b579bfc4b5f7f612bd', 'ql4b_14', '2', 'Fairly easy'),
+    ('359376c863a618b579bfc4b5f7f612bd', 'ql4b_14', '3', 'Neither easy or difficult'),
+    ('359376c863a618b579bfc4b5f7f612bd', 'ql4b_14', '4', 'Fairly difficult'),
+    ('359376c863a618b579bfc4b5f7f612bd', 'ql4b_14', '5', 'Very difficult'),
+    ('359376c863a618b579bfc4b5f7f612bd', 'ql4b_14', '6', "Don't know"),
+
+    -- ql4b_95
+    ('078a2cbd0959172290efec1057ecc352', 'ql4b_95', '1', 'Very easy'),
+    ('078a2cbd0959172290efec1057ecc352', 'ql4b_95', '2', 'Fairly easy'),
+    ('078a2cbd0959172290efec1057ecc352', 'ql4b_95', '3', 'Neither easy or difficult'),
+    ('078a2cbd0959172290efec1057ecc352', 'ql4b_95', '4', 'Fairly difficult'),
+    ('078a2cbd0959172290efec1057ecc352', 'ql4b_95', '5', 'Very difficult'),
+    ('078a2cbd0959172290efec1057ecc352', 'ql4b_95', '6', "Don't know"),
 
     -- ql5
     ('e89424490866dd7760d87a8e8954df67', 'ql5', '1', 'Very satisfied'),
@@ -368,6 +528,7 @@ FROM
     ('e89424490866dd7760d87a8e8954df67', 'ql5', '4', 'Fairly dissatisfied'),
     ('e89424490866dd7760d87a8e8954df67', 'ql5', '5', 'Very dissatisfied'),
     ('e89424490866dd7760d87a8e8954df67', 'ql5', '6', "Don't know"),
+
     -- ql7
     ('d0163ae7216bf005339c1171016c70e4', 'ql7', '1', 'Smartphone'),
     ('d0163ae7216bf005339c1171016c70e4', 'ql7', '2', 'Laptop'),
@@ -376,6 +537,15 @@ FROM
     ('d0163ae7216bf005339c1171016c70e4', 'ql7', '5', 'Smart device (e.g. smart speaker, smart TV, games console)'),
     ('d0163ae7216bf005339c1171016c70e4', 'ql7', '95', 'Other'),
     ('d0163ae7216bf005339c1171016c70e4', 'ql7', '97', "Don't know"),
+
+    -- ql8a
+    ('108ac312eb87c19ad89be041867aceba', 'ql8a_1', '1', 'Screen magnifier (software that enlarges your screen)'),
+    ('108ac312eb87c19ad89be041867aceba', 'ql8a_2', '1', 'Screen reader (software that reads out a webpage)'),
+    ('108ac312eb87c19ad89be041867aceba', 'ql8a_3', '1', 'Voice control software (control your computer using voice)'),
+    ('108ac312eb87c19ad89be041867aceba', 'ql8a_4', '1', 'Adjust colours/contrast on web pages'),
+    ('108ac312eb87c19ad89be041867aceba', 'ql8a_95', '1', 'Other'),
+    ('108ac312eb87c19ad89be041867aceba', 'ql8a_96', '1', 'None of these'),
+
     -- ql7a_1
     ('63505fb5a2473813be29a0b7fa584957', 'ql7a_1', '1', 'Strongly agree'),
     ('63505fb5a2473813be29a0b7fa584957', 'ql7a_1', '2', 'Agree'),

@@ -59,8 +59,32 @@ FROM
     ('ql1c_19', 'Which of the following sources, if any, did you use to find information about this topic?', 'Ukraine - impact on the UK, travel advice, sponsorship scheme', 'multi'),
     ('ql1c_20', 'Which of the following sources, if any, did you use to find information about this topic?', 'Cost of Living Support - This includes income and disability benefits, bills and allowances, childcare, housing and travel', 'multi'),
 
+    ('ql2_3', '', 'How often, if at all, do you use GOV.UK in... Your personal life - for yourself', 'single'),
+    ('ql2_4', '', 'How often, if at all, do you use GOV.UK in... Your personal life - for someone else', 'single'),
+    ('ql2_5', '', 'How often, if at all, do you use GOV.UK in... Your professional life - for yourself', 'single'),
+    ('ql2_6', '', 'How often, if at all, do you use GOV.UK in... Your professional life - for someone else', 'single'),
+
+    ('ql4a', '', 'In the last year, which of the following tasks have you used GOV.UK to complete?', 'multi'),
+
+    ('ql4b_1', 'How easy or difficult did you find the process of completing the task(s) on GOV.UK?', 'Apply for/renew a driving licence', 'single'),
+    ('ql4b_2', 'How easy or difficult did you find the process of completing the task(s) on GOV.UK?', 'Apply for/renew a passport', 'single'),
+    ('ql4b_3', 'How easy or difficult did you find the process of completing the task(s) on GOV.UK?', 'Sign in to check universal credit', 'single'),
+    ('ql4b_4', 'How easy or difficult did you find the process of completing the task(s) on GOV.UK?', 'Check/Pay for vehicle tax', 'single'),
+    ('ql4b_5', 'How easy or difficult did you find the process of completing the task(s) on GOV.UK?', 'Check MOT status/history', 'single'),
+    ('ql4b_6', 'How easy or difficult did you find the process of completing the task(s) on GOV.UK?', 'Register to vote', 'single'),
+    ('ql4b_7', 'How easy or difficult did you find the process of completing the task(s) on GOV.UK?', 'Get information about a company', 'single'),
+    ('ql4b_10', 'How easy or difficult did you find the process of completing the task(s) on GOV.UK?', 'Manage student finance account', 'single'),
+    ('ql4b_11', 'How easy or difficult did you find the process of completing the task(s) on GOV.UK?', 'File a self-assessment tax return', 'single'),
+    ('ql4b_12', 'How easy or difficult did you find the process of completing the task(s) on GOV.UK?', 'Check a state pension', 'single'),
+    ('ql4b_13', 'How easy or difficult did you find the process of completing the task(s) on GOV.UK?', 'Check an energy performance certificate (EPC)', 'single'),
+    ('ql4b_14', 'How easy or difficult did you find the process of completing the task(s) on GOV.UK?', 'Manage a tax-free childcare account', 'single'),
+    ('ql4b_95', 'How easy or difficult did you find the process of completing the task(s) on GOV.UK?', 'Other', 'single'),
+
     ('ql5', '', 'Thinking about the last time you used GOV.UK, how satisfied or dissatisfied were you with your experience?', 'single'),
     ('ql7', '', 'Still thinking about the last time you used GOV.UK, which device did you use?', 'single'),
+
+    ('ql8a', '', 'And did you use any software or equipment to help you use GOV.UK?', 'multi'),
+
     ('ql7a_1', '', 'The information on GOV.UK is accurate and reliable', 'single'),
     ('ql7a_2', '', 'I can typically find what I am looking for on GOV.UK', 'single'),
     ('ql7a_3', '', "I don't trust GOV.UK to handle my personal data in a safe and secure manner", 'single'),
