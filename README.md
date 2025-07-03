@@ -42,6 +42,7 @@ erDiagram
     questions {
         STRING question_id PK
         STRING src_question_id
+        STRING question_group_text
         STRING question_text
         STRING question_type
     }
