@@ -2,13 +2,12 @@ config {
     type: "table",
     description: "A table containing survey questions. Ensure any questions added here are also added to the UNPIVOT statement in question_responses",
     columns: {
-      survey_wave_id: "The identifier for the survey wave. Get this from the survey_waves table.",
       src_question_id: "The unique identifier for a question in the source survey.",
       question_text: "The text of the survey question.",
       question_type: "The type of answer expected for the question (e.g., 'single')."
     },
     assertions : {
-      uniqueKey: ["survey_wave_id", "src_question_id"],
+      uniqueKey: ["src_question_id"],
       rowConditions: [
         "question_type IN ('single', 'multi')"
     ]
@@ -18,18 +17,18 @@ config {
 SELECT
   *
 FROM
-  UNNEST( ARRAY<STRUCT<survey_wave_id STRING, src_question_id STRING, question_text STRING, question_type STRING>>[
+  UNNEST( ARRAY<STRUCT<src_question_id STRING, question_text STRING, question_type STRING>>[
     -- wave 13 questions
-    ('99bf804dece246925945905b20b33854', 'ql5', 'Thinking about the last time you used GOV.UK, how satisfied or dissatisfied were you with your experience?', 'single'),
-    ('99bf804dece246925945905b20b33854', 'ql7', 'Still thinking about the last time you used GOV.UK, which device did you use?', 'single'),
-    ('99bf804dece246925945905b20b33854', 'ql7a_1', 'The information on GOV.UK is accurate and reliable', 'single'),
-    ('99bf804dece246925945905b20b33854', 'ql7a_2', 'I can typically find what I am looking for on GOV.UK', 'single'),
-    ('99bf804dece246925945905b20b33854', 'ql7a_3', "I don't trust GOV.UK to handle my personal data in a safe and secure manner", 'single'),
-    ('99bf804dece246925945905b20b33854', 'ql7a_4', 'I would feel comfortable using one GOV.UK account (i.e. GOV.UK One Login) to access different government services', 'single'),
-    ('99bf804dece246925945905b20b33854', 'ql7a_5', "It's difficult to use GOV.UK to access government services", 'single'),
-    ('99bf804dece246925945905b20b33854', 'ql7a_6', 'I expect GOV.UK information to be politically neutral', 'single'),
-    ('99bf804dece246925945905b20b33854', 'ql7a_7', 'The information on GOV.UK is easy to understand', 'single'),
-    ('99bf804dece246925945905b20b33854', 'ql7a_8', 'I have the digital skills to use GOV.UK', 'single'),
-    ('99bf804dece246925945905b20b33854', 'ql1a', 'Which of the following topics, if any, have you sought information about in the last year?', 'multi'),
-    ('99bf804dece246925945905b20b33854', 'ql1c_3', 'Which of the following sources, if any, did you use to find information about this topic?', 'multi')
+    ('ql5', 'Thinking about the last time you used GOV.UK, how satisfied or dissatisfied were you with your experience?', 'single'),
+    ('ql7', 'Still thinking about the last time you used GOV.UK, which device did you use?', 'single'),
+    ('ql7a_1', 'The information on GOV.UK is accurate and reliable', 'single'),
+    ('ql7a_2', 'I can typically find what I am looking for on GOV.UK', 'single'),
+    ('ql7a_3', "I don't trust GOV.UK to handle my personal data in a safe and secure manner", 'single'),
+    ('ql7a_4', 'I would feel comfortable using one GOV.UK account (i.e. GOV.UK One Login) to access different government services', 'single'),
+    ('ql7a_5', "It's difficult to use GOV.UK to access government services", 'single'),
+    ('ql7a_6', 'I expect GOV.UK information to be politically neutral', 'single'),
+    ('ql7a_7', 'The information on GOV.UK is easy to understand', 'single'),
+    ('ql7a_8', 'I have the digital skills to use GOV.UK', 'single'),
+    ('ql1a', 'Which of the following topics, if any, have you sought information about in the last year?', 'multi'),
+    ('ql1c_3', 'Which of the following sources, if any, did you use to find information about this topic?', 'multi')
     ] )

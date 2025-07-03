@@ -8,8 +8,7 @@ config {
 }
 
 SELECT
-    TO_HEX(MD5(CONCAT(survey_wave_id, src_question_id))) AS question_id,
-    survey_wave_id,
+    TO_HEX(MD5(src_question_id)) AS question_id,
     src_question_id,
     question_text,
     question_type

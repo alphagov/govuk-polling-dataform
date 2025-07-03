@@ -1,0 +1,42 @@
+config {
+    type: "table",
+    description: "A table containing survey questions. Ensure any questions added here are also added to the UNPIVOT statement in question_responses",
+    columns: {
+      survey_wave_id: "The unique identifier for a survey. Get this from survey_waves table.",
+      question_id: "The unique identifier for a question. Get this from the questions table."
+    },
+    assertions : {
+      uniqueKey: ["survey_wave_id", "question_id"],
+    }
+}
+
+SELECT
+  *
+FROM
+  UNNEST( ARRAY<STRUCT<survey_wave_id STRING, question_id STRING>>[
+    -- wave 13 questions
+    -- ql1a
+    ('99bf804dece246925945905b20b33854', 'be5476a11a964d710455b344e978595e'),
+    -- ql5
+    ('99bf804dece246925945905b20b33854', 'fdffbe47c37426d2450fa81e3438a971'),
+    -- ql7
+    ('99bf804dece246925945905b20b33854', '024e446e3c902d1476b7a28973a5ca7c'),
+    -- ql7a_1
+    ('99bf804dece246925945905b20b33854', '47602fd5a2a938e128b72a2e197db94c'),
+    -- ql7a_2
+    ('99bf804dece246925945905b20b33854', '9ed80494f02187065fe551cfe5b41a2d'),
+    -- ql7a_3
+    ('99bf804dece246925945905b20b33854', 'b24c36c47095712c1f366397592fa29a'),
+    -- ql7a_4
+    ('99bf804dece246925945905b20b33854', '2bedef3e3362c18bffd171e350acd01b'),
+    -- ql7a_5
+    ('99bf804dece246925945905b20b33854', '88f0343d942755da4e2749dd9435ae61'),
+    -- ql7a_6
+    ('99bf804dece246925945905b20b33854', '8db850ba874cd5ca17e673ef6bd60ded'),
+    -- ql7a_7
+    ('99bf804dece246925945905b20b33854', '0ef50d065f6b542ca49c551f2c907271'),
+    -- ql7a_8
+    ('99bf804dece246925945905b20b33854', '4c02e8419b4a8d5b63ac8109a0b4fa24'),
+    -- ql1c_3
+    ('99bf804dece246925945905b20b33854', '5621ec1c9d78dbf7e2998dcbcb157150')
+    ] )
