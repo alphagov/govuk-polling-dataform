@@ -47,5 +47,8 @@ FROM
 LEFT JOIN
     ${ref("stg_src_column_to_question_response_choice_value")} questions_to_response_choice
     USING (src_column_name, choice_value)
-WHERE
-    questions_to_response_choice.question_type IN ('single', 'multi')
+-- WHERE
+--     questions_to_response_choice.question_type IN ('single', 'multi')
+
+-- debug
+-- WHERE src_column_name = 'ql7'

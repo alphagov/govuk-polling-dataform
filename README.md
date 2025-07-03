@@ -41,7 +41,6 @@ erDiagram
 
     questions {
         STRING question_id PK
-        STRING survey_wave_id FK
         STRING src_question_id
         STRING question_text
         STRING question_type
@@ -56,10 +55,18 @@ erDiagram
         STRING choice_text
     }
 
+    survey_wave_questions {
+        STRING survey_wave_question_id PK
+        STRING survey_wave_id FK
+        STRING question_id FK
+    }
+
     survey_waves ||--o{ survey_responses : ""
     survey_responses ||--o{ question_responses : ""
     question_response_choices ||--o{ question_responses : ""
     questions ||--o{ question_responses : ""
+    questions ||--o{ survey_wave_questions : ""
+    survey_waves ||--o{ survey_wave_questions : ""
 ```
 
 ### Development

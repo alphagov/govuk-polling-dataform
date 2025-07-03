@@ -13,7 +13,7 @@ config {
 }
 
 SELECT
-    TO_HEX(MD5(survey_wave_id, question_id)) AS survey_wave_question_id,
+    TO_HEX(MD5(CONCAT(survey_wave_id, question_id))) AS survey_wave_question_id,
     survey_wave_id,
     question_id
 FROM

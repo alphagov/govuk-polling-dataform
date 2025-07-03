@@ -11,9 +11,9 @@ config {
 WITH bmg_all_waves AS (
     SELECT * FROM ${ref("stg_wave_13")}
 
-    -- UNION ALL
+    UNION ALL
 
-    -- SELECT * FROM ${ref("stg_wave_12")}
+    SELECT * FROM ${ref("stg_wave_12")}
 ), bmg_all_waves_cleaned AS (
 SELECT
   -- survey response data
