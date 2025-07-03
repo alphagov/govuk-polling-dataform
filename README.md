@@ -87,6 +87,7 @@ Query that table and copy the `survey_wave_id`.
 3. Create a new row in `definitions/lookups/lookup_question_response_choices.sqlx` using the `question_id`.
 You'll need to know the name of the column in the source data which contains the values along with the coded values and the associated selection text.
 4. Execute the workflow and inspect the output of the `question_response_choices` table in BigQuery.
+5. Add the column which contains the coded values to the `UNPIVOT` code in `definitions/staging/stg_unpack_question_responses.sqlx`.
 
 ### Deployment
 Once you PR is reviewed and approved, merge into `main`.

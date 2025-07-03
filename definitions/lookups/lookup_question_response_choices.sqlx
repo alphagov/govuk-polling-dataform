@@ -601,5 +601,22 @@ FROM
     ('b4bdc8a3ee5ba409181600afc2b7cf0e', 'ql7a_8', '3', 'Neither agree nor disagree'),
     ('b4bdc8a3ee5ba409181600afc2b7cf0e', 'ql7a_8', '4', 'Disagree'),
     ('b4bdc8a3ee5ba409181600afc2b7cf0e', 'ql7a_8', '5', 'Strongly disagree'),
-    ('b4bdc8a3ee5ba409181600afc2b7cf0e', 'ql7a_8', '6', "Don't know")
+    ('b4bdc8a3ee5ba409181600afc2b7cf0e', 'ql7a_8', '6', "Don't know"),
+
+    -- ql12
+    ('270b56a963151f76e658e1411ba4324a', 'ql12_1', '1', 'Facebook'),
+    ('270b56a963151f76e658e1411ba4324a', 'ql12_2', '1', 'Instagram'),
+    ('270b56a963151f76e658e1411ba4324a', 'ql12_3', '1', 'X (Twitter)'),
+    ('270b56a963151f76e658e1411ba4324a', 'ql12_4', '1', 'TikTok'),
+    ('270b56a963151f76e658e1411ba4324a', 'ql12_5', '1', 'Snapchat'),
+    ('270b56a963151f76e658e1411ba4324a', 'ql12_6', '1', 'WhatsApp'),
+    ('270b56a963151f76e658e1411ba4324a', 'ql12_7', '1', 'Pinterest'),
+    ('270b56a963151f76e658e1411ba4324a', 'ql12_8', '1', 'Facebook Messenger'),
+    ('270b56a963151f76e658e1411ba4324a', 'ql12_9', '1', 'LinkedIn'),
+    ('270b56a963151f76e658e1411ba4324a', 'ql12_10', '1', 'Reddit'),
+    ('270b56a963151f76e658e1411ba4324a', 'ql12_11', '1', 'Bluesky'),
+    ('270b56a963151f76e658e1411ba4324a', 'ql12_12', '1', 'Threads'),
+    ('270b56a963151f76e658e1411ba4324a', 'ql12_13', '1', 'Telegram'),
+    ('270b56a963151f76e658e1411ba4324a', 'ql12_95', '1', 'Other'),
+    ('270b56a963151f76e658e1411ba4324a', 'ql12_96', '1', 'None of these')
     ] )

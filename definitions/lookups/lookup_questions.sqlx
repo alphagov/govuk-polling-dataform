@@ -92,5 +92,7 @@ FROM
     ('ql7a_5', '', "It's difficult to use GOV.UK to access government services", 'single'),
     ('ql7a_6', '', 'I expect GOV.UK information to be politically neutral', 'single'),
     ('ql7a_7', '', 'The information on GOV.UK is easy to understand', 'single'),
-    ('ql7a_8', '', 'I have the digital skills to use GOV.UK', 'single')
+    ('ql7a_8', '', 'I have the digital skills to use GOV.UK', 'single'),
+
+    ('ql12', '', 'Which of the following social media platforms, if any, have you used in the last month?', 'multi')
     ] )
