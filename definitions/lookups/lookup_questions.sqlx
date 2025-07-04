@@ -94,5 +94,12 @@ FROM
     ('ql7a_7', '', 'The information on GOV.UK is easy to understand', 'single'),
     ('ql7a_8', '', 'I have the digital skills to use GOV.UK', 'single'),
 
-    ('ql12', '', 'Which of the following social media platforms, if any, have you used in the last month?', 'multi')
+    ('ql12', '', 'Which of the following social media platforms, if any, have you used in the last month?', 'multi'),
+
+    ('ql13_1', "Next, I would like to ask you four questions about your feelings on aspects of your life. There are no right or wrong answers. For each of these questions I'd like you to give an answer on a scale of 0 to 10, where 0 is 'not at all' and 10 is 'completely'.", 'Life satisfaction - Overall, how satisfied are you with your life nowadays?', 'single'),
+    ('ql13_2', "Next, I would like to ask you four questions about your feelings on aspects of your life. There are no right or wrong answers. For each of these questions I'd like you to give an answer on a scale of 0 to 10, where 0 is 'not at all' and 10 is 'completely'.", 'Worthwhile - Overall, to what extent do you feel that the things you do in your life are worthwhile?', 'single'),
+    ('ql13_3', "Next, I would like to ask you four questions about your feelings on aspects of your life. There are no right or wrong answers. For each of these questions I'd like you to give an answer on a scale of 0 to 10, where 0 is 'not at all' and 10 is 'completely'.", 'Happiness - Overall, how happy did you feel yesterday?', 'single'),
+    ('ql13_4', "Next, I would like to ask you four questions about your feelings on aspects of your life. There are no right or wrong answers. For each of these questions I'd like you to give an answer on a scale of 0 to 10, where 0 is 'not at all' and 10 is 'completely'.", 'Anxiety - Overall, how anxious did you feel yesterday?', 'single'),
+
+    ('n1', '', 'Do you have a disability as defined by the Equality Act 2010?', 'multi')
     ] )
