@@ -14,6 +14,50 @@ WITH bmg_all_waves AS (
     UNION ALL
 
     SELECT * FROM ${ref("stg_wave_12")}
+
+    UNION ALL
+
+    SELECT * FROM ${ref("stg_wave_11")}
+
+    UNION ALL
+
+    SELECT * FROM ${ref("stg_wave_10")}
+
+    UNION ALL
+
+    SELECT * FROM ${ref("stg_wave_9")}
+
+    UNION ALL
+
+    SELECT * FROM ${ref("stg_wave_8")}
+
+    UNION ALL
+
+    SELECT * FROM ${ref("stg_wave_7")}
+
+    UNION ALL
+
+    SELECT * FROM ${ref("stg_wave_6")}
+
+    UNION ALL
+
+    SELECT * FROM ${ref("stg_wave_5")}
+
+    UNION ALL
+
+    SELECT * FROM ${ref("stg_wave_4")}
+
+    UNION ALL
+
+    SELECT * FROM ${ref("stg_wave_3")}
+
+    UNION ALL
+
+    SELECT * FROM ${ref("stg_wave_2")}
+
+    UNION ALL
+
+    SELECT * FROM ${ref("stg_wave_1")}
 ), bmg_all_waves_cleaned AS (
 SELECT
   -- survey response data
@@ -43,7 +87,7 @@ FROM bmg_all_waves
 )
 SELECT
   -- surrogate keys
-  TO_HEX(MD5(CONCAT(wave_name, src_response_id))) AS survey_response_id,
+  TO_HEX(MD5(CONCAT(wave_name, '-', src_response_id))) AS survey_response_id,
   TO_HEX(MD5(wave_name)) AS survey_wave_id,
   -- survey response data
   date,

@@ -1,0 +1,10 @@
+config {
+    type: "view",
+}
+
+SELECT
+  *
+FROM
+  ${ref("representative_synthetic_wavescombined")}
+WHERE
+  TRIM(LOWER(Wave)) = 'wave 8'
