@@ -1,0 +1,20 @@
+config {
+    type: "table",
+    database: "govuk-polling",
+    schema: "synthetic_polling",
+    columns: {
+      survey_wave_question_id: "",
+      survey_wave_id: "The identifier for the survey wave.",
+      question_id: "The unique identifier for a question."
+    },
+    assertions: {
+        uniqueKey: ["survey_wave_question_id"]
+    },
+}
+
+SELECT
+    TO_HEX(MD5(CONCAT(survey_wave_id, question_id))) AS survey_wave_question_id,
+    survey_wave_id,
+    question_id
+FROM
+${ref("lookup_survey_wave_questions")}

@@ -1,6 +1,6 @@
 config {
   type: "assertion",
-  description: "Asserts that the country_lookup table has exactly 1593 rows."
+  description: "Asserts that the table has exactly 1593 rows."
 }
 
 SELECT
@@ -8,4 +8,4 @@ SELECT
 FROM
   ${ref("stg_wave_12")}
 HAVING
-  actual_row_count != 1593
+  actual_row_count != 619

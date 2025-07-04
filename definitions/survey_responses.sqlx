@@ -3,15 +3,15 @@ config {
     database: "govuk-polling",
     schema: "synthetic_polling",
     assertions: {
-        uniqueKey: ["id"],
-        nonNull: ["id", "survey_wave_id", "response_id"]
+        uniqueKey: ["survey_response_id"],
+        nonNull: ["survey_response_id", "survey_wave_id", "src_response_id"]
     },
 }
 
 SELECT
-  TO_HEX(MD5(CONCAT(src.name, src.response_id))) AS id,
-  survey_waves.id AS survey_wave_id,
-  src.response_id,
+  src.survey_response_id,
+  src.survey_wave_id,
+  src.src_response_id,
   src.date,
   src.weight,
   src.imd_quartile_country,
@@ -20,11 +20,10 @@ SELECT
   src.qualification_2020,
   src.ethnicity
 FROM
-  ${ref("stg_wavescombined")} src
+  ${ref("stg_bmg_all_waves")} src
 LEFT JOIN
   ${ref("survey_waves")} survey_waves
-USING
-  (name)
+  ON src.wave_name = survey_waves.name
 LEFT JOIN
   ${ref("lookup_age_group")} lookup_age_group
 USING

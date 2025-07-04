@@ -1,0 +1,19 @@
+config {
+    type: "table",
+    database: "govuk-polling",
+    schema: "synthetic_polling",
+    assertions: {
+        uniqueKey: ["question_id"]
+    },
+}
+
+SELECT
+    TO_HEX(MD5(src_question_id)) AS question_id,
+    src_question_id,
+    NULLIF(question_group_text, '') AS question_group_text,
+    question_text,
+    question_type
+FROM
+${ref("lookup_questions")}
+
+

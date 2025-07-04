@@ -3,6 +3,11 @@ config {
   assertions : {
     uniqueKey: ["provider", "age_code"]
   },
+  columns: {
+      provider: "The name of the organisation performing the polling (all lowercase).",
+      age_code: "The coded value received in the data.",
+      age_group: "The text which was presented the user when making a selection.",
+    },
   description: "A centralized lookup table to map provider-specific age codes to standardized age groups."
 }
 
@@ -11,13 +16,13 @@ SELECT
 FROM
   UNNEST(
     ARRAY<STRUCT<provider STRING, age_code STRING, age_group STRING>>[
-      -- Rule set for provider 'BMG'
-      ('BMG', '2', '18-24'),
-      ('BMG', '3', '25-34'),
-      ('BMG', '4', '35-44'),
-      ('BMG', '5', '45-54'),
-      ('BMG', '6', '55-64'),
-      ('BMG', '7', '65-74'),
-      ('BMG', '8', '75+')
+      -- Rule set for provider 'bmg'
+      ('bmg', '2', '18-24'),
+      ('bmg', '3', '25-34'),
+      ('bmg', '4', '35-44'),
+      ('bmg', '5', '45-54'),
+      ('bmg', '6', '55-64'),
+      ('bmg', '7', '65-74'),
+      ('bmg', '8', '75+')
     ]
   )
