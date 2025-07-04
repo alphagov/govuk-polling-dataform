@@ -2,41 +2,89 @@ config {
     type: "table",
     description: "A table containing survey questions. Ensure any questions added here are also added to the UNPIVOT statement in question_responses",
     columns: {
-      survey_wave_id: "The unique identifier for a survey. Get this from survey_waves table.",
-      question_id: "The unique identifier for a question. Get this from the questions table."
+      wave_name: "The unique name for a survey. Get this from lookup_survey_waves.",
+      question_id: "The unique identifier for a question in the source data. Get this from the lookup_questions."
     },
     assertions : {
-      uniqueKey: ["survey_wave_id", "question_id"],
+      uniqueKey: ["wave_name", "src_question_id"],
     }
 }
 
 SELECT
   *
 FROM
-  UNNEST( ARRAY<STRUCT<survey_wave_id STRING, question_id STRING>>[
-    -- wave 13 questions
-    -- ql1a
-    ('99bf804dece246925945905b20b33854', '1a60a6969bff49b683d401c8f3af093e'),
-    -- ql5
-    ('99bf804dece246925945905b20b33854', 'e89424490866dd7760d87a8e8954df67'),
-    -- ql7
-    ('99bf804dece246925945905b20b33854', 'd0163ae7216bf005339c1171016c70e4'),
-    -- ql7a_1
-    ('99bf804dece246925945905b20b33854', '63505fb5a2473813be29a0b7fa584957'),
-    -- ql7a_2
-    ('99bf804dece246925945905b20b33854', 'b746304afce0ae1dca4e57c4d3fd7c68'),
-    -- ql7a_3
-    ('99bf804dece246925945905b20b33854', 'b8b8dae1cf363640aa166064c6231126'),
-    -- ql7a_4
-    ('99bf804dece246925945905b20b33854', '5b717a5eda67b83088fbf481425a1961'),
-    -- ql7a_5
-    ('99bf804dece246925945905b20b33854', '4a1c7f94974c2d0c811af076e66612b4'),
-    -- ql7a_6
-    ('99bf804dece246925945905b20b33854', 'a1c6e3316913675770491fff9ee830a8'),
-    -- ql7a_7
-    ('99bf804dece246925945905b20b33854', 'c9f34d4f4f9496d4facd47b776d2812b'),
-    -- ql7a_8
-    ('99bf804dece246925945905b20b33854', 'b4bdc8a3ee5ba409181600afc2b7cf0e'),
-    -- ql1c_3
-    ('99bf804dece246925945905b20b33854', '7a13142723d083e931a932045df463f8')
+  UNNEST( ARRAY<STRUCT<wave_name STRING, src_question_id STRING>>[
+    ('wave 13', 'n1'),
+    ('wave 13', 'ql12'),
+    ('wave 13', 'ql13_1'),
+    ('wave 13', 'ql13_2'),
+    ('wave 13', 'ql13_3'),
+    ('wave 13', 'ql13_4'),
+    ('wave 13', 'ql1b_3'),
+    ('wave 13', 'ql1b_4'),
+    ('wave 13', 'ql1b_5'),
+    ('wave 13', 'ql1b_6'),
+    ('wave 13', 'ql1b_7'),
+    ('wave 13', 'ql1b_8'),
+    ('wave 13', 'ql1b_9'),
+    ('wave 13', 'ql1b_10'),
+    ('wave 13', 'ql1b_11'),
+    ('wave 13', 'ql1b_12'),
+    ('wave 13', 'ql1b_13'),
+    ('wave 13', 'ql1b_14'),
+    ('wave 13', 'ql1b_15'),
+    ('wave 13', 'ql1b_16'),
+    ('wave 13', 'ql1b_17'),
+    ('wave 13', 'ql1b_18'),
+    ('wave 13', 'ql1b_19'),
+    ('wave 13', 'ql1b_20'),
+    ('wave 13', 'ql1b_20'),
+    ('wave 13', 'ql1c_3'),
+    ('wave 13', 'ql1c_4'),
+    ('wave 13', 'ql1c_5'),
+    ('wave 13', 'ql1c_6'),
+    ('wave 13', 'ql1c_7'),
+    ('wave 13', 'ql1c_8'),
+    ('wave 13', 'ql1c_9'),
+    ('wave 13', 'ql1c_10'),
+    ('wave 13', 'ql1c_11'),
+    ('wave 13', 'ql1c_12'),
+    ('wave 13', 'ql1c_13'),
+    ('wave 13', 'ql1c_14'),
+    ('wave 13', 'ql1c_15'),
+    ('wave 13', 'ql1c_16'),
+    ('wave 13', 'ql1c_17'),
+    ('wave 13', 'ql1c_18'),
+    ('wave 13', 'ql1c_19'),
+    ('wave 13', 'ql1c_20'),
+    ('wave 13', 'ql2_3'),
+    ('wave 13', 'ql2_4'),
+    ('wave 13', 'ql2_5'),
+    ('wave 13', 'ql2_6'),
+    ('wave 13', 'ql4a'),
+    ('wave 13', 'ql4b_1'),
+    ('wave 13', 'ql4b_2'),
+    ('wave 13', 'ql4b_3'),
+    ('wave 13', 'ql4b_4'),
+    ('wave 13', 'ql4b_5'),
+    ('wave 13', 'ql4b_6'),
+    ('wave 13', 'ql4b_7'),
+    ('wave 13', 'ql4b_10'),
+    ('wave 13', 'ql4b_11'),
+    ('wave 13', 'ql4b_12'),
+    ('wave 13', 'ql4b_13'),
+    ('wave 13', 'ql4b_14'),
+    ('wave 13', 'ql4b_95'),
+    ('wave 13', 'ql1a'),
+    ('wave 13', 'ql5'),
+    ('wave 13', 'ql7'),
+    ('wave 13', 'ql7a_1'),
+    ('wave 13', 'ql7a_2'),
+    ('wave 13', 'ql7a_3'),
+    ('wave 13', 'ql7a_4'),
+    ('wave 13', 'ql7a_5'),
+    ('wave 13', 'ql7a_6'),
+    ('wave 13', 'ql7a_7'),
+    ('wave 13', 'ql7a_8'),
+    ('wave 13', 'ql8a')
     ] )
