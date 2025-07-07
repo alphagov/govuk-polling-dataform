@@ -8,14 +8,14 @@ config {
 }
 WITH question_response_type AS (
 SELECT
-    lookup_question_response_choices.question_id,
+    questions.question_id,
     lookup_question_response_choices.src_column_name,
     lookup_question_response_choices.choice_value,
     lookup_question_response_choices.choice_text,
     questions.question_type
 FROM ${ref("lookup_question_response_choices")} lookup_question_response_choices
 LEFT JOIN ${ref("questions")} questions
-    USING (question_id) 
+    USING (src_question_id) 
 )
 SELECT *
 FROM question_response_type
