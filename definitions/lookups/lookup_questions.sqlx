@@ -21,6 +21,29 @@ FROM
   UNNEST( ARRAY<STRUCT<src_question_id STRING, question_group_text STRING, question_text STRING, question_type STRING>>[
     ('ql1a', '', 'Which of the following topics, if any, have you sought information about in the last year?', 'multi'),
 
+    ('ql1a_1',  'QL1A. Which of the following topics, if any, have you sought information about in the last year?',	'Unknown','single'),
+    ('ql1a_2',  'QL1A. Which of the following topics, if any, have you sought information about in the last year?',	'Unknown','single'),
+    ('ql1a_3',  'QL1A. Which of the following topics, if any, have you sought information about in the last year?',	'Benefits - including eligibility, appeals, tax credits and Universal Credit','single'),
+    ('ql1a_4',  'QL1A. Which of the following topics, if any, have you sought information about in the last year?',	'Births, deaths, marriages and care - including parenting, civil partnerships, divorce and Lasting Power of Attorney','single'),
+    ('ql1a_5',  'QL1A. Which of the following topics, if any, have you sought information about in the last year?',	'Business and self-employed - including tools and guidance for businesses','single'),
+    ('ql1a_6',  'QL1A. Which of the following topics, if any, have you sought information about in the last year?',	'Childcare and parenting - including giving birth, fostering, adopting, benefits for children and childcare','single'),
+    ('ql1a_7',  'QL1A. Which of the following topics, if any, have you sought information about in the last year?',	'Citizenship and living in the UK - including Voting, community participation, life in the UK, international projects','single'),
+    ('ql1a_8',  'QL1A. Which of the following topics, if any, have you sought information about in the last year?',	'Crime, justice and the law - including Legal processes, courts and the police','single'),
+    ('ql1a_9',  'QL1A. Which of the following topics, if any, have you sought information about in the last year?',	'Disabled people and services - including carers, your rights, benefits and the Equality Act','single'),
+    ('ql1a_10', 'QL1A. Which of the following topics, if any, have you sought information about in the last year?',	'Driving and transport - including vehicle tax, MOT and driving licences','single'),
+    ('ql1a_11',  'QL1A. Which of the following topics, if any, have you sought information about in the last year?', 'Education and learning - including schools, colleges, student loans, university admissions and apprenticeships','single'),
+    ('ql1a_12',  'QL1A. Which of the following topics, if any, have you sought information about in the last year?', 'Employing people - including pay, contracts and hiring','single'),
+    ('ql1a_13',  'QL1A. Which of the following topics, if any, have you sought information about in the last year?', 'Environment and countryside - including flooding, recycling and wildlife','single'),
+    ('ql1a_14',  'QL1A. Which of the following topics, if any, have you sought information about in the last year?', 'Housing and local services - including owning, renting and council services','single'),
+    ('ql1a_15',  'QL1A. Which of the following topics, if any, have you sought information about in the last year?', 'Money and tax - including debt and Self Assessment','single'),
+    ('ql1a_16',  'QL1A. Which of the following topics, if any, have you sought information about in the last year?', 'Passports, travel and living abroad - including renewing passports and travel advice by country','single'),
+    ('ql1a_17',  'QL1A. Which of the following topics, if any, have you sought information about in the last year?', 'Visas and immigration - including applying to visit, work, study, settle or seek asylum in the UK','single'),
+    ('ql1a_18',  'QL1A. Which of the following topics, if any, have you sought information about in the last year?', 'Working, jobs and pensions - including holiday entitlement and finding a job','single'),
+    ('ql1a_19',  'QL1A. Which of the following topics, if any, have you sought information about in the last year?', 'Ukraine - impact on the UK, travel advice, sponsorship scheme','single'),
+    ('ql1a_20',  'QL1A. Which of the following topics, if any, have you sought information about in the last year?', 'Cost of Living Support - This includes income and disability benefits, bills and allowances, childcare, housing and travel','single'),
+    ('ql1a_96',  'QL1A. Which of the following topics, if any, have you sought information about in the last year?', 'None of the above','single'),
+
+
     ('ql1b_3', 'For each of these topics, did you find the information that you were seeking?','Benefits - including eligibility, appeals, tax credits and Universal Credit', 'single'),
     ('ql1b_4', 'For each of these topics, did you find the information that you were seeking?','Births, deaths, marriages and care - including parenting, civil partnerships, divorce and Lasting Power of Attorney', 'single'),
     ('ql1b_5', 'For each of these topics, did you find the information that you were seeking?','Business and self-employed - including tools and guidance for businesses', 'single'),
@@ -102,4 +125,5 @@ FROM
     ('ql13_4', "Next, I would like to ask you four questions about your feelings on aspects of your life. There are no right or wrong answers. For each of these questions I'd like you to give an answer on a scale of 0 to 10, where 0 is 'not at all' and 10 is 'completely'.", 'Anxiety - Overall, how anxious did you feel yesterday?', 'single'),
 
     ('n1', '', 'Do you have a disability as defined by the Equality Act 2010?', 'multi')
+    
     ] )

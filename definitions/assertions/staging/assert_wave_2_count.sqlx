@@ -1,0 +1,11 @@
+config {
+  type: "assertion",
+  description: "Asserts that the table has exactly 1593 rows."
+}
+
+SELECT
+  COUNT(*) AS actual_row_count
+FROM
+  ${ref("stg_wave_2")}
+HAVING
+  actual_row_count != 1714
