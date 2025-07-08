@@ -29,8 +29,9 @@ erDiagram
         INTEGER imd_quartile_country
         STRING gender
         STRING age_group
-        STRING qualification_2020
+        STRING qualification
         STRING ethnicity
+        STRING government_office_region
     }
 
     question_responses {

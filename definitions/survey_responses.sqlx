@@ -18,7 +18,8 @@ SELECT
   lookup_gender.gender,
   lookup_age_group.age_group,
   lookup_qualification.qualification,
-  lookup_ethnicity.ethnicity
+  lookup_ethnicity.ethnicity,
+  lookup_government_office_region.government_office_region
 FROM
   ${ref("stg_bmg_all_waves")} src
 LEFT JOIN
@@ -40,3 +41,7 @@ LEFT JOIN
   ${ref("lookup_qualification")} lookup_qualification
 USING
   (provider, qualification_code)
+LEFT JOIN
+  ${ref("lookup_government_office_region")} lookup_government_office_region
+USING
+  (provider, government_office_region_code)
