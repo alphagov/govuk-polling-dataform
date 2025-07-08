@@ -4,10 +4,11 @@ config {
         uniqueKey: ["survey_response_id"],
         nonNull: ["survey_response_id", "survey_wave_id"],
         rowConditions: [
-            "age_code IN ('2', '3', '4', '5', '6', '7', '8')"
+            "age_code IN ('2', '3', '4', '5', '6', '7', '8')" 
         ]
     },
 }
+-- ive not added []'', 0] as values in age_code  as part of the age_code in, as I assume we want it to fail untill we resolve in future
 WITH bmg_all_waves AS (
     SELECT * FROM ${ref("stg_wave_13")}
 

@@ -19,3 +19,4 @@ LEFT JOIN ${ref("questions")} questions
 )
 SELECT *
 FROM question_response_type
+ORDER BY src_column_name, choice_value

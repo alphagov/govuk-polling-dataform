@@ -1,0 +1,16 @@
+config {
+  type: "assertion",
+  description: "Asserts that none of the responseids have more then 20 topic responses ( 1-20 )"
+}
+
+WITH CTE_1 AS (
+SELECT 
+survey_response_id,
+COUNT(ql1a) as num_responses_for_id
+
+FROM ${ref("stg_combining_one_hot")}
+GROUP BY survey_response_id
+HAVING COUNT(ql1a) > 20
+)
+SELECT 
+* FROM CTE_1 

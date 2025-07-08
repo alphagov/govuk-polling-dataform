@@ -6,6 +6,6 @@ config {
 SELECT
   COUNT(*) AS actual_row_count
 FROM
-  ${ref("stg_wave_2")}
+  ${ref("stg_wave_3")}
 HAVING
   actual_row_count != 1714
