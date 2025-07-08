@@ -1,0 +1,33 @@
+config {
+  type: "table",
+  assertions : {
+    uniqueKey: ["provider", "qualification_code"],
+    rowConditions: [
+        "qualification IN ('No qualifications', 'Other qualification', 'Up to 4 GCSEs or equivalent (NVQ level 1)', '5 or more GCSEs or equivalent (NVQ level 2)', 'A levels or equivalent (Such as Scottish Highers or NVQ level 3)', 'Bachelors Degree or equivalent (such as HND or NVQ level 4)', 'Masters Degree or equivalent (NVQ level 5)', 'PHD', 'Prefer not to say')"
+    ]
+  },
+  columns: {
+      provider: "The name of the organisation performing the polling (all lowercase).",
+      age_code: "The coded value received in the data.",
+      age_group: "The text which was presented the user when making a selection.",
+    },
+  description: "A centralised lookup table to map provider-specific qualification codes to human-readable values."
+}
+
+SELECT
+  *
+FROM
+  UNNEST(
+    ARRAY<STRUCT<provider STRING, qualification_code STRING, qualification STRING>>[
+      -- Rule set for provider 'bmg'
+      ('bmg', '1', 'No qualifications'),
+      ('bmg', '2', 'Other qualification'),
+      ('bmg', '3', 'Up to 4 GCSEs or equivalent (NVQ level 1)'),
+      ('bmg', '4', '5 or more GCSEs or equivalent (NVQ level 2)'),
+      ('bmg', '5', 'A levels or equivalent (Such as Scottish Highers or NVQ level 3)'),
+      ('bmg', '6', 'Bachelors Degree or equivalent (such as HND or NVQ level 4)'),
+      ('bmg', '7', 'Masters Degree or equivalent (NVQ level 5)'),
+      ('bmg', '8', 'PHD'),
+      ('bmg', '9', 'Prefer not to say')
+    ]
+  )

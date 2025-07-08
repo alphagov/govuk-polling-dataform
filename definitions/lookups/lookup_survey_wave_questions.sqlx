@@ -38,7 +38,6 @@ FROM
     ('wave 13', 'ql1b_18'),
     ('wave 13', 'ql1b_19'),
     ('wave 13', 'ql1b_20'),
-    ('wave 13', 'ql1b_20'),
     ('wave 13', 'ql1c_3'),
     ('wave 13', 'ql1c_4'),
     ('wave 13', 'ql1c_5'),
