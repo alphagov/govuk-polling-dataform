@@ -17,3 +17,4 @@ SELECT
 FROM ${ref("stg_unpack_question_responses")} response_choices
 LEFT JOIN ${ref("question_responses")} question_responses
     USING (survey_response_id, question_id)
+    

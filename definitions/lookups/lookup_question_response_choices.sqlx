@@ -17,32 +17,6 @@ SELECT
 FROM
   UNNEST( ARRAY<STRUCT<src_question_id STRING, src_column_name STRING, choice_value STRING, choice_text STRING>>[
 
-    -- one hot encoding questions 
-    -- ql1a 
-    ('ql1a', 'ql1a', '1', "Unkonwn fl1a_1 value"),
-    ('ql1a', 'ql1a', '2', "Unknown ql1a_2 value"),
-    ('ql1a', 'ql1a', '3', "Benefits - including eligibility, appeals, tax credits and Universal Credit"),
-    ('ql1a', 'ql1a', '4', "Births, deaths, marriages and care - including parenting, civil partnerships, divorce and Lasting Power of Attorney"),
-    ('ql1a', 'ql1a', '5', "Business and self-employed - including tools and guidance for businesses"),
-    ('ql1a', 'ql1a', '6', "Childcare and parenting - including giving birth, fostering, adopting, benefits for children and childcare"),
-    ('ql1a', 'ql1a', '7', "Citizenship and living in the UK - including Voting, community participation, life in the UK, international projects"),
-    ('ql1a', 'ql1a', '8', "Crime, justice and the law - including Legal processes, courts and the police"),
-    ('ql1a', 'ql1a', '9', "Disabled people and services - including carers, your rights, benefits and the Equality Act"),
-    ('ql1a', 'ql1a', '10', "Driving and transport - including vehicle tax, MOT and driving licences"),
-    ('ql1a', 'ql1a', '11', "Education and learning - including schools, colleges, student loans, university admissions and apprenticeships"),
-    ('ql1a', 'ql1a', '12', "Employing people - including pay, contracts and hiring"),
-    ('ql1a', 'ql1a', '13', "Environment and countryside - including flooding, recycling and wildlife"),
-    ('ql1a', 'ql1a', '14', "Housing and local services - including owning, renting and council services"),
-    ('ql1a', 'ql1a', '15', "Money and tax - including debt and Self Assessment"),
-    ('ql1a', 'ql1a', '16', "Passports, travel and living abroad - including renewing passports and travel advice by country"),
-    ('ql1a', 'ql1a', '17', "Visas and immigration - including applying to visit, work, study, settle or seek asylum in the UK"),
-    ('ql1a', 'ql1a', '18', "Working, jobs and pensions - including holiday entitlement and finding a job"),
-    ('ql1a', 'ql1a', '19', "Ukraine - impact on the UK, travel advice, sponsorship scheme"),
-    ('ql1a', 'ql1a', '20', "Cost of Living Support - This includes income and disability benefits, bills and allowances, childcare, housing and travel"),
-    ('ql1a', 'ql1a', '96', "None of the above"),
-
-
-    -- normal questions
     -- ql1a 1_20, 96
     ('ql1a_1', 'ql1a_1', '1', "Unkonwn fl1a_1 value"),
     ('ql1a_2', 'ql1a_2', '1', "Unknown ql1a_2 value"),
