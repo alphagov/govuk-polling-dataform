@@ -12,7 +12,6 @@ SELECT
   src.survey_response_id,
   src.survey_wave_id,
   src.src_response_id,
-  src.date,
   src.weight,
   src.imd_quartile_country,
   src.gender,

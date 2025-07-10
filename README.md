@@ -24,7 +24,6 @@ erDiagram
         STRING survey_response_id PK
         STRING survey_wave_id FK
         STRING src_response_id
-        DATE date
         FLOAT weight
         INTEGER imd_quartile_country
         STRING gender
@@ -50,7 +49,6 @@ erDiagram
     question_response_choices {
         STRING question_response_choice_id PK
         STRING question_response_id FK
-        STRING question_id FK
         STRING src_question_response_column_name
         STRING choice_value
         STRING choice_text

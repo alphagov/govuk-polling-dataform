@@ -15,17 +15,17 @@ SELECT
   *
 FROM
   UNNEST( ARRAY<STRUCT<name STRING, provider STRING, start_date DATE, end_date DATE>>[
-    ('wave 1', 'bmg', NULL, NULL),
-    ('wave 2', 'bmg', NULL, NULL),
-    ('wave 3', 'bmg', NULL, NULL),
-    ('wave 4', 'bmg', NULL, NULL),
-    ('wave 5', 'bmg', NULL, NULL),
-    ('wave 6', 'bmg', NULL, NULL),
-    ('wave 7', 'bmg', NULL, NULL),
-    ('wave 8', 'bmg', NULL, NULL),
-    ('wave 9', 'bmg', NULL, NULL),
-    ('wave 10', 'bmg', NULL, NULL),
-    ('wave 11', 'bmg', NULL, NULL),
-    ('wave 12', 'bmg', NULL, NULL),
-    ('wave 13', 'bmg', NULL, NULL)
+    ('wave_1', 'bmg', NULL, NULL),
+    ('wave_2', 'bmg', NULL, NULL),
+    ('wave_3', 'bmg', NULL, NULL),
+    ('wave_4', 'bmg', NULL, NULL),
+    ('wave_5', 'bmg', NULL, NULL),
+    ('wave_6', 'bmg', NULL, NULL),
+    ('wave_7', 'bmg', NULL, NULL),
+    ('wave_8', 'bmg', NULL, NULL),
+    ('wave_9', 'bmg', NULL, NULL),
+    ('wave_10', 'bmg', NULL, NULL),
+    ('wave_11', 'bmg', NULL, NULL),
+    ('wave_12', 'bmg', NULL, NULL),
+    ('wave_13', 'bmg', NULL, NULL)
     ] )

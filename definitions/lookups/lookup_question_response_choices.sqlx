@@ -16,6 +16,8 @@ SELECT
   *
 FROM
   UNNEST( ARRAY<STRUCT<src_question_id STRING, src_column_name STRING, choice_value STRING, choice_text STRING>>[
+    ('ql1a', 'ql1a_1', '1', "Coronavirus (COVID-19) guidance, rules and services"),
+    ('ql1a', 'ql1a_2', '1', "Brexit: to check what you need to do"),
     ('ql1a', 'ql1a_3', '1', "Benefits - including eligibility, appeals, tax credits and Universal Credit"),
     ('ql1a', 'ql1a_4', '1', "Births, deaths, marriages and care - including parenting, civil partnerships, divorce and Lasting Power of Attorney"),
     ('ql1a', 'ql1a_5', '1', "Business and self-employed - including tools and guidance for businesses"),
@@ -35,6 +37,16 @@ FROM
     ('ql1a', 'ql1a_19', '1', "Ukraine - impact on the UK, travel advice, sponsorship scheme"),
     ('ql1a', 'ql1a_20', '1', "Cost of Living Support - This includes income and disability benefits, bills and allowances, childcare, housing and travel"),
     ('ql1a', 'ql1a_96', '1', "None of the above"),
+    -- ql1b_1
+    ('ql1b_1', 'ql1b_1', '1', 'Yes - I found all the information I was seeking'),
+    ('ql1b_1', 'ql1b_1', '2', 'Yes - I found some of the information I was seeking'),
+    ('ql1b_1', 'ql1b_1', '3', 'No'),
+    ('ql1b_1', 'ql1b_1', '4', "Can't recall"),
+    -- ql1b_2
+    ('ql1b_2', 'ql1b_2', '1', 'Yes - I found all the information I was seeking'),
+    ('ql1b_2', 'ql1b_2', '2', 'Yes - I found some of the information I was seeking'),
+    ('ql1b_2', 'ql1b_2', '3', 'No'),
+    ('ql1b_2', 'ql1b_2', '4', "Can't recall"),
     -- ql1b_3
     ('ql1b_3', 'ql1b_3', '1', 'Yes - I found all the information I was seeking'),
     ('ql1b_3', 'ql1b_3', '2', 'Yes - I found some of the information I was seeking'),
@@ -125,6 +137,32 @@ FROM
     ('ql1b_20', 'ql1b_20', '2', 'Yes - I found some of the information I was seeking'),
     ('ql1b_20', 'ql1b_20', '3', 'No'),
     ('ql1b_20', 'ql1b_20', '4', "Can't recall"),
+    -- ql1c_1
+    ('ql1c_1', 'ql1c_1_1', '1', "Local council website"),
+    ('ql1c_1', 'ql1c_1_2', '1', "Government website (e.g. GOV.UK, GOV.WALES, GOV.SCOT, NIDIRECT)"),
+    ('ql1c_1', 'ql1c_1_3', '1', "NHS website"),
+    ('ql1c_1', 'ql1c_1_4', '1', "Social media (e.g. Facebook, Twitter, Instagram)"),
+    ('ql1c_1', 'ql1c_1_5', '1', "Search engines (e.g. Google)"),
+    ('ql1c_1', 'ql1c_1_6', '1', "Radio"),
+    ('ql1c_1', 'ql1c_1_7', '1', "TV"),
+    ('ql1c_1', 'ql1c_1_8', '1', "Newspaper"),
+    ('ql1c_1', 'ql1c_1_9', '1', "Magazine"),
+    ('ql1c_1', 'ql1c_1_10', '1', "Word of mouth"),
+    ('ql1c_1', 'ql1c_1_11', '1', "AI chatbot (e.g. ChatGPT, Copilot, Gemini)"),
+    ('ql1c_1', 'ql1c_1_95', '1', "Other"),
+    -- ql1c_2
+    ('ql1c_2', 'ql1c_2_1', '1', "Local council website"),
+    ('ql1c_2', 'ql1c_2_2', '1', "Government website (e.g. GOV.UK, GOV.WALES, GOV.SCOT, NIDIRECT)"),
+    ('ql1c_2', 'ql1c_2_3', '1', "NHS website"),
+    ('ql1c_2', 'ql1c_2_4', '1', "Social media (e.g. Facebook, Twitter, Instagram)"),
+    ('ql1c_2', 'ql1c_2_5', '1', "Search engines (e.g. Google)"),
+    ('ql1c_2', 'ql1c_2_6', '1', "Radio"),
+    ('ql1c_2', 'ql1c_2_7', '1', "TV"),
+    ('ql1c_2', 'ql1c_2_8', '1', "Newspaper"),
+    ('ql1c_2', 'ql1c_2_9', '1', "Magazine"),
+    ('ql1c_2', 'ql1c_2_10', '1', "Word of mouth"),
+    ('ql1c_2', 'ql1c_2_11', '1', "AI chatbot (e.g. ChatGPT, Copilot, Gemini)"),
+    ('ql1c_2', 'ql1c_2_95', '1', "Other"),
     -- ql1c_3
     ('ql1c_3', 'ql1c_3_1', '1', "Local council website"),
     ('ql1c_3', 'ql1c_3_2', '1', "Government website (e.g. GOV.UK, GOV.WALES, GOV.SCOT, NIDIRECT)"),
@@ -359,6 +397,26 @@ FROM
     ('ql1c_20', 'ql1c_20_10', '1', "Word of mouth"),
     ('ql1c_20', 'ql1c_20_11', '1', "AI chatbot (e.g. ChatGPT, Copilot, Gemini)"),
     ('ql1c_20', 'ql1c_20_95', '1', "Other"),
+    -- ql2_1
+    ('ql2_1', 'ql2_1', '1', 'Daily'),
+    ('ql2_1', 'ql2_1', '2', 'Several times a week'),
+    ('ql2_1', 'ql2_1', '3', 'About once a week'),
+    ('ql2_1', 'ql2_1', '4', 'About once a month'),
+    ('ql2_1', 'ql2_1', '5', 'About once every six months'),
+    ('ql2_1', 'ql2_1', '6', 'About once a year'),
+    ('ql2_1', 'ql2_1', '7', 'Less often'),
+    ('ql2_1', 'ql2_1', '8', 'Never used it'),
+    ('ql2_1', 'ql2_1', '9', "Don't Know"),
+    -- ql2_2
+    ('ql2_2', 'ql2_2', '1', 'Daily'),
+    ('ql2_2', 'ql2_2', '2', 'Several times a week'),
+    ('ql2_2', 'ql2_2', '3', 'About once a week'),
+    ('ql2_2', 'ql2_2', '4', 'About once a month'),
+    ('ql2_2', 'ql2_2', '5', 'About once every six months'),
+    ('ql2_2', 'ql2_2', '6', 'About once a year'),
+    ('ql2_2', 'ql2_2', '7', 'Less often'),
+    ('ql2_2', 'ql2_2', '8', 'Never used it'),
+    ('ql2_2', 'ql2_2', '9', "Don't Know"),
     -- ql2_3
     ('ql2_3', 'ql2_3', '1', 'Daily'),
     ('ql2_3', 'ql2_3', '2', 'Several times a week'),
@@ -399,6 +457,13 @@ FROM
     ('ql2_6', 'ql2_6', '7', 'Less often'),
     ('ql2_6', 'ql2_6', '8', 'Never used it'),
     ('ql2_6', 'ql2_6', '9', "Don't know"),
+    --ql3
+    ('ql3', 'ql3_1', '1', 'Government gateway account'),
+    ('ql3', 'ql3_2', '2', 'GOV.UK Verify account'),
+    ('ql3', 'ql3_3', '3', ''), --TODO: find out
+    ('ql3', 'ql3_95', '95', ''), --TODO: find out
+    ('ql3', 'ql3_96', '96', ''), --TODO: find out
+    ('ql3', 'ql3_97', '97', ''), --TODO: find out
     -- ql4a
     ('ql4a', 'ql4a_1', '1', 'Apply for/renew a driving licence'),
     ('ql4a', 'ql4a_2', '1', 'Apply for/renew a passport'),
@@ -407,6 +472,8 @@ FROM
     ('ql4a', 'ql4a_5', '1', 'Check MOT status/history'),
     ('ql4a', 'ql4a_6', '1', 'Register to vote'),
     ('ql4a', 'ql4a_7', '1', 'Get information about a company'),
+    ('ql4a', 'ql4a_8', '1', 'Report Covid-19 test result'),
+    ('ql4a', 'ql4a_9', '1', 'Order lateral flow tests'),
     ('ql4a', 'ql4a_10', '1', 'Manage student finance account'),
     ('ql4a', 'ql4a_11', '1', 'File a self-assessment tax return'),
     ('ql4a', 'ql4a_12', '1', 'Check a state pension'),
@@ -463,6 +530,20 @@ FROM
     ('ql4b_7', 'ql4b_7', '4', 'Fairly difficult'),
     ('ql4b_7', 'ql4b_7', '5', 'Very difficult'),
     ('ql4b_7', 'ql4b_7', '6', "Don't know"),
+    -- ql4b_8
+    ('ql4b_8', 'ql4b_8', '1', 'Very easy'),
+    ('ql4b_8', 'ql4b_8', '2', 'Fairly easy'),
+    ('ql4b_8', 'ql4b_8', '3', 'Neither easy or difficult'),
+    ('ql4b_8', 'ql4b_8', '4', 'Fairly difficult'),
+    ('ql4b_8', 'ql4b_8', '5', 'Very difficult'),
+    ('ql4b_8', 'ql4b_8', '6', "Don't know"),
+    -- ql4b_9
+    ('ql4b_9', 'ql4b_9', '1', 'Very easy'),
+    ('ql4b_9', 'ql4b_9', '2', 'Fairly easy'),
+    ('ql4b_9', 'ql4b_9', '3', 'Neither easy or difficult'),
+    ('ql4b_9', 'ql4b_9', '4', 'Fairly difficult'),
+    ('ql4b_9', 'ql4b_9', '5', 'Very difficult'),
+    ('ql4b_9', 'ql4b_9', '6', "Don't know"),
     -- ql4b_10
     ('ql4b_10', 'ql4b_10', '1', 'Very easy'),
     ('ql4b_10', 'ql4b_10', '2', 'Fairly easy'),

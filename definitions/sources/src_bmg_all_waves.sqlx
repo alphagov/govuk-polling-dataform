@@ -1,0 +1,9 @@
+config {
+    type: "view",
+}
+SELECT
+    _TABLE_SUFFIX AS wave_name,
+    *
+-- this will dynamically get all tables called src_ in the dataset
+FROM ${ref("src_wave_13").replace("wave_13", "*")}
+
