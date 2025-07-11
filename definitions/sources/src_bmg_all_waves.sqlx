@@ -4,6 +4,7 @@ config {
 SELECT
     _TABLE_SUFFIX AS wave_name,
     *
--- this will dynamically get all tables called src_ in the dataset
-FROM ${ref("src_wave_13").replace("wave_13", "*")}
+-- this will dynamically get all tables starting with src_bmg_ in the dataset
+-- tables must be named `src_bmg_wave_{number}`
+FROM `govuk-polling.govuk_polling_responses.src_bmg_*`
 

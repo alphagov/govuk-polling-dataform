@@ -1,8 +1,0 @@
-config {
-    type: "declaration",
-    database: "govuk-polling",
-    schema: "govuk_polling_responses",
-    name: "src_wave_13",
-    description: "Raw data for wave 13 from govuk-polling project.",
-}
-
