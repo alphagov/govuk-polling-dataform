@@ -4,7 +4,11 @@ config {
         uniqueKey: ["survey_response_id"],
         nonNull: ["survey_response_id", "survey_wave_id"],
         rowConditions: [
-            "age_code IN ('2', '3', '4', '5', '6', '7', '8')"
+            "age_code IN ('1', '2', '3', '4', '5', '6', '7', '8')",
+            "gender_code IN ('1', '2', '95', '98')",
+            "ethnicity_code IN ('1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '95', '98')",
+            "qualification_code IN ('1', '2', '3', '4', '5', '6', '7', '8', '9')",
+            "government_office_region_code IN ('1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12')"
         ]
     },
 }
@@ -15,8 +19,9 @@ SELECT
   TRIM(CAST(responseid AS STRING)) AS src_response_id,
   CAST(WEIGHT AS FLOAT64) AS weight,
   CAST(quartile_country AS INTEGER) AS imd_quartile_country,
-  TRIM(CAST(gender AS STRING)) AS gender,
+  NULLIF(TRIM(CAST(gender AS STRING)), '') AS gender_code,
   NULLIF(TRIM(CAST(age AS STRING)), '') AS age_code,
+<<<<<<< HEAD
   TRIM(CAST(qualification2020 AS STRING)) AS qualification_2020,
   TRIM(CAST(gor_code AS STRING)) AS gor_code,
   TRIM(CAST(ethnicity AS STRING)) AS ethnicity,
@@ -359,6 +364,12 @@ SELECT
   NULLIF(TRIM(CAST(ql4b_14 AS STRING)), '') AS ql4b_14,
   NULLIF(TRIM(CAST(ql4b_95 AS STRING)), '') AS ql4b_95,
 
+=======
+  NULLIF(TRIM(CAST(qualification2020 AS STRING)), '') AS qualification_code,
+  NULLIF(TRIM(CAST(gor_code AS STRING)), '') AS government_office_region_code,
+  NULLIF(TRIM(CAST(ethnicity AS STRING)), '') AS ethnicity_code,
+  -- single answer questions
+>>>>>>> refs/heads/main
   NULLIF(TRIM(CAST(ql5 AS STRING)), '') AS ql5,
 
   NULLIF(TRIM(CAST(ql7 AS STRING)), '') AS ql7,
@@ -418,5 +429,33 @@ SELECT
   TO_HEX(MD5(CONCAT(wave_name, '-', src_response_id))) AS survey_response_id,
   TO_HEX(MD5(wave_name)) AS survey_wave_id,
   -- survey response data
+<<<<<<< HEAD
     *
+=======
+  date,
+  wave_name,
+  src_response_id,
+  weight,
+  imd_quartile_country,
+  gender_code,
+  age_code,
+  qualification_code,
+  government_office_region_code,
+  ethnicity_code,
+  -- single answer questions
+  ql5,
+  ql7,
+  ql7a_1,
+  ql7a_2,
+  ql7a_3,
+  ql7a_4,
+  ql7a_5,
+  ql7a_6,
+  ql7a_7,
+  ql7a_8,
+    -- multi answer questions
+  '1' AS ql1a_3,
+  '1' AS ql1c_3_1,
+  '1' AS ql1c_3_2
+>>>>>>> refs/heads/main
 FROM bmg_all_waves_cleaned
