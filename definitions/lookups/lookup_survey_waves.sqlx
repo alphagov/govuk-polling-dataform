@@ -27,5 +27,5 @@ FROM
     ('wave_10', 'bmg', NULL, NULL),
     ('wave_11', 'bmg', NULL, NULL),
     ('wave_12', 'bmg', NULL, NULL),
-    ('wave_13', 'bmg', NULL, NULL)
+    ('wave_13', 'bmg', DATE('2025-04-01'), DATE('2025-06-30'))
     ] )
