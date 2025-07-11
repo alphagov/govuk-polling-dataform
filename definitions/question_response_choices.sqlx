@@ -10,7 +10,6 @@ config {
 SELECT
     TO_HEX(MD5(CONCAT(question_responses.question_response_id, response_choices.question_id, response_choices.src_question_response_column_name))) AS question_response_choice_id,
     question_responses.question_response_id,
-    response_choices.question_id,
     response_choices.src_question_response_column_name,
     response_choices.choice_value,
     response_choices.choice_text

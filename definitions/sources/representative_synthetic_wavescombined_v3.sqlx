@@ -2,6 +2,6 @@ config {
     type: "declaration",
     database: "govuk-polling",
     schema: "synthetic_polling",
-    name: "representative_synthetic_wavescombined",
+    name: "representative_synthetic_wavescombined_v3",
     description: "Raw data for combined representative synthetic waves from govuk-polling project.",
 }

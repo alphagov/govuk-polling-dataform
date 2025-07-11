@@ -1,11 +1,12 @@
 config {
   type: "assertion",
-  description: "Asserts that the table has exactly 1570 rows."
+  description: "Asserts that the table has exactly 1568 rows."
 }
 
 SELECT
   COUNT(*) AS actual_row_count
 FROM
-  ${ref("stg_wave_13")}
+  ${ref("src_bmg_all_waves")}
+WHERE wave_name = 'wave_13'
 HAVING
-  actual_row_count != 1570
+  actual_row_count != 1568

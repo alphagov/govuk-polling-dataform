@@ -8,76 +8,367 @@ config {
             "gender_code IN ('1', '2', '95', '98')",
             "ethnicity_code IN ('1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '95', '98')",
             "qualification_code IN ('1', '2', '3', '4', '5', '6', '7', '8', '9')",
-            "government_office_region_code IN ('1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12')"
+            "government_office_region_code IN ('1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12')",
+            "is_english_main_language_code IN ('1', '2', '98')"
         ]
     },
 }
-WITH bmg_all_waves AS (
-    SELECT * FROM ${ref("stg_wave_13")}
-
-    UNION ALL
-
-    SELECT * FROM ${ref("stg_wave_12")}
-
-    UNION ALL
-
-    SELECT * FROM ${ref("stg_wave_11")}
-
-    UNION ALL
-
-    SELECT * FROM ${ref("stg_wave_10")}
-
-    UNION ALL
-
-    SELECT * FROM ${ref("stg_wave_9")}
-
-    UNION ALL
-
-    SELECT * FROM ${ref("stg_wave_8")}
-
-    UNION ALL
-
-    SELECT * FROM ${ref("stg_wave_7")}
-
-    UNION ALL
-
-    SELECT * FROM ${ref("stg_wave_6")}
-
-    UNION ALL
-
-    SELECT * FROM ${ref("stg_wave_5")}
-
-    UNION ALL
-
-    SELECT * FROM ${ref("stg_wave_4")}
-
-    UNION ALL
-
-    SELECT * FROM ${ref("stg_wave_3")}
-
-    UNION ALL
-
-    SELECT * FROM ${ref("stg_wave_2")}
-
-    UNION ALL
-
-    SELECT * FROM ${ref("stg_wave_1")}
-), bmg_all_waves_cleaned AS (
+WITH bmg_all_waves_cleaned AS (
 SELECT
   -- survey response data
-  DATE(Date) AS date,
-  TRIM(LOWER(Wave)) AS wave_name,
+  wave_name,
   TRIM(CAST(responseid AS STRING)) AS src_response_id,
   CAST(WEIGHT AS FLOAT64) AS weight,
   CAST(quartile_country AS INTEGER) AS imd_quartile_country,
   NULLIF(TRIM(CAST(gender AS STRING)), '') AS gender_code,
   NULLIF(TRIM(CAST(age AS STRING)), '') AS age_code,
-  NULLIF(TRIM(CAST(qualification2020 AS STRING)), '') AS qualification_code,
-  NULLIF(TRIM(CAST(gor_code AS STRING)), '') AS government_office_region_code,
-  NULLIF(TRIM(CAST(ethnicity AS STRING)), '') AS ethnicity_code,
-  -- single answer questions
+  TRIM(CAST(qualification2020 AS STRING)) AS qualification_code,
+  TRIM(CAST(gor_code AS STRING)) AS government_office_region_code,
+  TRIM(CAST(ethnicity AS STRING)) AS ethnicity_code,
+  TRIM(CAST(lang AS STRING)) AS is_english_main_language_code,
+
+-- TODO: need earlier wave data   ql1a_1,
+-- TODO: need earlier wave data   ql1a_2,
+  NULLIF(TRIM(CAST(ql1a_3 AS STRING)), '') AS ql1a_3,
+  NULLIF(TRIM(CAST(ql1a_4 AS STRING)), '') AS ql1a_4,
+  NULLIF(TRIM(CAST(ql1a_5 AS STRING)), '') AS ql1a_5,
+  NULLIF(TRIM(CAST(ql1a_6 AS STRING)), '') AS ql1a_6,
+  NULLIF(TRIM(CAST(ql1a_7 AS STRING)), '') AS ql1a_7,
+  NULLIF(TRIM(CAST(ql1a_8 AS STRING)), '') AS ql1a_8,
+  NULLIF(TRIM(CAST(ql1a_9 AS STRING)), '') AS ql1a_9,
+  NULLIF(TRIM(CAST(ql1a_10 AS STRING)), '') AS ql1a_10,
+  NULLIF(TRIM(CAST(ql1a_11 AS STRING)), '') AS ql1a_11,
+  NULLIF(TRIM(CAST(ql1a_12 AS STRING)), '') AS ql1a_12,
+  NULLIF(TRIM(CAST(ql1a_13 AS STRING)), '') AS ql1a_13,
+  NULLIF(TRIM(CAST(ql1a_14 AS STRING)), '') AS ql1a_14,
+  NULLIF(TRIM(CAST(ql1a_15 AS STRING)), '') AS ql1a_15,
+  NULLIF(TRIM(CAST(ql1a_16 AS STRING)), '') AS ql1a_16,
+  NULLIF(TRIM(CAST(ql1a_17 AS STRING)), '') AS ql1a_17,
+  NULLIF(TRIM(CAST(ql1a_18 AS STRING)), '') AS ql1a_18,
+  NULLIF(TRIM(CAST(ql1a_19 AS STRING)), '') AS ql1a_19,
+  NULLIF(TRIM(CAST(ql1a_20 AS STRING)), '') AS ql1a_20,
+  NULLIF(TRIM(CAST(ql1a_96 AS STRING)), '') AS ql1a_96,
+
+-- TODO: need earlier wave data   ql1b_1,
+-- TODO: need earlier wave data   ql1b_2,
+  NULLIF(TRIM(CAST(ql1b_3 AS STRING)), '') AS ql1b_3,
+  NULLIF(TRIM(CAST(ql1b_4 AS STRING)), '') AS ql1b_4,
+  NULLIF(TRIM(CAST(ql1b_5 AS STRING)), '') AS ql1b_5,
+  NULLIF(TRIM(CAST(ql1b_6 AS STRING)), '') AS ql1b_6,
+  NULLIF(TRIM(CAST(ql1b_7 AS STRING)), '') AS ql1b_7,
+  NULLIF(TRIM(CAST(ql1b_8 AS STRING)), '') AS ql1b_8,
+  NULLIF(TRIM(CAST(ql1b_9 AS STRING)), '') AS ql1b_9,
+  NULLIF(TRIM(CAST(ql1b_10 AS STRING)), '') AS ql1b_10,
+  NULLIF(TRIM(CAST(ql1b_11 AS STRING)), '') AS ql1b_11,
+  NULLIF(TRIM(CAST(ql1b_12 AS STRING)), '') AS ql1b_12,
+  NULLIF(TRIM(CAST(ql1b_13 AS STRING)), '') AS ql1b_13,
+  NULLIF(TRIM(CAST(ql1b_14 AS STRING)), '') AS ql1b_14,
+  NULLIF(TRIM(CAST(ql1b_15 AS STRING)), '') AS ql1b_15,
+  NULLIF(TRIM(CAST(ql1b_16 AS STRING)), '') AS ql1b_16,
+  NULLIF(TRIM(CAST(ql1b_17 AS STRING)), '') AS ql1b_17,
+  NULLIF(TRIM(CAST(ql1b_18 AS STRING)), '') AS ql1b_18,
+  NULLIF(TRIM(CAST(ql1b_19 AS STRING)), '') AS ql1b_19,
+  NULLIF(TRIM(CAST(ql1b_20 AS STRING)), '') AS ql1b_20,
+
+--   NULLIF(TRIM(CAST(ql1c_1_1 AS STRING)), '') AS ql1c_1_1,
+--   NULLIF(TRIM(CAST(ql1c_1_2 AS STRING)), '') AS ql1c_1_1,
+--   NULLIF(TRIM(CAST(ql1c_1_3 AS STRING)), '') AS ql1c_1_3,
+--   NULLIF(TRIM(CAST(ql1c_1_4 AS STRING)), '') AS ql1c_1_4,
+--   NULLIF(TRIM(CAST(ql1c_1_5 AS STRING)), '') AS ql1c_1_5,
+--   NULLIF(TRIM(CAST(ql1c_1_6 AS STRING)), '') AS ql1c_1_6,
+--   NULLIF(TRIM(CAST(ql1c_1_7 AS STRING)), '') AS ql1c_1_7,
+--   NULLIF(TRIM(CAST(ql1c_1_8 AS STRING)), '') AS ql1c_1_8,
+--   NULLIF(TRIM(CAST(ql1c_1_9 AS STRING)), '') AS ql1c_1_9,
+--   NULLIF(TRIM(CAST(ql1c_1_10 AS STRING)), '') AS ql1c_1_10,
+--   NULLIF(TRIM(CAST(ql1c_1_11 AS STRING)), '') AS ql1c_1_11,
+--   NULLIF(TRIM(CAST(ql1c_1_95 AS STRING)), '') AS ql1c_1_95,
+
+--   NULLIF(TRIM(CAST(ql1c_2_1 AS STRING)), '') AS ql1c_2_1,
+--   NULLIF(TRIM(CAST(ql1c_2_2 AS STRING)), '') AS ql1c_2_1,
+--   NULLIF(TRIM(CAST(ql1c_2_3 AS STRING)), '') AS ql1c_2_3,
+--   NULLIF(TRIM(CAST(ql1c_2_4 AS STRING)), '') AS ql1c_2_4,
+--   NULLIF(TRIM(CAST(ql1c_2_5 AS STRING)), '') AS ql1c_2_5,
+--   NULLIF(TRIM(CAST(ql1c_2_6 AS STRING)), '') AS ql1c_2_6,
+--   NULLIF(TRIM(CAST(ql1c_2_7 AS STRING)), '') AS ql1c_2_7,
+--   NULLIF(TRIM(CAST(ql1c_2_8 AS STRING)), '') AS ql1c_2_8,
+--   NULLIF(TRIM(CAST(ql1c_2_9 AS STRING)), '') AS ql1c_2_9,
+--   NULLIF(TRIM(CAST(ql1c_2_10 AS STRING)), '') AS ql1c_2_10,
+--   NULLIF(TRIM(CAST(ql1c_2_11 AS STRING)), '') AS ql1c_2_11,
+--   NULLIF(TRIM(CAST(ql1c_2_95 AS STRING)), '') AS ql1c_2_95,
+
+  NULLIF(TRIM(CAST(ql1c_3_1 AS STRING)), '') AS ql1c_3_1,
+  NULLIF(TRIM(CAST(ql1c_3_2 AS STRING)), '') AS ql1c_3_2,
+  NULLIF(TRIM(CAST(ql1c_3_3 AS STRING)), '') AS ql1c_3_3,
+  NULLIF(TRIM(CAST(ql1c_3_4 AS STRING)), '') AS ql1c_3_4,
+  NULLIF(TRIM(CAST(ql1c_3_5 AS STRING)), '') AS ql1c_3_5,
+  NULLIF(TRIM(CAST(ql1c_3_6 AS STRING)), '') AS ql1c_3_6,
+  NULLIF(TRIM(CAST(ql1c_3_7 AS STRING)), '') AS ql1c_3_7,
+  NULLIF(TRIM(CAST(ql1c_3_8 AS STRING)), '') AS ql1c_3_8,
+  NULLIF(TRIM(CAST(ql1c_3_9 AS STRING)), '') AS ql1c_3_9,
+  NULLIF(TRIM(CAST(ql1c_3_10 AS STRING)), '') AS ql1c_3_10,
+  NULLIF(TRIM(CAST(ql1c_3_11 AS STRING)), '') AS ql1c_3_11,
+  NULLIF(TRIM(CAST(ql1c_3_95 AS STRING)), '') AS ql1c_3_95,
+
+  NULLIF(TRIM(CAST(ql1c_4_1 AS STRING)), '') AS ql1c_4_1,
+  NULLIF(TRIM(CAST(ql1c_4_2 AS STRING)), '') AS ql1c_4_2,
+  NULLIF(TRIM(CAST(ql1c_4_3 AS STRING)), '') AS ql1c_4_3,
+  NULLIF(TRIM(CAST(ql1c_4_4 AS STRING)), '') AS ql1c_4_4,
+  NULLIF(TRIM(CAST(ql1c_4_5 AS STRING)), '') AS ql1c_4_5,
+  NULLIF(TRIM(CAST(ql1c_4_6 AS STRING)), '') AS ql1c_4_6,
+  NULLIF(TRIM(CAST(ql1c_4_7 AS STRING)), '') AS ql1c_4_7,
+  NULLIF(TRIM(CAST(ql1c_4_8 AS STRING)), '') AS ql1c_4_8,
+  NULLIF(TRIM(CAST(ql1c_4_9 AS STRING)), '') AS ql1c_4_9,
+  NULLIF(TRIM(CAST(ql1c_4_10 AS STRING)), '') AS ql1c_4_10,
+  NULLIF(TRIM(CAST(ql1c_4_11 AS STRING)), '') AS ql1c_4_11,
+  NULLIF(TRIM(CAST(ql1c_4_95 AS STRING)), '') AS ql1c_4_95,
+
+  NULLIF(TRIM(CAST(ql1c_5_1 AS STRING)), '') AS ql1c_5_1,
+  NULLIF(TRIM(CAST(ql1c_5_2 AS STRING)), '') AS ql1c_5_2,
+  NULLIF(TRIM(CAST(ql1c_5_3 AS STRING)), '') AS ql1c_5_3,
+  NULLIF(TRIM(CAST(ql1c_5_4 AS STRING)), '') AS ql1c_5_4,
+  NULLIF(TRIM(CAST(ql1c_5_5 AS STRING)), '') AS ql1c_5_5,
+  NULLIF(TRIM(CAST(ql1c_5_6 AS STRING)), '') AS ql1c_5_6,
+  NULLIF(TRIM(CAST(ql1c_5_7 AS STRING)), '') AS ql1c_5_7,
+  NULLIF(TRIM(CAST(ql1c_5_8 AS STRING)), '') AS ql1c_5_8,
+  NULLIF(TRIM(CAST(ql1c_5_9 AS STRING)), '') AS ql1c_5_9,
+  NULLIF(TRIM(CAST(ql1c_5_10 AS STRING)), '') AS ql1c_5_10,
+  NULLIF(TRIM(CAST(ql1c_5_11 AS STRING)), '') AS ql1c_5_11,
+  NULLIF(TRIM(CAST(ql1c_5_95 AS STRING)), '') AS ql1c_5_95,
+
+  NULLIF(TRIM(CAST(ql1c_6_1 AS STRING)), '') AS ql1c_6_1,
+  NULLIF(TRIM(CAST(ql1c_6_2 AS STRING)), '') AS ql1c_6_2,
+  NULLIF(TRIM(CAST(ql1c_6_3 AS STRING)), '') AS ql1c_6_3,
+  NULLIF(TRIM(CAST(ql1c_6_4 AS STRING)), '') AS ql1c_6_4,
+  NULLIF(TRIM(CAST(ql1c_6_5 AS STRING)), '') AS ql1c_6_5,
+  NULLIF(TRIM(CAST(ql1c_6_6 AS STRING)), '') AS ql1c_6_6,
+  NULLIF(TRIM(CAST(ql1c_6_7 AS STRING)), '') AS ql1c_6_7,
+  NULLIF(TRIM(CAST(ql1c_6_8 AS STRING)), '') AS ql1c_6_8,
+  NULLIF(TRIM(CAST(ql1c_6_9 AS STRING)), '') AS ql1c_6_9,
+  NULLIF(TRIM(CAST(ql1c_6_10 AS STRING)), '') AS ql1c_6_10,
+  NULLIF(TRIM(CAST(ql1c_6_11 AS STRING)), '') AS ql1c_6_11,
+  NULLIF(TRIM(CAST(ql1c_6_95 AS STRING)), '') AS ql1c_6_95,
+
+  NULLIF(TRIM(CAST(ql1c_7_1 AS STRING)), '') AS ql1c_7_1,
+  NULLIF(TRIM(CAST(ql1c_7_2 AS STRING)), '') AS ql1c_7_2,
+  NULLIF(TRIM(CAST(ql1c_7_3 AS STRING)), '') AS ql1c_7_3,
+  NULLIF(TRIM(CAST(ql1c_7_4 AS STRING)), '') AS ql1c_7_4,
+  NULLIF(TRIM(CAST(ql1c_7_5 AS STRING)), '') AS ql1c_7_5,
+  NULLIF(TRIM(CAST(ql1c_7_6 AS STRING)), '') AS ql1c_7_6,
+  NULLIF(TRIM(CAST(ql1c_7_7 AS STRING)), '') AS ql1c_7_7,
+  NULLIF(TRIM(CAST(ql1c_7_8 AS STRING)), '') AS ql1c_7_8,
+  NULLIF(TRIM(CAST(ql1c_7_9 AS STRING)), '') AS ql1c_7_9,
+  NULLIF(TRIM(CAST(ql1c_7_10 AS STRING)), '') AS ql1c_7_10,
+  NULLIF(TRIM(CAST(ql1c_7_11 AS STRING)), '') AS ql1c_7_11,
+  NULLIF(TRIM(CAST(ql1c_7_95 AS STRING)), '') AS ql1c_7_95,
+
+  NULLIF(TRIM(CAST(ql1c_8_1 AS STRING)), '') AS ql1c_8_1,
+  NULLIF(TRIM(CAST(ql1c_8_2 AS STRING)), '') AS ql1c_8_2,
+  NULLIF(TRIM(CAST(ql1c_8_3 AS STRING)), '') AS ql1c_8_3,
+  NULLIF(TRIM(CAST(ql1c_8_4 AS STRING)), '') AS ql1c_8_4,
+  NULLIF(TRIM(CAST(ql1c_8_5 AS STRING)), '') AS ql1c_8_5,
+  NULLIF(TRIM(CAST(ql1c_8_6 AS STRING)), '') AS ql1c_8_6,
+  NULLIF(TRIM(CAST(ql1c_8_7 AS STRING)), '') AS ql1c_8_7,
+  NULLIF(TRIM(CAST(ql1c_8_8 AS STRING)), '') AS ql1c_8_8,
+  NULLIF(TRIM(CAST(ql1c_8_9 AS STRING)), '') AS ql1c_8_9,
+  NULLIF(TRIM(CAST(ql1c_8_10 AS STRING)), '') AS ql1c_8_10,
+  NULLIF(TRIM(CAST(ql1c_8_11 AS STRING)), '') AS ql1c_8_11,
+  NULLIF(TRIM(CAST(ql1c_8_95 AS STRING)), '') AS ql1c_8_95,
+
+  NULLIF(TRIM(CAST(ql1c_9_1 AS STRING)), '') AS ql1c_9_1,
+  NULLIF(TRIM(CAST(ql1c_9_2 AS STRING)), '') AS ql1c_9_2,
+  NULLIF(TRIM(CAST(ql1c_9_3 AS STRING)), '') AS ql1c_9_3,
+  NULLIF(TRIM(CAST(ql1c_9_4 AS STRING)), '') AS ql1c_9_4,
+  NULLIF(TRIM(CAST(ql1c_9_5 AS STRING)), '') AS ql1c_9_5,
+  NULLIF(TRIM(CAST(ql1c_9_6 AS STRING)), '') AS ql1c_9_6,
+  NULLIF(TRIM(CAST(ql1c_9_7 AS STRING)), '') AS ql1c_9_7,
+  NULLIF(TRIM(CAST(ql1c_9_8 AS STRING)), '') AS ql1c_9_8,
+  NULLIF(TRIM(CAST(ql1c_9_9 AS STRING)), '') AS ql1c_9_9,
+  NULLIF(TRIM(CAST(ql1c_9_10 AS STRING)), '') AS ql1c_9_10,
+  NULLIF(TRIM(CAST(ql1c_9_11 AS STRING)), '') AS ql1c_9_11,
+  NULLIF(TRIM(CAST(ql1c_9_95 AS STRING)), '') AS ql1c_9_95,
+
+  NULLIF(TRIM(CAST(ql1c_10_1 AS STRING)), '') AS ql1c_10_1,
+  NULLIF(TRIM(CAST(ql1c_10_2 AS STRING)), '') AS ql1c_10_2,
+  NULLIF(TRIM(CAST(ql1c_10_3 AS STRING)), '') AS ql1c_10_3,
+  NULLIF(TRIM(CAST(ql1c_10_4 AS STRING)), '') AS ql1c_10_4,
+  NULLIF(TRIM(CAST(ql1c_10_5 AS STRING)), '') AS ql1c_10_5,
+  NULLIF(TRIM(CAST(ql1c_10_6 AS STRING)), '') AS ql1c_10_6,
+  NULLIF(TRIM(CAST(ql1c_10_7 AS STRING)), '') AS ql1c_10_7,
+  NULLIF(TRIM(CAST(ql1c_10_8 AS STRING)), '') AS ql1c_10_8,
+  NULLIF(TRIM(CAST(ql1c_10_9 AS STRING)), '') AS ql1c_10_9,
+  NULLIF(TRIM(CAST(ql1c_10_10 AS STRING)), '') AS ql1c_10_10,
+  NULLIF(TRIM(CAST(ql1c_10_11 AS STRING)), '') AS ql1c_10_11,
+  NULLIF(TRIM(CAST(ql1c_10_95 AS STRING)), '') AS ql1c_10_95,
+
+  NULLIF(TRIM(CAST(ql1c_11_1 AS STRING)), '') AS ql1c_11_1,
+  NULLIF(TRIM(CAST(ql1c_11_2 AS STRING)), '') AS ql1c_11_2,
+  NULLIF(TRIM(CAST(ql1c_11_3 AS STRING)), '') AS ql1c_11_3,
+  NULLIF(TRIM(CAST(ql1c_11_4 AS STRING)), '') AS ql1c_11_4,
+  NULLIF(TRIM(CAST(ql1c_11_5 AS STRING)), '') AS ql1c_11_5,
+  NULLIF(TRIM(CAST(ql1c_11_6 AS STRING)), '') AS ql1c_11_6,
+  NULLIF(TRIM(CAST(ql1c_11_7 AS STRING)), '') AS ql1c_11_7,
+  NULLIF(TRIM(CAST(ql1c_11_8 AS STRING)), '') AS ql1c_11_8,
+  NULLIF(TRIM(CAST(ql1c_11_9 AS STRING)), '') AS ql1c_11_9,
+  NULLIF(TRIM(CAST(ql1c_11_10 AS STRING)), '') AS ql1c_11_10,
+  NULLIF(TRIM(CAST(ql1c_11_11 AS STRING)), '') AS ql1c_11_11,
+  NULLIF(TRIM(CAST(ql1c_11_95 AS STRING)), '') AS ql1c_11_95,
+
+  NULLIF(TRIM(CAST(ql1c_12_1 AS STRING)), '') AS ql1c_12_1,
+  NULLIF(TRIM(CAST(ql1c_12_2 AS STRING)), '') AS ql1c_12_2,
+  NULLIF(TRIM(CAST(ql1c_12_3 AS STRING)), '') AS ql1c_12_3,
+  NULLIF(TRIM(CAST(ql1c_12_4 AS STRING)), '') AS ql1c_12_4,
+  NULLIF(TRIM(CAST(ql1c_12_5 AS STRING)), '') AS ql1c_12_5,
+  NULLIF(TRIM(CAST(ql1c_12_6 AS STRING)), '') AS ql1c_12_6,
+  NULLIF(TRIM(CAST(ql1c_12_7 AS STRING)), '') AS ql1c_12_7,
+  NULLIF(TRIM(CAST(ql1c_12_8 AS STRING)), '') AS ql1c_12_8,
+  NULLIF(TRIM(CAST(ql1c_12_9 AS STRING)), '') AS ql1c_12_9,
+  NULLIF(TRIM(CAST(ql1c_12_10 AS STRING)), '') AS ql1c_12_10,
+  NULLIF(TRIM(CAST(ql1c_12_11 AS STRING)), '') AS ql1c_12_11,
+  NULLIF(TRIM(CAST(ql1c_12_95 AS STRING)), '') AS ql1c_12_95,
+
+  NULLIF(TRIM(CAST(ql1c_13_1 AS STRING)), '') AS ql1c_13_1,
+  NULLIF(TRIM(CAST(ql1c_13_2 AS STRING)), '') AS ql1c_13_2,
+  NULLIF(TRIM(CAST(ql1c_13_3 AS STRING)), '') AS ql1c_13_3,
+  NULLIF(TRIM(CAST(ql1c_13_4 AS STRING)), '') AS ql1c_13_4,
+  NULLIF(TRIM(CAST(ql1c_13_5 AS STRING)), '') AS ql1c_13_5,
+  NULLIF(TRIM(CAST(ql1c_13_6 AS STRING)), '') AS ql1c_13_6,
+  NULLIF(TRIM(CAST(ql1c_13_7 AS STRING)), '') AS ql1c_13_7,
+  NULLIF(TRIM(CAST(ql1c_13_8 AS STRING)), '') AS ql1c_13_8,
+  NULLIF(TRIM(CAST(ql1c_13_9 AS STRING)), '') AS ql1c_13_9,
+  NULLIF(TRIM(CAST(ql1c_13_10 AS STRING)), '') AS ql1c_13_10,
+  NULLIF(TRIM(CAST(ql1c_13_11 AS STRING)), '') AS ql1c_13_11,
+  NULLIF(TRIM(CAST(ql1c_13_95 AS STRING)), '') AS ql1c_13_95,
+
+  NULLIF(TRIM(CAST(ql1c_14_1 AS STRING)), '') AS ql1c_14_1,
+  NULLIF(TRIM(CAST(ql1c_14_2 AS STRING)), '') AS ql1c_14_2,
+  NULLIF(TRIM(CAST(ql1c_14_3 AS STRING)), '') AS ql1c_14_3,
+  NULLIF(TRIM(CAST(ql1c_14_4 AS STRING)), '') AS ql1c_14_4,
+  NULLIF(TRIM(CAST(ql1c_14_5 AS STRING)), '') AS ql1c_14_5,
+  NULLIF(TRIM(CAST(ql1c_14_6 AS STRING)), '') AS ql1c_14_6,
+  NULLIF(TRIM(CAST(ql1c_14_7 AS STRING)), '') AS ql1c_14_7,
+  NULLIF(TRIM(CAST(ql1c_14_8 AS STRING)), '') AS ql1c_14_8,
+  NULLIF(TRIM(CAST(ql1c_14_9 AS STRING)), '') AS ql1c_14_9,
+  NULLIF(TRIM(CAST(ql1c_14_10 AS STRING)), '') AS ql1c_14_10,
+  NULLIF(TRIM(CAST(ql1c_14_11 AS STRING)), '') AS ql1c_14_11,
+  NULLIF(TRIM(CAST(ql1c_14_95 AS STRING)), '') AS ql1c_14_95,
+
+  NULLIF(TRIM(CAST(ql1c_15_1 AS STRING)), '') AS ql1c_15_1,
+  NULLIF(TRIM(CAST(ql1c_15_2 AS STRING)), '') AS ql1c_15_2,
+  NULLIF(TRIM(CAST(ql1c_15_3 AS STRING)), '') AS ql1c_15_3,
+  NULLIF(TRIM(CAST(ql1c_15_4 AS STRING)), '') AS ql1c_15_4,
+  NULLIF(TRIM(CAST(ql1c_15_5 AS STRING)), '') AS ql1c_15_5,
+  NULLIF(TRIM(CAST(ql1c_15_6 AS STRING)), '') AS ql1c_15_6,
+  NULLIF(TRIM(CAST(ql1c_15_7 AS STRING)), '') AS ql1c_15_7,
+  NULLIF(TRIM(CAST(ql1c_15_8 AS STRING)), '') AS ql1c_15_8,
+  NULLIF(TRIM(CAST(ql1c_15_9 AS STRING)), '') AS ql1c_15_9,
+  NULLIF(TRIM(CAST(ql1c_15_10 AS STRING)), '') AS ql1c_15_10,
+  NULLIF(TRIM(CAST(ql1c_15_11 AS STRING)), '') AS ql1c_15_11,
+  NULLIF(TRIM(CAST(ql1c_15_95 AS STRING)), '') AS ql1c_15_95,
+
+  NULLIF(TRIM(CAST(ql1c_16_1 AS STRING)), '') AS ql1c_16_1,
+  NULLIF(TRIM(CAST(ql1c_16_2 AS STRING)), '') AS ql1c_16_2,
+  NULLIF(TRIM(CAST(ql1c_16_3 AS STRING)), '') AS ql1c_16_3,
+  NULLIF(TRIM(CAST(ql1c_16_4 AS STRING)), '') AS ql1c_16_4,
+  NULLIF(TRIM(CAST(ql1c_16_5 AS STRING)), '') AS ql1c_16_5,
+  NULLIF(TRIM(CAST(ql1c_16_6 AS STRING)), '') AS ql1c_16_6,
+  NULLIF(TRIM(CAST(ql1c_16_7 AS STRING)), '') AS ql1c_16_7,
+  NULLIF(TRIM(CAST(ql1c_16_8 AS STRING)), '') AS ql1c_16_8,
+  NULLIF(TRIM(CAST(ql1c_16_9 AS STRING)), '') AS ql1c_16_9,
+  NULLIF(TRIM(CAST(ql1c_16_10 AS STRING)), '') AS ql1c_16_10,
+  NULLIF(TRIM(CAST(ql1c_16_11 AS STRING)), '') AS ql1c_16_11,
+  NULLIF(TRIM(CAST(ql1c_16_95 AS STRING)), '') AS ql1c_16_95,
+
+  NULLIF(TRIM(CAST(ql1c_17_1 AS STRING)), '') AS ql1c_17_1,
+  NULLIF(TRIM(CAST(ql1c_17_2 AS STRING)), '') AS ql1c_17_2,
+  NULLIF(TRIM(CAST(ql1c_17_3 AS STRING)), '') AS ql1c_17_3,
+  NULLIF(TRIM(CAST(ql1c_17_4 AS STRING)), '') AS ql1c_17_4,
+  NULLIF(TRIM(CAST(ql1c_17_5 AS STRING)), '') AS ql1c_17_5,
+  NULLIF(TRIM(CAST(ql1c_17_6 AS STRING)), '') AS ql1c_17_6,
+  NULLIF(TRIM(CAST(ql1c_17_7 AS STRING)), '') AS ql1c_17_7,
+  NULLIF(TRIM(CAST(ql1c_17_8 AS STRING)), '') AS ql1c_17_8,
+  NULLIF(TRIM(CAST(ql1c_17_9 AS STRING)), '') AS ql1c_17_9,
+  NULLIF(TRIM(CAST(ql1c_17_10 AS STRING)), '') AS ql1c_17_10,
+  NULLIF(TRIM(CAST(ql1c_17_11 AS STRING)), '') AS ql1c_17_11,
+  NULLIF(TRIM(CAST(ql1c_17_95 AS STRING)), '') AS ql1c_17_95,
+
+  NULLIF(TRIM(CAST(ql1c_18_1 AS STRING)), '') AS ql1c_18_1,
+  NULLIF(TRIM(CAST(ql1c_18_2 AS STRING)), '') AS ql1c_18_2,
+  NULLIF(TRIM(CAST(ql1c_18_3 AS STRING)), '') AS ql1c_18_3,
+  NULLIF(TRIM(CAST(ql1c_18_4 AS STRING)), '') AS ql1c_18_4,
+  NULLIF(TRIM(CAST(ql1c_18_5 AS STRING)), '') AS ql1c_18_5,
+  NULLIF(TRIM(CAST(ql1c_18_6 AS STRING)), '') AS ql1c_18_6,
+  NULLIF(TRIM(CAST(ql1c_18_7 AS STRING)), '') AS ql1c_18_7,
+  NULLIF(TRIM(CAST(ql1c_18_8 AS STRING)), '') AS ql1c_18_8,
+  NULLIF(TRIM(CAST(ql1c_18_9 AS STRING)), '') AS ql1c_18_9,
+  NULLIF(TRIM(CAST(ql1c_18_10 AS STRING)), '') AS ql1c_18_10,
+  NULLIF(TRIM(CAST(ql1c_18_11 AS STRING)), '') AS ql1c_18_11,
+  NULLIF(TRIM(CAST(ql1c_18_95 AS STRING)), '') AS ql1c_18_95,
+
+  NULLIF(TRIM(CAST(ql1c_19_1 AS STRING)), '') AS ql1c_19_1,
+  NULLIF(TRIM(CAST(ql1c_19_2 AS STRING)), '') AS ql1c_19_2,
+  NULLIF(TRIM(CAST(ql1c_19_3 AS STRING)), '') AS ql1c_19_3,
+  NULLIF(TRIM(CAST(ql1c_19_4 AS STRING)), '') AS ql1c_19_4,
+  NULLIF(TRIM(CAST(ql1c_19_5 AS STRING)), '') AS ql1c_19_5,
+  NULLIF(TRIM(CAST(ql1c_19_6 AS STRING)), '') AS ql1c_19_6,
+  NULLIF(TRIM(CAST(ql1c_19_7 AS STRING)), '') AS ql1c_19_7,
+  NULLIF(TRIM(CAST(ql1c_19_8 AS STRING)), '') AS ql1c_19_8,
+  NULLIF(TRIM(CAST(ql1c_19_9 AS STRING)), '') AS ql1c_19_9,
+  NULLIF(TRIM(CAST(ql1c_19_10 AS STRING)), '') AS ql1c_19_10,
+  NULLIF(TRIM(CAST(ql1c_19_11 AS STRING)), '') AS ql1c_19_11,
+  NULLIF(TRIM(CAST(ql1c_19_95 AS STRING)), '') AS ql1c_19_95,
+
+  NULLIF(TRIM(CAST(ql1c_20_1 AS STRING)), '') AS ql1c_20_1,
+  NULLIF(TRIM(CAST(ql1c_20_2 AS STRING)), '') AS ql1c_20_2,
+  NULLIF(TRIM(CAST(ql1c_20_3 AS STRING)), '') AS ql1c_20_3,
+  NULLIF(TRIM(CAST(ql1c_20_4 AS STRING)), '') AS ql1c_20_4,
+  NULLIF(TRIM(CAST(ql1c_20_5 AS STRING)), '') AS ql1c_20_5,
+  NULLIF(TRIM(CAST(ql1c_20_6 AS STRING)), '') AS ql1c_20_6,
+  NULLIF(TRIM(CAST(ql1c_20_7 AS STRING)), '') AS ql1c_20_7,
+  NULLIF(TRIM(CAST(ql1c_20_8 AS STRING)), '') AS ql1c_20_8,
+  NULLIF(TRIM(CAST(ql1c_20_9 AS STRING)), '') AS ql1c_20_9,
+  NULLIF(TRIM(CAST(ql1c_20_10 AS STRING)), '') AS ql1c_20_10,
+  NULLIF(TRIM(CAST(ql1c_20_11 AS STRING)), '') AS ql1c_20_11,
+  NULLIF(TRIM(CAST(ql1c_20_95 AS STRING)), '') AS ql1c_20_95,
+
+
+  NULLIF(TRIM(CAST(ql2_3 AS STRING)), '') AS ql2_3,
+  NULLIF(TRIM(CAST(ql2_4 AS STRING)), '') AS ql2_4,
+  NULLIF(TRIM(CAST(ql2_5 AS STRING)), '') AS ql2_5,
+  NULLIF(TRIM(CAST(ql2_6 AS STRING)), '') AS ql2_6,
+
+  NULLIF(TRIM(CAST(ql4a_1 AS STRING)), '') AS ql4a_1,
+  NULLIF(TRIM(CAST(ql4a_2 AS STRING)), '') AS ql4a_2,
+  NULLIF(TRIM(CAST(ql4a_3 AS STRING)), '') AS ql4a_3,
+  NULLIF(TRIM(CAST(ql4a_4 AS STRING)), '') AS ql4a_4,
+  NULLIF(TRIM(CAST(ql4a_5 AS STRING)), '') AS ql4a_5,
+  NULLIF(TRIM(CAST(ql4a_6 AS STRING)), '') AS ql4a_6,
+  NULLIF(TRIM(CAST(ql4a_7 AS STRING)), '') AS ql4a_7,
+  NULLIF(TRIM(CAST(ql4a_10 AS STRING)), '') AS ql4a_10,
+  NULLIF(TRIM(CAST(ql4a_11 AS STRING)), '') AS ql4a_11,
+  NULLIF(TRIM(CAST(ql4a_12 AS STRING)), '') AS ql4a_12,
+  NULLIF(TRIM(CAST(ql4a_13 AS STRING)), '') AS ql4a_13,
+  NULLIF(TRIM(CAST(ql4a_14 AS STRING)), '') AS ql4a_14,
+  NULLIF(TRIM(CAST(ql4a_95 AS STRING)), '') AS ql4a_95,
+  NULLIF(TRIM(CAST(ql4a_96 AS STRING)), '') AS ql4a_96,
+
+  NULLIF(TRIM(CAST(ql4b_1 AS STRING)), '') AS ql4b_1,
+  NULLIF(TRIM(CAST(ql4b_2 AS STRING)), '') AS ql4b_2,
+  NULLIF(TRIM(CAST(ql4b_3 AS STRING)), '') AS ql4b_3,
+  NULLIF(TRIM(CAST(ql4b_4 AS STRING)), '') AS ql4b_4,
+  NULLIF(TRIM(CAST(ql4b_5 AS STRING)), '') AS ql4b_5,
+  NULLIF(TRIM(CAST(ql4b_6 AS STRING)), '') AS ql4b_6,
+  NULLIF(TRIM(CAST(ql4b_7 AS STRING)), '') AS ql4b_7,
+  NULLIF(TRIM(CAST(ql4b_10 AS STRING)), '') AS ql4b_10,
+  NULLIF(TRIM(CAST(ql4b_11 AS STRING)), '') AS ql4b_11,
+  NULLIF(TRIM(CAST(ql4b_12 AS STRING)), '') AS ql4b_12,
+  NULLIF(TRIM(CAST(ql4b_13 AS STRING)), '') AS ql4b_13,
+  NULLIF(TRIM(CAST(ql4b_14 AS STRING)), '') AS ql4b_14,
+  NULLIF(TRIM(CAST(ql4b_95 AS STRING)), '') AS ql4b_95,
+
   NULLIF(TRIM(CAST(ql5 AS STRING)), '') AS ql5,
+
   NULLIF(TRIM(CAST(ql7 AS STRING)), '') AS ql7,
+
   NULLIF(TRIM(CAST(ql7a_1 AS STRING)), '') AS ql7a_1,
   NULLIF(TRIM(CAST(ql7a_2 AS STRING)), '') AS ql7a_2,
   NULLIF(TRIM(CAST(ql7a_3 AS STRING)), '') AS ql7a_3,
@@ -85,38 +376,53 @@ SELECT
   NULLIF(TRIM(CAST(ql7a_5 AS STRING)), '') AS ql7a_5,
   NULLIF(TRIM(CAST(ql7a_6 AS STRING)), '') AS ql7a_6,
   NULLIF(TRIM(CAST(ql7a_7 AS STRING)), '') AS ql7a_7,
-  NULLIF(TRIM(CAST(ql7a_8 AS STRING)), '') AS ql7a_8
-  -- multi answer questions
-FROM bmg_all_waves
+  NULLIF(TRIM(CAST(ql7a_8 AS STRING)), '') AS ql7a_8,
+
+  NULLIF(TRIM(CAST(ql8a_1 AS STRING)), '') AS ql8a_1,
+  NULLIF(TRIM(CAST(ql8a_2 AS STRING)), '') AS ql8a_2,
+  NULLIF(TRIM(CAST(ql8a_3 AS STRING)), '') AS ql8a_3,
+  NULLIF(TRIM(CAST(ql8a_4 AS STRING)), '') AS ql8a_4,
+  NULLIF(TRIM(CAST(ql8a_95 AS STRING)), '') AS ql8a_95,
+  NULLIF(TRIM(CAST(ql8a_96 AS STRING)), '') AS ql8a_96,
+
+  NULLIF(TRIM(CAST(ql12_1 AS STRING)), '') AS ql12_1,
+  NULLIF(TRIM(CAST(ql12_2 AS STRING)), '') AS ql12_2,
+  NULLIF(TRIM(CAST(ql12_3 AS STRING)), '') AS ql12_3,
+  NULLIF(TRIM(CAST(ql12_4 AS STRING)), '') AS ql12_4,
+  NULLIF(TRIM(CAST(ql12_5 AS STRING)), '') AS ql12_5,
+  NULLIF(TRIM(CAST(ql12_6 AS STRING)), '') AS ql12_6,
+  NULLIF(TRIM(CAST(ql12_7 AS STRING)), '') AS ql12_7,
+  NULLIF(TRIM(CAST(ql12_8 AS STRING)), '') AS ql12_8,
+  NULLIF(TRIM(CAST(ql12_9 AS STRING)), '') AS ql12_9,
+  NULLIF(TRIM(CAST(ql12_10 AS STRING)), '') AS ql12_10,
+  NULLIF(TRIM(CAST(ql12_11 AS STRING)), '') AS ql12_11,
+  NULLIF(TRIM(CAST(ql12_12 AS STRING)), '') AS ql12_12,
+  NULLIF(TRIM(CAST(ql12_13 AS STRING)), '') AS ql12_13,
+  NULLIF(TRIM(CAST(ql12_95 AS STRING)), '') AS ql12_95,
+  NULLIF(TRIM(CAST(ql12_96 AS STRING)), '') AS ql12_96,
+
+  NULLIF(TRIM(CAST(ql13_1 AS STRING)), '') AS ql13_1,
+  NULLIF(TRIM(CAST(ql13_2 AS STRING)), '') AS ql13_2,
+  NULLIF(TRIM(CAST(ql13_3 AS STRING)), '') AS ql13_3,
+  NULLIF(TRIM(CAST(ql13_4 AS STRING)), '') AS ql13_4,
+
+  NULLIF(TRIM(CAST(n1_1 AS STRING)), '') AS n1_1,
+  NULLIF(TRIM(CAST(n1_2 AS STRING)), '') AS n1_2,
+  NULLIF(TRIM(CAST(n1_3 AS STRING)), '') AS n1_3,
+  NULLIF(TRIM(CAST(n1_4 AS STRING)), '') AS n1_4,
+  NULLIF(TRIM(CAST(n1_5 AS STRING)), '') AS n1_5,
+  NULLIF(TRIM(CAST(n1_6 AS STRING)), '') AS n1_6,
+  NULLIF(TRIM(CAST(n1_7 AS STRING)), '') AS n1_7,
+  NULLIF(TRIM(CAST(n1_95 AS STRING)), '') AS n1_95,
+  NULLIF(TRIM(CAST(n1_96 AS STRING)), '') AS n1_96,
+  NULLIF(TRIM(CAST(n1_97 AS STRING)), '') AS n1_97,
+  NULLIF(TRIM(CAST(n1_98 AS STRING)), '') AS n1_98
+FROM ${ref("src_bmg_all_waves")}
 )
 SELECT
   -- surrogate keys
   TO_HEX(MD5(CONCAT(wave_name, '-', src_response_id))) AS survey_response_id,
   TO_HEX(MD5(wave_name)) AS survey_wave_id,
   -- survey response data
-  date,
-  wave_name,
-  src_response_id,
-  weight,
-  imd_quartile_country,
-  gender_code,
-  age_code,
-  qualification_code,
-  government_office_region_code,
-  ethnicity_code,
-  -- single answer questions
-  ql5,
-  ql7,
-  ql7a_1,
-  ql7a_2,
-  ql7a_3,
-  ql7a_4,
-  ql7a_5,
-  ql7a_6,
-  ql7a_7,
-  ql7a_8,
-    -- multi answer questions
-  '1' AS ql1a_3,
-  '1' AS ql1c_3_1,
-  '1' AS ql1c_3_2
+    *
 FROM bmg_all_waves_cleaned
