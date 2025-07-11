@@ -1,0 +1,27 @@
+config {
+  type: "table",
+  assertions : {
+    uniqueKey: ["provider", "is_english_main_language_code"],
+    rowConditions: [
+        "is_english_main_language IN ('Yes', 'No', 'Prefer not to say')"
+    ]
+  },
+  columns: {
+      provider: "The name of the organisation performing the polling (all lowercase).",
+      is_english_main_language_code: "The coded value received in the data.",
+      is_english_main_language: "The text which was presented the user when making a selection.",
+    },
+  description: "A centralised lookup table to map provider-specific is_english_main_language codes to text response."
+}
+
+SELECT
+  *
+FROM
+  UNNEST(
+    ARRAY<STRUCT<provider STRING, is_english_main_language_code STRING, is_english_main_language STRING>>[
+      -- Rule set for provider 'bmg'
+      ('bmg', '1', 'Yes'),
+      ('bmg', '2', 'No'),
+      ('bmg', '98', 'Prefer not to say')
+    ]
+  )

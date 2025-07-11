@@ -18,7 +18,8 @@ SELECT
   lookup_age_group.age_group,
   lookup_qualification.qualification,
   lookup_ethnicity.ethnicity,
-  lookup_government_office_region.government_office_region
+  lookup_government_office_region.government_office_region,
+  lookup_is_english_main_language.is_english_main_language
 FROM
   ${ref("stg_bmg_all_waves")} src
 LEFT JOIN
@@ -44,3 +45,7 @@ LEFT JOIN
   ${ref("lookup_government_office_region")} lookup_government_office_region
 USING
   (provider, government_office_region_code)
+LEFT JOIN
+  ${ref("lookup_is_english_main_language")} lookup_is_english_main_language
+USING
+  (provider, is_english_main_language_code)

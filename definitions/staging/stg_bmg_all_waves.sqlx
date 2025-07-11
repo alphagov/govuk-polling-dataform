@@ -8,7 +8,8 @@ config {
             "gender_code IN ('1', '2', '95', '98')",
             "ethnicity_code IN ('1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '95', '98')",
             "qualification_code IN ('1', '2', '3', '4', '5', '6', '7', '8', '9')",
-            "government_office_region_code IN ('1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12')"
+            "government_office_region_code IN ('1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12')",
+            "is_english_main_language_code IN ('1', '2', '98')"
         ]
     },
 }
@@ -24,6 +25,7 @@ SELECT
   TRIM(CAST(qualification2020 AS STRING)) AS qualification_code,
   TRIM(CAST(gor_code AS STRING)) AS government_office_region_code,
   TRIM(CAST(ethnicity AS STRING)) AS ethnicity_code,
+  TRIM(CAST(lang AS STRING)) AS is_english_main_language_code,
 
 -- TODO: need earlier wave data   ql1a_1,
 -- TODO: need earlier wave data   ql1a_2,
