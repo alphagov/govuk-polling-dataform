@@ -1,0 +1,28 @@
+config {
+  type: "table",
+  assertions : {
+    uniqueKey: ["provider", "gender_code"],
+    rowConditions: [
+        "gender IN ('A man (including trans man)', 'A woman (including trans woman)', 'Other', 'Prefer not to say')"
+    ]
+  },
+  columns: {
+      provider: "The name of the organisation performing the polling (all lowercase).",
+      age_code: "The coded value received in the data.",
+      age_group: "The text which was presented the user when making a selection.",
+    },
+  description: "A centralised lookup table to map provider-specific gender codes to human-readable values."
+}
+
+SELECT
+  *
+FROM
+  UNNEST(
+    ARRAY<STRUCT<provider STRING, gender_code STRING, gender STRING>>[
+      -- Rule set for provider 'bmg'
+      ('bmg', '1', 'A man (including trans man)'),
+      ('bmg', '2', 'A woman (including trans woman)'),
+      ('bmg', '95', 'Other'),
+      ('bmg', '98', 'Prefer not to say')
+    ]
+  )
