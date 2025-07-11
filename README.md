@@ -73,8 +73,9 @@ erDiagram
 
 #### Adding a new Wave
 1. Create a new row in `definitions/lookups/lookup_survey_waves.sqlx`.
-2. For each question,
-    add a new row in the `definitions/lookups/lookup_survey_wave_questions.sqlx` file including the `wave_name` and `src_question_id`.
+2. Upload the source CSV to the `govuk_polling_responses` dataset with the name `src_{provider}_wave_{number}`. For example, `src_bmg_wave_13`.
+2. For each question, add a new row in the `definitions/lookups/lookup_survey_wave_questions.sqlx` file including the `wave_name` and `src_question_id`.
+    If this wave has the same questions as previous waves, just copy and paste being sure to update the values in `wave_name`.
 3. Execute the workflow to ensure `survey_wave_questions` is populated as expected.
 
 #### Adding a new Question
