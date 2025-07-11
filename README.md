@@ -31,6 +31,7 @@ erDiagram
         STRING qualification
         STRING ethnicity
         STRING government_office_region
+        STRING is_english_main_language_code
     }
 
     question_responses {
