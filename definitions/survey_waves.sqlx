@@ -1,7 +1,7 @@
 config {
     type: "table",
     database: "govuk-polling",
-    schema: "synthetic_polling",
+    schema: "govuk_polling_responses",
     assertions: {
         uniqueKey: ["survey_wave_id"],
         nonNull: ["survey_wave_id", "name"]
