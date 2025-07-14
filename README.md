@@ -58,7 +58,6 @@ erDiagram
     question_response_selections {
         STRING question_response_selection_id PK
         STRING question_response_id FK
-        STRING selection_value
         STRING selection_text
     }
 
