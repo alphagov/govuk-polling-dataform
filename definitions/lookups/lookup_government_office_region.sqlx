@@ -1,0 +1,36 @@
+config {
+  type: "table",
+  assertions : {
+    uniqueKey: ["provider", "government_office_region_code"],
+    rowConditions: [
+        "government_office_region IN ('East Midlands', 'East of England', 'London', 'North East', 'North West', 'South East', 'South West', 'West Midlands', 'Yorkshire and The Humber', 'Northern Ireland', 'Scotland', 'Wales')"
+    ]
+  },
+  columns: {
+      provider: "The name of the organisation performing the polling (all lowercase).",
+      government_office_region_code: "The coded value received in the data.",
+      government_office_region: "The text which was presented the user when making a selection.",
+    },
+  description: "A centralised lookup table to map provider-specific age codes to standardised age groups."
+}
+
+SELECT
+  *
+FROM
+  UNNEST(
+    ARRAY<STRUCT<provider STRING, government_office_region_code STRING, government_office_region STRING>>[
+      -- Rule set for provider 'bmg'
+      ('bmg', '1', 'East Midlands'),
+      ('bmg', '2', 'East of England'),
+      ('bmg', '3', 'London'),
+      ('bmg', '4', 'North East'),
+      ('bmg', '5', 'North West'),
+      ('bmg', '6', 'South East'),
+      ('bmg', '7', 'South West'),
+      ('bmg', '8', 'West Midlands'),
+      ('bmg', '9', 'Yorkshire and The Humber'),
+      ('bmg', '10', 'Northern Ireland'),
+      ('bmg', '11', 'Scotland'),
+      ('bmg', '12', 'Wales')
+    ]
+  )
