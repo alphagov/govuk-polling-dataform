@@ -24,7 +24,6 @@ erDiagram
         STRING survey_response_id PK
         STRING survey_wave_id FK
         STRING src_response_id
-        DATE date
         FLOAT weight
         INTEGER imd_quartile_country
         STRING gender
@@ -32,6 +31,7 @@ erDiagram
         STRING qualification
         STRING ethnicity
         STRING government_office_region
+        STRING is_english_main_language
     }
 
     question_responses {
@@ -49,12 +49,16 @@ erDiagram
     }
 
     question_response_choices {
-        STRING question_response_choice_id PK
-        STRING question_response_id FK
+        STRING question_choice_id PK
         STRING question_id FK
-        STRING src_question_response_column_name
         STRING choice_value
         STRING choice_text
+    }
+
+    question_response_selections {
+        STRING question_response_selection_id PK
+        STRING question_response_id FK
+        STRING selection_text
     }
 
     survey_wave_questions {
@@ -65,18 +69,23 @@ erDiagram
 
     survey_waves ||--o{ survey_responses : ""
     survey_responses ||--o{ question_responses : ""
-    question_response_choices ||--o{ question_responses : ""
+    question_responses ||--o{ question_response_selections : ""
     questions ||--o{ question_responses : ""
     questions ||--o{ survey_wave_questions : ""
     survey_waves ||--o{ survey_wave_questions : ""
+    questions ||--o{ question_response_choices : "has a lookup of"
+
+    %% Styling for the question_response_choices table
+    style question_response_choices fill:#F9F2B2
 ```
 
 ### Development
 
 #### Adding a new Wave
 1. Create a new row in `definitions/lookups/lookup_survey_waves.sqlx`.
-2. For each question,
-    add a new row in the `definitions/lookups/lookup_survey_wave_questions.sqlx` file including the `wave_name` and `src_question_id`.
+2. Upload the source CSV to the `govuk_polling_responses` dataset with the name `src_{provider}_wave_{number}`. For example, `src_bmg_wave_13`.
+2. For each question, add a new row in the `definitions/lookups/lookup_survey_wave_questions.sqlx` file including the `wave_name` and `src_question_id`.
+    If this wave has the same questions as previous waves, just copy and paste being sure to update the values in `wave_name`.
 3. Execute the workflow to ensure `survey_wave_questions` is populated as expected.
 4. Execute definitions/config/retrieve_column_names.sqlx and update definitions/config/retrieve_column_names.js variable const allStgColumns.
 

@@ -1,7 +1,7 @@
 config {
     type: "table",
     database: "govuk-polling",
-    schema: "synthetic_polling",
+    schema: "govuk_polling_responses",
     columns: {
       survey_wave_question_id: "Unique identifier for a specific question within a specific wave.",
       survey_wave_id: "The identifier for the survey wave.",
@@ -13,7 +13,7 @@ config {
 }
 
 SELECT
-    TO_HEX(MD5(CONCAT(survey_waves.survey_wave_id, questions.question_id))) AS survey_wave_question_id,
+    TO_HEX(MD5(CONCAT(survey_waves.survey_wave_id, '-', questions.question_id))) AS survey_wave_question_id,
     survey_waves.survey_wave_id,
     questions.question_id
 FROM
