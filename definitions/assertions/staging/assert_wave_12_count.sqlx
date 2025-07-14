@@ -1,9 +1,0 @@
-config {
-  type: "assertion",
-  description: "Asserts that the table has exactly 1593 rows."
-}
-
-config {
-  type: "assertion",
-  description: "Asserts that the table has exactly 1570 rows."
-}

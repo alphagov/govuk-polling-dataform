@@ -1,0 +1,14 @@
+config {
+    type: "view"
+}
+
+-- This query gets all current column_names in stg_bmg_all_waves and formats them as a single newline-separated string.
+SELECT
+    -- Concatenate double quotes around the column name, then aggregate with comma and newline as delimiter
+    STRING_AGG(CONCAT('"', column_name, '"'), ',\n' ORDER BY ordinal_position) AS formatted_column_list
+FROM
+    `${dataform.projectConfig.defaultDatabase}.${dataform.projectConfig.defaultSchema}.INFORMATION_SCHEMA.COLUMNS`
+WHERE
+    table_name = "stg_bmg_all_waves"
+
+    

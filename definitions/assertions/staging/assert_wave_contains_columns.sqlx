@@ -6,10 +6,9 @@ config {
 js {
     const {
         automaticResponseColumns, allStgColumns
-    } = require('../../config/retrieve_column_names');
+    } = require('/includes/retrieve_column_names');
 
     // 1. Map each column name string to a quoted string (e.g., 'col1' -> "'col1'")
-    // const quotedColumns = automaticResponseColumns.map(col => `'${col}'`); // deliberately make it fail for testing
     const quotedColumns = allStgColumns.map(col => `'${col}'`); // Actual value that should be used  
 
     // 2. Join the quoted strings with commas (e.g., ["'col1'", "'col2'"] -> "'col1', 'col2'")
