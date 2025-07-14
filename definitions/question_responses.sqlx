@@ -18,7 +18,7 @@ question_responses AS (
   QUALIFY ROW_NUMBER() OVER (PARTITION BY survey_response_id, question_id) = 1
 )
   SELECT
-    TO_HEX(MD5(CONCAT(question_responses.survey_response_id, question_responses.question_id))) AS question_response_id,
+    TO_HEX(MD5(CONCAT(question_responses.survey_response_id, '-', question_responses.question_id))) AS question_response_id,
     question_responses.survey_response_id,
     question_responses.question_id
 FROM question_responses

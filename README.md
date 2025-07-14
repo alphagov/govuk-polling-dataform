@@ -48,10 +48,16 @@ erDiagram
         STRING question_type
     }
 
+    question_response_choices {
+        STRING question_choice_id PK
+        STRING question_id FK
+        STRING choice_value
+        STRING choice_text
+    }
+
     question_response_selections {
         STRING question_response_selection_id PK
         STRING question_response_id FK
-        STRING src_question_response_column_name
         STRING selection_value
         STRING selection_text
     }
@@ -64,10 +70,14 @@ erDiagram
 
     survey_waves ||--o{ survey_responses : ""
     survey_responses ||--o{ question_responses : ""
-    question_response_selections ||--o{ question_responses : ""
+    question_responses ||--o{ question_response_selections : ""
     questions ||--o{ question_responses : ""
     questions ||--o{ survey_wave_questions : ""
     survey_waves ||--o{ survey_wave_questions : ""
+    questions ||--o{ question_response_choices : "has a lookup of"
+
+    %% Styling for the question_response_choices table
+    style question_response_choices fill:#F9F2B2
 ```
 
 ### Development

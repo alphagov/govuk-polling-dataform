@@ -459,11 +459,11 @@ FROM
     ('ql2_6', 'ql2_6', '9', "Don't know"),
     --ql3
     ('ql3', 'ql3_1', '1', 'Government gateway account'),
-    ('ql3', 'ql3_2', '2', 'GOV.UK Verify account'),
-    ('ql3', 'ql3_3', '3', ''), --TODO: find out
-    ('ql3', 'ql3_95', '95', ''), --TODO: find out
-    ('ql3', 'ql3_96', '96', ''), --TODO: find out
-    ('ql3', 'ql3_97', '97', ''), --TODO: find out
+    ('ql3', 'ql3_2', '1', 'GOV.UK Verify account'),
+    ('ql3', 'ql3_3', '1', 'GOV.UK One Login Account'),
+    ('ql3', 'ql3_95', '1', 'I signed into another account'),
+    ('ql3', 'ql3_96', '1', "No, I’ve not signed into an account"),
+    ('ql3', 'ql3_97', '1', "I’m not sure"),
     -- ql4a
     ('ql4a', 'ql4a_1', '1', 'Apply for/renew a driving licence'),
     ('ql4a', 'ql4a_2', '1', 'Apply for/renew a passport'),
