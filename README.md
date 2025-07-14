@@ -78,6 +78,7 @@ erDiagram
 2. For each question,
     add a new row in the `definitions/lookups/lookup_survey_wave_questions.sqlx` file including the `wave_name` and `src_question_id`.
 3. Execute the workflow to ensure `survey_wave_questions` is populated as expected.
+4. Execute definitions/config/retrieve_column_names.sqlx and update definitions/config/retrieve_column_names.js variable const allStgColumns.
 
 #### Adding a new Question
 1. Create a new row in `definitions/lookups/lookup_questions.sqlx`.

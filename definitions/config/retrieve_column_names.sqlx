@@ -1,0 +1,12 @@
+config {
+    type: "view"
+}
+-- This query is run to get all current column_names in stg_bmg_all_waves 
+SELECT 
+    column_name
+FROM 
+    `${dataform.projectConfig.defaultDatabase}.${dataform.projectConfig.defaultSchema}.INFORMATION_SCHEMA.COLUMNS`
+WHERE 
+    table_name = 'stg_bmg_all_waves'
+ORDER BY 
+    ordinal_position
