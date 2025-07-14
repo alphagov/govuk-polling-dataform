@@ -18,8 +18,8 @@ FROM
   UNNEST( ARRAY<STRUCT<src_question_id STRING, src_column_name STRING, choice_value STRING, choice_text STRING>>[
 
     -- ql1a 1_20, 96
-    ('ql1a_1', 'ql1a_1', '1', "Unkonwn fl1a_1 value"),
-    ('ql1a_2', 'ql1a_2', '1', "Unknown ql1a_2 value"),
+    ('ql1a_1', 'ql1a_1', '1', ""),
+    ('ql1a_2', 'ql1a_2', '1', ""),
     ('ql1a_3', 'ql1a_3', '1', "Benefits - including eligibility, appeals, tax credits and Universal Credit"),
     ('ql1a_4', 'ql1a_4', '1', "Births, deaths, marriages and care - including parenting, civil partnerships, divorce and Lasting Power of Attorney"),
     ('ql1a_5', 'ql1a_5', '1', "Business and self-employed - including tools and guidance for businesses"),

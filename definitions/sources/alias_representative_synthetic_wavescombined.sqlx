@@ -2,7 +2,7 @@ config {
   type: "view",
     database: "govuk-polling",
     schema: "synthetic_polling",
-    name: "alias_representative_synthetic_wavescombined",
+    name: "representative_synthetic_wavescombined",
     description: "Raw data for combined representative synthetic waves from govuk-polling project.",
 }
 

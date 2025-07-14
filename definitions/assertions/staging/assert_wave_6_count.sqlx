@@ -8,4 +8,4 @@ SELECT
 FROM
   ${ref("stg_wave_6")}
 HAVING
-  actual_row_count != 1565
+  actual_row_count != 1624

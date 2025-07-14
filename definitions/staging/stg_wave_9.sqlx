@@ -5,6 +5,6 @@ config {
 SELECT
   *
 FROM
-  ${ref("alias_representative_synthetic_wavescombined")}
+  ${ref("representative_synthetic_wavescombined")}
 WHERE
   TRIM(LOWER(Wave)) = 'wave 9'
