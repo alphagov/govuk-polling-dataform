@@ -6,7 +6,7 @@ config {
 js {
     const {
       allSrcColumns
-    } = require('/includes/retrieve_column_names');
+    } = require('/includes/constants');
 
     // 1. Map each column name string to a quoted string (e.g., 'col1' -> "'col1'")
     const quotedColumns = allSrcColumns.map(col => `'${col}'`); // Actual value that should be used  
