@@ -4,18 +4,17 @@
 // pros: has all the code for generating column names in one place, Con: we will no longer have a visible list we can interrogate for debugging
 
 // this is the list that you update with the output of /config/query_actuall_column_names.sqlx
-const allStgColumns =["survey_response_id",
-"survey_wave_id",
-"wave_name",
-"src_response_id",
-"weight",
-"imd_quartile_country",
-"gender_code",
-"age_code",
-"qualification_code",
-"government_office_region_code",
-"ethnicity_code",
-"is_english_main_language_code",
+const allSrcColumns =["wave_name",
+"responseid",
+"respid",
+"gor_code",
+"quartile_country",
+"gender",
+"qualification2020",
+"ethnicity",
+"lang",
+"age",
+"WEIGHT",
 "ql1a_3",
 "ql1a_4",
 "ql1a_5",
@@ -287,6 +286,7 @@ const allStgColumns =["survey_response_id",
 "ql4a_14",
 "ql4a_95",
 "ql4a_96",
+"ql4a_95_other",
 "ql4b_1",
 "ql4b_2",
 "ql4b_3",
@@ -301,7 +301,14 @@ const allStgColumns =["survey_response_id",
 "ql4b_14",
 "ql4b_95",
 "ql5",
+"ql6",
 "ql7",
+"ql8a_1",
+"ql8a_2",
+"ql8a_3",
+"ql8a_4",
+"ql8a_95",
+"ql8a_96",
 "ql7a_1",
 "ql7a_2",
 "ql7a_3",
@@ -310,12 +317,7 @@ const allStgColumns =["survey_response_id",
 "ql7a_6",
 "ql7a_7",
 "ql7a_8",
-"ql8a_1",
-"ql8a_2",
-"ql8a_3",
-"ql8a_4",
-"ql8a_95",
-"ql8a_96",
+"ql10mar",
 "ql12_1",
 "ql12_2",
 "ql12_3",
@@ -347,29 +349,32 @@ const allStgColumns =["survey_response_id",
 "n1_97",
 "n1_98"
 ];
+// ["survey_response_id", "question_id", "src_question_response_column_name", "selection_value"]
+const stgDemographicColumns = [];
 
-const demographicColumns = ['survey_response_id'
-,'survey_wave_id'
-,'date'
-,'wave_name'
-,'src_response_id'
-,'weight'
-,'imd_quartile_country'
+const srcDemographicColumns = ['wave_name'
+,'respid'
+,'responseid'
+,'questionid'
+,'quartile_country'
 ,'gender'
-,'age_code'
-,'qualification_2020'
+,'age'
+,'qualification2020'
 ,'gor_code'
 ,'ethnicity'
+,'lang',
+,"WEIGHT"
 ];
 
 // this exports the variable to global so other files can use files (would this overwrite existing module.exports?)
 
 // Here use filter for where they are not present in the demographic columns
-const automaticResponseColumns = allStgColumns.filter(column => !demographicColumns.includes(column));
+const srcResponseColumns = allSrcColumns
+  .filter(column => !srcDemographicColumns.includes(column))
+  .concat(stgDemographicColumns);
 
 
 module.exports = {
-  demographicColumns: demographicColumns,
-  allStgColumns: allStgColumns,
-  automaticResponseColumns: automaticResponseColumns
+  allSrcColumns: allSrcColumns,
+  srcResponseColumns: srcResponseColumns
 };

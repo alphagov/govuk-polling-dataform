@@ -1,15 +1,15 @@
 config {
     type: "assertion",
-    description: "Asserts that bmg_stg_all has the expected columns"
+    description: "Asserts that src_bmg_all_waves has the expected columns"
 }
 
 js {
     const {
-        automaticResponseColumns, allStgColumns
+      allSrcColumns
     } = require('/includes/retrieve_column_names');
 
     // 1. Map each column name string to a quoted string (e.g., 'col1' -> "'col1'")
-    const quotedColumns = allStgColumns.map(col => `'${col}'`); // Actual value that should be used  
+    const quotedColumns = allSrcColumns.map(col => `'${col}'`); // Actual value that should be used  
 
     // 2. Join the quoted strings with commas (e.g., ["'col1'", "'col2'"] -> "'col1', 'col2'")
     const columnsJoined = quotedColumns.join(', ');
@@ -32,7 +32,7 @@ WITH -- CTE for the expected column names, generated from the JS array
   FROM
     `${dataform.projectConfig.defaultDatabase}.${dataform.projectConfig.defaultSchema}.INFORMATION_SCHEMA.COLUMNS`
   WHERE
-    table_name = 'stg_bmg_all_waves' ),
+    table_name = 'src_bmg_all_waves' ),
 -- Find columns in the expected list that are missing from the actual table
 missing_expected_columns AS (
 SELECT
