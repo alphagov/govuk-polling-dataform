@@ -1,6 +1,7 @@
 config {
     type: "assertion",
-    description: "Asserts that src_bmg_all_waves has the expected columns"
+    description: "Asserts that src_bmg_all_waves has the expected columns",
+    dependencies: ["src_bmg_all_waves"]
 }
 
 js {
