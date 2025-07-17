@@ -7,13 +7,6 @@
 const allSrcColumns =["wave_name",
 "responseid",
 "respid",
-"gor_code",
-"quartile_country",
-"gender",
-"qualification2020",
-"ethnicity",
-"lang",
-"age",
 "WEIGHT",
 "ql1a_3",
 "ql1a_4",
@@ -347,7 +340,14 @@ const allSrcColumns =["wave_name",
 "n1_95",
 "n1_96",
 "n1_97",
-"n1_98"
+"n1_98",
+"gor_code",
+"quartile_country",
+"gender",
+"qualification2020",
+"ethnicity",
+"lang",
+"age"
 ];
 
 const srcDemographicColumns = ['wave_name'
