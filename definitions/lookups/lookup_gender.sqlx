@@ -2,6 +2,7 @@ config {
   type: "table",
   assertions : {
     uniqueKey: ["provider", "gender_code"],
+    nonNull: ["provider", "gender_code", "gender"],
     rowConditions: [
         "gender IN ('A man (including trans man)', 'A woman (including trans woman)', 'Other', 'Prefer not to say')"
     ]

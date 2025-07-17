@@ -9,6 +9,7 @@ config {
     },
     assertions : {
       uniqueKey: ["src_question_id", "src_column_name", "choice_value"],
+      nonNull: ["src_question_id", "src_column_name", "choice_value", "choice_text"]
     }
 }
 

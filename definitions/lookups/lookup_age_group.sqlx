@@ -2,6 +2,7 @@ config {
   type: "table",
   assertions : {
     uniqueKey: ["provider", "age_code"],
+    nonNull: ["provider", "age_code", "age_group"],
     rowConditions: [
         "age_group IN ('18-24', '25-34', '35-44', '45-54', '55-64', '65-74', '75+')"
     ]

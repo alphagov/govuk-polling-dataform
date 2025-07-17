@@ -2,6 +2,7 @@ config {
   type: "table",
   assertions : {
     uniqueKey: ["provider", "is_english_main_language_code"],
+    nonNull: ["provider", "is_english_main_language_code", "is_english_main_language"],
     rowConditions: [
         "is_english_main_language IN ('Yes', 'No', 'Prefer not to say')"
     ]

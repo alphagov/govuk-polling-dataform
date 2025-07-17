@@ -3,7 +3,8 @@ config {
     database: "govuk-polling",
     schema: "govuk_polling_responses",
     assertions: {
-        uniqueKey: ["question_response_choice_id"]
+        uniqueKey: ["question_response_choice_id"],
+        nonNull: ["question_response_choice_id", "question_id", "choice_text", "choice_value"]
     },
     description: "A reference table for all possible choices presented to the survey repondant for a given question."
 }

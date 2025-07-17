@@ -2,6 +2,7 @@ config {
   type: "table",
   assertions : {
     uniqueKey: ["provider", "ethnicity_code"],
+    nonNull: ["provider", "ethnicity_code", "ethnicity"],
     rowConditions: [
         `ethnicity IN ("English/Welsh/Scottish/Northern Irish/British", "Irish", "Gypsy or Irish Traveller", "Other White", "White and Black Caribbean", "White and Black African", "White and Asian", "Other Mixed / Multiple", "Indian", "Pakistani", "Bangladeshi", "Chinese", "Other Asian or Asian British", "Caribbean", "African", "Other Black or Black British", "Arab", "Any other", "Prefer not to say")`
     ]
