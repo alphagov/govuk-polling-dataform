@@ -1,0 +1,36 @@
+config {
+  type: "assertion",
+  description: "Fails if any question defined for a survey wave does not have at least one corresponding response within that wave."
+}
+-- Part 1: Select all combinations of wave_name and src_question_id
+-- that are EXPECTED to have responses, based on the survey_wave_questions table.
+SELECT
+  sw.name AS wave_name,
+  q.src_question_id
+FROM
+  ${ref("survey_wave_questions")} AS swq
+JOIN
+  ${ref("survey_waves")} AS sw
+  ON swq.survey_wave_id = sw.survey_wave_id
+JOIN
+  ${ref("questions")} AS q
+  ON swq.question_id = q.question_id
+
+EXCEPT DISTINCT
+
+-- Part 2: Select all combinations of wave_name and src_question_id
+-- that ACTUALLY have at least one response in the data.
+SELECT
+  sw.name AS wave_name,
+  q.src_question_id
+FROM
+  ${ref("question_responses")} AS qr
+JOIN
+  ${ref("survey_responses")} AS sr
+  ON qr.survey_response_id = sr.survey_response_id
+JOIN
+  ${ref("survey_waves")} AS sw
+  ON sr.survey_wave_id = sw.survey_wave_id
+JOIN
+  ${ref("questions")} AS q
+  ON qr.question_id = q.question_id
