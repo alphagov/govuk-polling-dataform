@@ -1,7 +1,8 @@
 config {
     type: "table",
     assertions : {
-      uniqueKey: ["name", "provider"]
+      uniqueKey: ["name", "provider"],
+      nonNull: ["name", "provider", "start_date", "end_date"]
     },
     columns: {
       name: "The name of the survey wave (all lowercase).",

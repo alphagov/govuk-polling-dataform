@@ -3,7 +3,8 @@ config {
     database: "govuk-polling",
     schema: "govuk_polling_responses",
     assertions: {
-        uniqueKey: ["question_id"]
+        uniqueKey: ["question_id"],
+        nonNull: ["question_id", "src_question_id", "question_group_text", "question_text", "question_type"]
     },
 }
 

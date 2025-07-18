@@ -9,6 +9,7 @@ config {
     },
     assertions : {
       uniqueKey: ["src_question_id"],
+      nonNull: ["src_question_id", "question_group_text", "question_text", "question_type"],
       rowConditions: [
         "question_type IN ('single', 'multi')"
     ]

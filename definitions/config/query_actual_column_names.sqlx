@@ -10,5 +10,6 @@ FROM
     `${dataform.projectConfig.defaultDatabase}.${dataform.projectConfig.defaultSchema}.INFORMATION_SCHEMA.COLUMNS`
 WHERE
     table_name = "src_bmg_all_waves"
-
+ORDER BY
+    1
     

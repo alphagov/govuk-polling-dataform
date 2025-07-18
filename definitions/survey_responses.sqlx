@@ -1,10 +1,11 @@
+-- age_group is excluded from the nonNull test as there are some records in the source with missing values for this column
 config {
     type: "table",
     database: "govuk-polling",
     schema: "govuk_polling_responses",
     assertions: {
         uniqueKey: ["survey_response_id"],
-        nonNull: ["survey_response_id", "survey_wave_id", "src_response_id"]
+        nonNull: ["survey_response_id", "survey_wave_id", "src_response_id", "weight", "imd_quartile_country", "gender", "qualification", "ethnicity", "government_office_region", "is_english_main_language"]
     },
 }
 

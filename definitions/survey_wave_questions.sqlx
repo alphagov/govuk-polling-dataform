@@ -8,7 +8,8 @@ config {
       question_id: "The unique identifier for a question."
     },
     assertions: {
-        uniqueKey: ["survey_wave_question_id"]
+        uniqueKey: ["survey_wave_question_id"],
+        nonNull: ["survey_wave_question_id", "survey_wave_id", "question_id"]
     },
 }
 

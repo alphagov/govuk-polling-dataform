@@ -2,6 +2,7 @@ config {
   type: "table",
   assertions : {
     uniqueKey: ["provider", "government_office_region_code"],
+    nonNull: ["provider", "government_office_region_code", "government_office_region"],
     rowConditions: [
         "government_office_region IN ('East Midlands', 'East of England', 'London', 'North East', 'North West', 'South East', 'South West', 'West Midlands', 'Yorkshire and The Humber', 'Northern Ireland', 'Scotland', 'Wales')"
     ]
