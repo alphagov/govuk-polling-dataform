@@ -1,0 +1,90 @@
+-- This script dynamically builds and runs a query that summarizes null column counts
+
+
+DECLARE column_profiling_query_string STRING;
+DECLARE final_executable_script STRING;
+
+
+-- This part creates a query that profiles every single column from the specified tables.
+SET column_profiling_query_string = (
+  SELECT
+    -- STRING_AGG will concatenate the results of the FORMAT function below.
+    STRING_AGG(
+      -- It creates a long list of stats for every single column,
+      FORMAT("""
+      SELECT
+        '%s' AS table_name,
+        '%s' AS column_name,
+        COUNT(*) AS total_rows,
+        COUNT(%s) AS non_null_count
+      FROM `govuk-polling.govuk_polling_responses.%s`
+      """,
+      table_name,  -- 1st %s: The table name string literal
+      column_name, -- 2nd %s: The column name string literal
+      column_name, -- 3rd %s: The column name to be used in COUNT()
+      table_name   -- 4th %s: The table name for the FROM clause
+      ),
+      '\n      UNION ALL\n' -- This separator joins all the formatted mini-queries.
+    )
+  FROM
+    `govuk-polling.govuk_polling_responses.INFORMATION_SCHEMA.COLUMNS`
+  -- This uses an explicit list of tables for precision and safety.
+  WHERE
+    table_name IN (
+      'src_bmg_wave_1', 'src_bmg_wave_2', 'src_bmg_wave_3', 'src_bmg_wave_4',
+      'src_bmg_wave_5', 'src_bmg_wave_6', 'src_bmg_wave_7', 'src_bmg_wave_8',
+      'src_bmg_wave_9', 'src_bmg_wave_10', 'src_bmg_wave_11', 'src_bmg_wave_12'
+    )
+);
+
+
+-- Assemble the final, complete script using the string we just generated.
+SET final_executable_script = """
+-- This is the clean, final query that will be executed. It uses CTEs for readability.
+
+-- CTE 1: Raw statistics for every column from every table.
+-- The very large UNION ALL string generated will be placed here.
+WITH column_level_stats AS (
+"""
+||
+  column_profiling_query_string
+||
+"""
+),
+
+-- CTE 2: Classify each column based on its null counts.
+classified_columns AS (
+  SELECT
+    table_name,
+    -- Case statement to categorize the null status of each column.
+    CASE
+      WHEN non_null_count = 0 THEN 'always_null'
+      WHEN non_null_count > 0 AND non_null_count < total_rows THEN 'mixed_null_and_non_null'
+      ELSE 'no_nulls'
+    END AS column_status
+  FROM
+    column_level_stats
+)
+
+-- Final Step: Aggregate the classifications to get a summary for each table.
+SELECT
+  table_name,
+  COUNTIF(column_status = 'always_null') AS columns_with_always_null_response,
+  COUNTIF(column_status = 'mixed_null_and_non_null') AS columns_with_null_and_non_null,
+  COUNTIF(column_status = 'no_nulls') AS columns_with_no_nulls
+FROM
+  classified_columns
+GROUP BY
+  table_name
+ORDER BY
+  -- Sort by the numeric part of the wave name for a logical order.
+  SAFE_CAST(REGEXP_EXTRACT(table_name, r'_(\\d+)$') AS INT64);
+""";
+
+
+-- (Optional) For debugging, uncomment the line below to see the full script before it runs.
+SELECT final_executable_script;
+
+
+-- Execute the final script to get your summary table.
+EXECUTE IMMEDIATE final_executable_script;

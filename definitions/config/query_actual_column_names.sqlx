@@ -8,6 +8,7 @@ SELECT
     STRING_AGG(CONCAT('"', column_name, '"'), ',\n' ORDER BY ordinal_position) AS formatted_column_list
 FROM
     `${dataform.projectConfig.defaultDatabase}.${dataform.projectConfig.defaultSchema}.INFORMATION_SCHEMA.COLUMNS`
+
 WHERE
     table_name = "src_bmg_all_waves"
 ORDER BY

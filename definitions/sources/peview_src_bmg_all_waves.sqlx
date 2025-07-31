@@ -1,0 +1,9 @@
+config {type:"view",
+dependencies: ["create_template_src_bmg_all_waves_union"]}
+
+
+
+-- this calls the cleanAndCastColumn function on every member of SrCResponseColumns to generate 
+-- the desired sql template 
+
+SELECT * FROM ${ref("create_template_src_bmg_all_waves_union")}

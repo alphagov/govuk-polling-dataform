@@ -1,10 +1,17 @@
 config {
     type: "view",
+    // The 'dependencies' array is the crucial link. It tells Dataform:
+    // "Before you process this file, you MUST successfully run the
+    // 'create_src_bmg_all_waves_query' operation first."
+    //dependencies: ["create_template_src_bmg_all_waves_union"]
 }
-SELECT
-    _TABLE_SUFFIX AS wave_name,
-    *
--- this will dynamically get all tables starting with src_bmg_ in the dataset
--- tables must be named `src_bmg_wave_{number}`
-FROM `govuk-polling.govuk_polling_responses.src_bmg_*`
 
+  -- This is a "declaration" file. Its purpose is to make the view created by our
+  -- operations script available to the rest of the Dataform project via ref().
+  -- The SQL here is a simple self-reference. It acts as a check to ensure
+  -- the view was actually created by the operations script. If the view doesn't exist,
+  -- this compilation will fail, preventing downstream errors.
+SELECT
+  *
+FROM
+  ${self()}
