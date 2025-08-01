@@ -1,7 +1,7 @@
 config {
   type: "assertion",
   description: "Asserts that the table has exactly 1593 rows.",
-  dependencies: ["src_bmg_all_waves"]
+  dependencies: ["constructor_src_bmg_all_waves"]
   
 }
 
@@ -9,6 +9,6 @@ SELECT
   COUNT(*) AS actual_row_count
 FROM
   ${ref("src_bmg_all_waves")}
-WHERE wave_name = 'wave_12'
+WHERE wave_name = 'wave 12'
 HAVING
   actual_row_count != 1593

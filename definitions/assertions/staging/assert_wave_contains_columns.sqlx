@@ -5,75 +5,86 @@ config {
 }
 
 js {
-    const {
-      allSrcColumns
-    } = require('/includes/constants');
+    const { allSrcColumns } = require('/includes/constants');
 
-    // 1. Map each column name string to a quoted string (e.g., 'col1' -> "'col1'")
-    const quotedColumns = allSrcColumns.map(col => `'${col}'`); // Actual value that should be used  
+    // 1. Map each column name string to a quoted string
+    const quotedColumns = allSrcColumns.map(col => `'${col}'`);
 
-    // 2. Join the quoted strings with commas (e.g., ["'col1'", "'col2'"] -> "'col1', 'col2'")
+    // 2. Join the quoted strings with commas
     const columnsJoined = quotedColumns.join(', ');
 
-    // 3. Wrap the joined string in ARRAY<STRING>[...] to form the complete SQL array literal
+    // 3. Wrap the joined string in an ARRAY literal
     const expectedColumnsSqlArrayLiteral = `ARRAY<STRING>[${columnsJoined}]`;
+
 }
 
-WITH -- CTE for the expected column names, generated from the JS array
-  expected_column_names AS (
-  SELECT
-    column_name
-  FROM
-    UNNEST(${expectedColumnsSqlArrayLiteral}) AS column_name
-    ),
--- Actual column names returned from information schema
-  actual_column_names AS (
-  SELECT
-    column_name
-  FROM
-    `${dataform.projectConfig.defaultDatabase}.${dataform.projectConfig.defaultSchema}.INFORMATION_SCHEMA.COLUMNS`
-  WHERE
-    table_name = 'src_bmg_all_waves' ),
+-- This CTE uses the JS variable to create a list of expected columns
+WITH expected_column_names AS (
+    SELECT
+        column_name
+    FROM
+        UNNEST(${expectedColumnsSqlArrayLiteral}) AS column_name
+),
+
+-- This CTE gets the actual columns from the table in the current environment
+actual_column_names AS (
+    SELECT
+        column_name
+    FROM 
+        `${dataform.projectConfig.defaultDatabase}.${dataform.projectConfig.defaultSchema}.INFORMATION_SCHEMA.COLUMNS`
+    WHERE 
+        -- dataform.projectConfig.default schema ensure we select the workspace dataset (bq speak schema = dataset)
+        table_schema = '${dataform.projectConfig.defaultSchema}'
+        -- AND table_name = 'src_bmg_all_waves'
+        AND table_name = 'src_bmg_all_waves'
+),
+
 -- Find columns in the expected list that are missing from the actual table
 missing_expected_columns AS (
-SELECT
-  expected.column_name,
-  'MISSING_EXPECTED' AS discrepancy_type
+    SELECT
+        expected.column_name,
+        'MISSING_IN_TABLE' AS discrepancy_type
+    FROM
+        expected_column_names AS expected
+    LEFT JOIN
+        actual_column_names AS actual
+        ON expected.column_name = actual.column_name
+    WHERE
+        actual.column_name IS NULL
+),
 
-FROM
-  expected_column_names AS expected
-LEFT JOIN
-  actual_column_names AS actual
-  -- Try to join each expected name to an actual name
-ON
-  expected.column_name = actual.column_name
-  -- Join condition is the name matching
-WHERE
-  actual.column_name IS NULL)
-  ,
 -- Find columns in the actual table that are not in the expected list
 unexpected_actual_columns AS (
     SELECT
         actual.column_name,
-        'UNEXPECTED_ACTUAL' AS discrepancy_type
+        'UNEXPECTED_IN_TABLE' AS discrepancy_type
     FROM
         actual_column_names AS actual
     LEFT JOIN
         expected_column_names AS expected
-           ON actual.column_name = expected.column_name
+        ON actual.column_name = expected.column_name
     WHERE
         expected.column_name IS NULL
+        -- This is a haggard way to stop the wave_name variable created in src_bmg_all_waves.sqlx from triggering 
+        AND actual.column_name != 'wave_name'
 )
--- Any rows returned here indicate a discrepancy and will cause the assertion to fail.
+
+-- The assertion fails if this query returns any rows.
+-- The results show exactly which columns are missing or unexpected.
 SELECT
     column_name,
     discrepancy_type
 FROM
     missing_expected_columns
-UNION ALL 
+
+UNION ALL
+
 SELECT
     column_name,
     discrepancy_type
 FROM
     unexpected_actual_columns
-ORDER BY discrepancy_type, column_name
+
+ORDER BY
+    discrepancy_type,
+    column_name

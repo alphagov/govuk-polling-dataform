@@ -2,15 +2,17 @@ config {
     type: "view"
 }
 
--- This query gets all current column_names in stg_bmg_all_waves and formats them as a single newline-separated string.
+-- This query gets all distinct column_names across all src_bmg_wave* tables and formats them as a single newline-separated string.
 SELECT
     -- Concatenate double quotes around the column name, then aggregate with comma and newline as delimiter
-    STRING_AGG(CONCAT('"', column_name, '"'), ',\n' ORDER BY ordinal_position) AS formatted_column_list
-FROM
-    `${dataform.projectConfig.defaultDatabase}.${dataform.projectConfig.defaultSchema}.INFORMATION_SCHEMA.COLUMNS`
-
-WHERE
-    table_name = "src_bmg_all_waves"
-ORDER BY
-    1
-    
+    STRING_AGG(CONCAT('"', column_name, '"'), ',\n' ORDER BY column_name) AS formatted_column_list
+FROM (
+    -- Get distinct column names across all matching tables
+    SELECT DISTINCT
+        column_name
+    FROM
+    -- Ensure this remains pointing at the original dataset location (actual columns) or else it will pull in the generated columns(predicted columns),
+        `govuk-polling.govuk_polling_responses.INFORMATION_SCHEMA.COLUMNS`
+    WHERE
+        table_name LIKE "src_bmg_wave%"
+)
