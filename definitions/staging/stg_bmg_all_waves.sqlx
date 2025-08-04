@@ -18,6 +18,7 @@ js {
   const {cleanAndCastColumn} = require('includes/utils');
 
   }
+
 WITH bmg_all_waves_cleaned AS (
 SELECT
   -- survey response data

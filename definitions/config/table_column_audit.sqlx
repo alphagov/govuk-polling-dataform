@@ -1,0 +1,86 @@
+-- This script dynamically builds and runs a query that summarizes null column counts
+
+-- Step 1: DECLARE all variables at the top of the script.
+DECLARE column_profiling_query_string STRING;
+DECLARE final_executable_script STRING;
+
+-- Step 2: Generate the data-gathering query string.
+-- get stats for a dynamic list of columns.
+SET column_profiling_query_string = (
+  SELECT
+    STRING_AGG(
+      FORMAT("""
+      SELECT
+        '%s' AS table_name,
+        COUNT(*) AS total_rows,
+        COUNT(%s) AS non_null_count
+      FROM `govuk-polling.govuk_polling_responses.%s`
+      """,
+      table_name,  -- The table name string literal
+      column_name, -- The column name to be used in COUNT()
+      table_name   -- The table name for the FROM clause
+      ),
+      '\n      UNION ALL\n'
+    )
+  FROM
+    `govuk-polling.govuk_polling_responses.INFORMATION_SCHEMA.COLUMNS`
+  WHERE
+    table_name IN (
+      'src_bmg_wave_1', 'src_bmg_wave_2', 'src_bmg_wave_3', 'src_bmg_wave_4',
+      'src_bmg_wave_5', 'src_bmg_wave_6', 'src_bmg_wave_7', 'src_bmg_wave_8',
+      'src_bmg_wave_9', 'src_bmg_wave_10', 'src_bmg_wave_11', 'src_bmg_wave_12'
+    )
+);
+
+-- Step 3: Assemble the final, complete script that will use PIVOT.
+SET final_executable_script = """
+-- This is the clean, final query that will be executed.
+
+-- CTE 1: Raw statistics for every column from every table.
+-- The very large UNION ALL string generated in Step 2 will be placed here.
+WITH column_level_stats AS (
+"""
+||
+  column_profiling_query_string
+||
+"""
+)
+
+-- Final Step: Classify each column and PIVOT the results into the summary table.
+SELECT
+  * -- Select all the pivoted columns
+FROM (
+  -- This inner query classifies each column before the pivot.
+  SELECT
+    table_name,
+    -- Case statement to categorize the null status of each column.
+    CASE
+      WHEN non_null_count = 0 THEN 'always_null'
+      WHEN non_null_count > 0 AND non_null_count < total_rows THEN 'mixed_null_and_non_null'
+      ELSE 'no_nulls'
+    END AS column_status
+  FROM
+    column_level_stats
+)
+PIVOT(
+  -- The aggregation function: Count the occurrences of each status.
+  COUNT(*)
+  -- The pivot column: We want to create new columns FROM the values in 'column_status'.
+  FOR column_status IN (
+    'always_null' AS columns_with_always_null_response,
+    'mixed_null_and_non_null' AS columns_with_null_and_non_null,
+    'no_nulls' AS columns_with_no_nulls
+  )
+)
+ORDER BY
+  -- Sort by the numeric part of the wave name for a logical order.
+  SAFE_CAST(REGEXP_EXTRACT(table_name, r'_(\\d+)$') AS INT64);
+""";
+
+
+-- (Optional) For debugging, uncomment the line below to see the full script before it runs.
+-- SELECT final_executable_script;
+
+
+-- Step 4: Execute the final script to get your summary table.
+EXECUTE IMMEDIATE final_executable_script;

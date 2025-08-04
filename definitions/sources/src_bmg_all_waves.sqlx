@@ -1,10 +1,16 @@
 config {
     type: "view",
+    dependencies: ["constructor_src_bmg_all_waves"]
 }
-SELECT
-    _TABLE_SUFFIX AS wave_name,
-    *
--- this will dynamically get all tables starting with src_bmg_ in the dataset
--- tables must be named `src_bmg_wave_{number}`
-FROM `govuk-polling.govuk_polling_responses.src_bmg_*`
 
+  -- This is a "declaration" file. Its purpose is to make the view created by our
+  -- operations script available to the rest of the Dataform project via ref().
+  -- The SQL here is a simple self-reference. It acts as a check to ensure
+  -- the view was actually created by the operations script. If the view doesn't exist,
+  -- this compilation will fail, preventing downstream errors. 
+  -- I could also assign a js variable src_bmg_all_waves and use it upstream in 
+  -- create_template_src_bmg_waves_union and use self reference such as SELECT * FROM ${self()} to check table creation
+SELECT
+  * 
+FROM
+  ${ref("constructor_src_bmg_all_waves")}
