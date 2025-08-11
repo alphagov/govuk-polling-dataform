@@ -31,13 +31,15 @@ actual_column_names AS (
     SELECT
         column_name
     FROM 
-        `${dataform.projectConfig.defaultDatabase}.${dataform.projectConfig.defaultSchema}.INFORMATION_SCHEMA.COLUMNS`
+        `${dataform.projectConfig.defaultDatabase}.${dataform.projectConfig.defaultSchema}_${dataform.projectConfig.schemaSuffix}.INFORMATION_SCHEMA.COLUMNS`
     WHERE 
         -- dataform.projectConfig.default schema ensure we select the workspace dataset (bq speak schema = dataset)
-        table_schema = '${dataform.projectConfig.defaultSchema}'
+        table_schema = '${dataform.projectConfig.defaultSchema}_${dataform.projectConfig.schemaSuffix}'
         -- AND table_name = 'src_bmg_all_waves'
         AND table_name = 'src_bmg_all_waves'
-),
+)
+
+,
 
 -- Find columns in the expected list that are missing from the actual table
 missing_expected_columns AS (

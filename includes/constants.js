@@ -41,6 +41,7 @@ const allSrcColumns =["WEIGHT",
 "ql13_2",
 "ql13_3",
 "ql13_4",
+"ql13mar",
 "ql1a_10",
 "ql1a_11",
 "ql1a_12",
@@ -346,7 +347,8 @@ const allSrcColumns =["WEIGHT",
 "qualification2020",
 "quartile_country",
 "respid",
-"responseid"
+"responseid",
+"cat"
 ];
 
 const srcDemographicColumns = ['wave_name'

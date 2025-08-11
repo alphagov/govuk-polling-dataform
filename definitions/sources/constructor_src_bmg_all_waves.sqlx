@@ -18,7 +18,8 @@ js {
     // "src_bmg_wave_9",
     // "src_bmg_wave_10",
     "src_bmg_wave_12",
-    "src_bmg_wave_13"
+    "src_bmg_wave_13",
+    "src_bmg_wave_14"
   ];
 
   global.tableNamesForSql = bmgWaveTables.map(name => `'${name}'`).join(',');
