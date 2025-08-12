@@ -39,7 +39,7 @@ actual_column_names AS (
         AND table_name = 'src_bmg_all_waves'
 )
 
-,
+),
 
 -- Find columns in the expected list that are missing from the actual table
 missing_expected_columns AS (
