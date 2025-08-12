@@ -1,0 +1,9 @@
+config {type:"view"}
+
+SELECT 
+    table_name,
+    table_catalog,
+    column_name
+FROM
+ `govuk-polling.govuk_polling_responses.INFORMATION_SCHEMA.COLUMNS`
+ WHERE table_name LIKE "src_bmg_%"

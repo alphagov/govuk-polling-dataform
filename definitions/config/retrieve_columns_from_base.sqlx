@@ -14,11 +14,7 @@ WITH table_columns AS (
     -- Extract numeric wave for sorting
     SAFE_CAST(REGEXP_EXTRACT(table_name, r'src_bmg_wave_(\d+)') AS INT64) AS wave_number
 
-  FROM `${dataform.projectConfig.defaultDatabase}.${dataform.projectConfig.defaultSchema}_${dataform.projectConfig.schemaSuffix}.INFORMATION_SCHEMA.COLUMNS`
-
-  WHERE 
-    -- Filter for tables that match the src_bmg_wave_ pattern
-    table_name LIKE 'src_bmg_wave_%'
+  FROM ${ref("src_column_names")}
 ),
 
 -- Create individual tuple strings for each column

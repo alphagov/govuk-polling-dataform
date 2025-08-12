@@ -12,8 +12,5 @@ FROM (
         column_name
     FROM
     -- Ensure this remains pointing at the workspace dataset
-        `${dataform.projectConfig.defaultDatabase}.${dataform.projectConfig.defaultSchema}_${dataform.projectConfig.schemaSuffix}.INFORMATION_SCHEMA.COLUMNS`
-    WHERE
-
-        table_name = "src_bmg_all_waves"
+        ${ref("src_column_names")}
 )

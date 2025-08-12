@@ -29,14 +29,10 @@ WITH expected_column_names AS (
 -- This CTE gets the actual columns from the workspace dataset
 actual_column_names AS (
     SELECT
-        column_name
+        DISTINCT(column_name)
     FROM 
-        -- this has to be the origin govuk-polling.govuk_polling_response, not the project default "gds-bq-reporting"
-           `${dataform.projectConfig.defaultDatabase}.${dataform.projectConfig.defaultSchema}_${dataform.projectConfig.schemaSuffix}.INFORMATION_SCHEMA.COLUMNS`
-        /** `${dataform.projectConfig.defaultDatabase}.${dataform.projectConfig.defaultSchema}_${dataform.projectConfig.SUFFIX}.INFORMATION_SCHEMA.COLUMNS` **/
-    WHERE 
-        table_name = "src_bmg_all_waves"
-
+        -- this is our table of column_names
+           ${ref("src_column_names")}
 ),
 
 -- Find columns in the expected list that are missing from the actual table
