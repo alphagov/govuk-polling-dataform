@@ -16,6 +16,3 @@ FROM (
     WHERE
         table_name LIKE "src_bmg_wave%"
 )
- 
-  
-  

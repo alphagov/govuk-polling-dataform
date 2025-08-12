@@ -347,8 +347,7 @@ const allSrcColumns =["WEIGHT",
 "qualification2020",
 "quartile_country",
 "respid",
-"responseid",
-"cat"
+"responseid"
 ];
 
 const srcDemographicColumns = ['wave_name'

@@ -12,9 +12,7 @@ WITH table_columns AS (
     table_name LIKE 'src_bmg_wave_%'
     -- Exclude system columns if needed
     AND column_name NOT IN ('_TABLE_SUFFIX')
-)
-,
-
+),
 
 -- Create individual tuple strings for each column
 column_tuples AS (
@@ -24,9 +22,7 @@ column_tuples AS (
     column_name,
     CONCAT("('", wave_name, "', '", column_name, "')") AS tuple_string
   FROM table_columns
-)
-,
-
+),
 
 -- Aggregate tuples by wave with proper formatting
 wave_grouped AS (
@@ -42,7 +38,7 @@ wave_grouped AS (
   GROUP BY wave_name, wave_number
 )
 
--- Final output with proper formatting - filter for only wave 12 and 13
+-- Final output with proper formatting
 SELECT 
   wave_name,
   columns_formatted AS columns
