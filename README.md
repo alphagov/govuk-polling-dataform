@@ -104,7 +104,7 @@ Then select the `production` configuration and select `New compliation` which wi
 
 ### Python
 
-This includes the script used to cleaning files locally and then uploading to BQ. Place .csv in Python folder, this.csv is then processed and output into pyton/simple_processed and is then uploaded to BQ by the script
+This includes a script used to clean files locally and then upload them to BigQuery (BQ). Place your .csv file in the Python folder; the script will process it and output the result into python/simple_processed, after which it will be uploaded to BQ.
 
 
 ## Licence
