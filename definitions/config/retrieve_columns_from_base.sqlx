@@ -1,4 +1,11 @@
--- Query to extract all column names grouped by wave with formatted tuple strings
+/**
+The purpose of this query is to automate. the generation of the lookup_survey_wave_questions.sqlx. It currently doesnt work
+Query currently outputs the wave and column name, where as we would want to wave and question. A solution would be to select 
+the question names, for which these column_names exist for a particular wave
+**/
+
+-- Query to extract all column names grouped by wave with formatted tuple strings for wave_questions_lookup
+
 WITH table_columns AS (
   SELECT 
     -- Extract wave number from table name (assumes format: src_bmg_wave_{number})
@@ -6,15 +13,13 @@ WITH table_columns AS (
     column_name,
     -- Extract numeric wave for sorting
     SAFE_CAST(REGEXP_EXTRACT(table_name, r'src_bmg_wave_(\d+)') AS INT64) AS wave_number
-  FROM `govuk-polling.govuk_polling_responses.INFORMATION_SCHEMA.COLUMNS`
+
+  FROM `${dataform.projectConfig.defaultDatabase}.${dataform.projectConfig.defaultSchema}_${dataform.projectConfig.schemaSuffix}.INFORMATION_SCHEMA.COLUMNS`
+
   WHERE 
     -- Filter for tables that match the src_bmg_wave_ pattern
     table_name LIKE 'src_bmg_wave_%'
-    -- Exclude system columns if needed
-    AND column_name NOT IN ('_TABLE_SUFFIX')
-)
-,
-
+),
 
 -- Create individual tuple strings for each column
 column_tuples AS (
@@ -24,9 +29,7 @@ column_tuples AS (
     column_name,
     CONCAT("('", wave_name, "', '", column_name, "')") AS tuple_string
   FROM table_columns
-)
-,
-
+),
 
 -- Aggregate tuples by wave with proper formatting
 wave_grouped AS (
@@ -42,7 +45,7 @@ wave_grouped AS (
   GROUP BY wave_name, wave_number
 )
 
--- Final output with proper formatting - filter for only wave 12 and 13
+-- Final output with proper formatting
 SELECT 
   wave_name,
   columns_formatted AS columns

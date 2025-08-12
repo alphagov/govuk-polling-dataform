@@ -26,17 +26,17 @@ WITH expected_column_names AS (
         UNNEST(${expectedColumnsSqlArrayLiteral}) AS column_name
 ),
 
--- This CTE gets the actual columns from the table in the current environment
+-- This CTE gets the actual columns from the workspace dataset
 actual_column_names AS (
     SELECT
         column_name
     FROM 
-        `${dataform.projectConfig.defaultDatabase}.${dataform.projectConfig.defaultSchema}.INFORMATION_SCHEMA.COLUMNS`
+        -- this has to be the origin govuk-polling.govuk_polling_response, not the project default "gds-bq-reporting"
+           `${dataform.projectConfig.defaultDatabase}.${dataform.projectConfig.defaultSchema}_${dataform.projectConfig.schemaSuffix}.INFORMATION_SCHEMA.COLUMNS`
+        /** `${dataform.projectConfig.defaultDatabase}.${dataform.projectConfig.defaultSchema}_${dataform.projectConfig.SUFFIX}.INFORMATION_SCHEMA.COLUMNS` **/
     WHERE 
-        -- dataform.projectConfig.default schema ensure we select the workspace dataset (bq speak schema = dataset)
-        table_schema = '${dataform.projectConfig.defaultSchema}'
-        -- AND table_name = 'src_bmg_all_waves'
-        AND table_name = 'src_bmg_all_waves'
+        table_name = "src_bmg_all_waves"
+
 ),
 
 -- Find columns in the expected list that are missing from the actual table
