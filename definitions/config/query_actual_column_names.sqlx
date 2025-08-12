@@ -11,8 +11,6 @@ FROM (
     SELECT DISTINCT
         column_name
     FROM
-    -- Ensure this remains pointing at the original dataset location (actual columns) or else it will pull in the generated columns(predicted columns),
-        `govuk-polling.govuk_polling_responses.INFORMATION_SCHEMA.COLUMNS`
-    WHERE
-        table_name LIKE "src_bmg_wave%"
+    -- Ensure this remains pointing at the workspace dataset
+        ${ref("src_column_names")}
 )

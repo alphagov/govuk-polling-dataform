@@ -26,17 +26,13 @@ WITH expected_column_names AS (
         UNNEST(${expectedColumnsSqlArrayLiteral}) AS column_name
 ),
 
--- This CTE gets the actual columns from the table in the current environment
+-- This CTE gets the actual columns from the workspace dataset
 actual_column_names AS (
     SELECT
-        column_name
+        DISTINCT(column_name)
     FROM 
-        `${dataform.projectConfig.defaultDatabase}.${dataform.projectConfig.defaultSchema}.INFORMATION_SCHEMA.COLUMNS`
-    WHERE 
-        -- dataform.projectConfig.default schema ensure we select the workspace dataset (bq speak schema = dataset)
-        table_schema = '${dataform.projectConfig.defaultSchema}'
-        -- AND table_name = 'src_bmg_all_waves'
-        AND table_name = 'src_bmg_all_waves'
+        -- this is our table of column_names
+           ${ref("src_column_names")}
 ),
 
 -- Find columns in the expected list that are missing from the actual table
