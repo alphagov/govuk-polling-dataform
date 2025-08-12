@@ -25,7 +25,7 @@ SET column_profiling_query_string = (
   FROM
     `govuk-polling.govuk_polling_responses.INFORMATION_SCHEMA.COLUMNS`
   WHERE
-    table_name LIKE 'src_bmg_wave%'
+    table_name LIKE 'src_bmg%'
 );
 
 -- Step 3: Assemble the final, complete script that will use PIVOT.

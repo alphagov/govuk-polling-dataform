@@ -3,11 +3,8 @@ config {
 }
 
 SELECT 
-    LOWER(REGEXP_REPLACE(
-        REGEXP_REPLACE(_TABLE_SUFFIX, r'_', ' '),  -- Replace underscores with spaces
-        r'(\d+)', 
-        r'wave \1'  -- Add "wave " before numbers
-    )) AS wave_name,
+
+        LOWER(REGEXP_REPLACE(_TABLE_SUFFIX, r'_', ' ')) AS wave_name,
     *
-FROM `govuk-polling.govuk_polling_responses.src_bmg_wave_*`
+FROM `govuk-polling.govuk_polling_responses.src_bmg_*`
 
