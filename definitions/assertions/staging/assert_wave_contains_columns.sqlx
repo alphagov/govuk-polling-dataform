@@ -38,9 +38,6 @@ actual_column_names AS (
         AND
         table_name LIKE  "src_bmg_wave%"
 
-
-)
-
 ),
 
 -- Find columns in the expected list that are missing from the actual table

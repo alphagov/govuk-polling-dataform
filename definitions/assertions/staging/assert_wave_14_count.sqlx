@@ -1,7 +1,7 @@
 config {
   type: "assertion",
   description: "Asserts that the table has exactly 1596 rows.",
-  dependencies: ["constructor_src_bmg_all_waves"]
+  dependencies: ["src_bmg_all_waves"]
   
 }
 
