@@ -11,4 +11,4 @@ FROM
   ${ref("src_bmg_all_waves")}
 WHERE wave_name = 'wave 13'
 HAVING
-  actual_row_count != 1568
+  actual_row_count != 1570

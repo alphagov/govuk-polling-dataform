@@ -152,6 +152,8 @@ FROM
     ('wave 13', 'ql7a_4'),
     ('wave 13', 'ql7a_5'),
     ('wave 13', 'ql7a_6'),
+    ('wave 13', 'ql7a_7'),
+    ('wave 13', 'ql7a_8'),
     ('wave 13', 'ql8a'),
     ('wave 13', 'ql12'),
     ('wave 13', 'ql13_1'),
