@@ -1,3 +1,7 @@
+config {type:"view"}
+
+Select 1 as num
+/**
 -- This script dynamically builds and runs a query that summarizes null column counts
 
 -- Step 1: DECLARE all variables at the top of the script.
@@ -80,3 +84,4 @@ ORDER BY
 
 -- Step 4: Execute the final script to get your summary table.
 EXECUTE IMMEDIATE final_executable_script;
+**/

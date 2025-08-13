@@ -2,9 +2,11 @@ config {
   type: "view",
 }
 
-SELECT 
+js {
+  const {srcResponseColumns} = require('includes/constants');
+}
 
-        LOWER(REGEXP_REPLACE(_TABLE_SUFFIX, r'_', ' ')) AS wave_name,
-    *
-FROM `govuk-polling.govuk_polling_responses.src_bmg_*`
+SELECT 
+*
+FROM  ${ref("constructor_src_bmg_all_waves")}
 
