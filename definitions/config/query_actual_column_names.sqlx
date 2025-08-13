@@ -13,4 +13,5 @@ FROM (
     FROM
     -- Ensure this remains pointing at the workspace dataset
         ${ref("src_column_names")}
+ORDER BY column_name ASC
 )
