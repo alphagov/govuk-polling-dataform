@@ -83,7 +83,12 @@ erDiagram
 ### Development
 
 #### Creating a Development Workspace
-**Note that all BigQuery datasets created by your Development Workspace will have to bve deleted manually once you are finished with them.**
+**Note that all BigQuery datasets created by your Development Workspace will have to be deleted manually once you are finished with them.**
+All datasets created by your Development Workspace will be suffixed with the workspace name.
+For example, if your workspace is called `add_wave_15`, then the following datasets will require manual deletion.
+- `govuk-polling.govuk_polling_responses_add_wave_15`
+- `gds-bq-reporting.polling_processing_add_wave_15`
+- `gds-bq-reporting.dataform_assertions_add_wave_15`
  
 
 #### Adding a new Wave
