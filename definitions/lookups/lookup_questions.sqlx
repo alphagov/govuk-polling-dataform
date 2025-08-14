@@ -92,7 +92,7 @@ FROM
     ('ql4b_95', 'QL4B. How easy or difficult did you find the process of completing the task(s) on GOV.UK?', 'Other', 'single'),
 
     ('ql5', 'QL5.', 'Thinking about the last time you used GOV.UK, how satisfied or dissatisfied were you with your experience?', 'single'),
-    ('ql7', 'QL6.', 'Still thinking about the last time you used GOV.UK, which device did you use?', 'single'),
+    ('ql7', 'QL7.', 'Still thinking about the last time you used GOV.UK, which device did you use?', 'single'),
 
     ('ql8a', 'QL8A.', 'And did you use any software or equipment to help you use GOV.UK?', 'multi'),
 
