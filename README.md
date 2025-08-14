@@ -1,6 +1,7 @@
 # GOV.UK Polling Dataform
 
-The dataform configuration for modelling GOV.UK polling data. The output tables are made available in BigQuery and Looker.
+The dataform configuration for modelling GOV.UK polling data. The [dataform pipeline](https://console.cloud.google.com/bigquery/dataform/locations/europe-west2/repositories/polling/details/workspaces?hl=en&inv=1&invt=Ab5YPA&project=gds-bq-reporting) is in the `gds-bq-reporting` GCP project and is called `polling`.
+The output tables are made available in [BigQuery dataset](https://console.cloud.google.com/bigquery?hl=en&inv=1&invt=Ab5WvQ&project=govuk-polling&ws=!1m4!1m3!3m2!1sgovuk-polling!2sgovuk_polling_responses!1m10!1m4!4m3!1sgovuk-polling!2sgovuk_polling_responses!3ssrc_bmg_wave_11!1m4!4m3!1sgovuk-polling!2sgovuk_polling_responses!3ssrc_bmg_wave_13) `govuk-polling.govuk_polling_responses` and various [Looker Explores](https://github.com/alphagov/gds-looker/blob/faf1f66e7d424620557d1c55ee1301f709b98873/models/govuk.model.lkml#L58).
 
 ## Nomenclature
 
@@ -81,20 +82,23 @@ erDiagram
 
 ### Development
 
+#### Creating a Development Workspace
+**Note that all BigQuery datasets created by your Development Workspace will have to bve deleted manually once you are finished with them.**
+ 
+
 #### Adding a new Wave
 1. Create a new row in `definitions/lookups/lookup_survey_waves.sqlx`.
 2. Upload the source CSV to the `govuk_polling_responses` dataset with the name `src_{provider}_wave_{number}`. For example, `src_bmg_wave_13`.
-2. For each question, add a new row in the `definitions/lookups/lookup_survey_wave_questions.sqlx` file including the `wave_name` and `src_question_id`.
+3. For each question, add a new row in the `definitions/lookups/lookup_survey_wave_questions.sqlx` file including the `wave_name` and `src_question_id`.
     If this wave has the same questions as previous waves, just copy and paste being sure to update the values in `wave_name`.
-3. Execute the workflow to ensure `survey_wave_questions` is populated as expected.
-4. Execute definitions/config/retrieve_column_names.sqlx and update definitions/config/retrieve_column_names.js variable const allStgColumns.
+4. Execute `definitions/config/query_actual_column_names.sqlx` and copy the output. Then open `includes/constants.js` and paste in the copied string to update the variable const `allSrcColumns`.
+5. Execute the workflow to ensure `survey_wave_questions` is populated as expected and no tests fail.
 
 #### Adding a new Question
 1. Create a new row in `definitions/lookups/lookup_questions.sqlx`.
 2. Create a new row in `definitions/lookups/lookup_question_response_choices.sqlx` using the corresponding `src_question_id`.
 You'll need to know the name of the column in the source data which contains the values along with the coded values and the associated selection text.
 3. Execute the workflow and inspect the output of the `question_response_choices` table in BigQuery.
-4. Add the column which contains the coded values to the `UNPIVOT` code in `definitions/staging/stg_unpack_question_responses.sqlx`.
 
 ### Deployment
 Once you PR is reviewed and approved, merge into `main`.
@@ -102,7 +106,7 @@ Once you PR is reviewed and approved, merge into `main`.
 The production release configuration is based on `main` and will compile once a day. To manually compile, go to [Release Configurations](https://console.cloud.google.com/bigquery/dataform/locations/europe-west2/repositories/polling/details/release-scheduling?hl=en&inv=1&invt=Ab1Ofw&project=gds-bq-reporting).
 Then select the `production` configuration and select `New compliation` which will sync to the latest changes on `main` branch. Then, go back to the "Releases & Scheduling" section and choose `Start Execution`.
 
-### Python
+### Scripts
 
 This includes a script used to clean files locally and then upload them to BigQuery (BQ). Place your .csv file in the Python folder; the script will process it and output the result into python/simple_processed, after which it will be uploaded to BQ.
 
