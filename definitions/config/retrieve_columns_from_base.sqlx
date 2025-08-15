@@ -14,18 +14,27 @@ WITH table_columns AS (
     -- Extract numeric wave for sorting
     SAFE_CAST(REGEXP_EXTRACT(table_name, r'src_bmg_wave_(\d+)') AS INT64) AS wave_number
 
-  FROM ${ref("src_column_names")}
+  FROM `gds-bq-reporting.polling_processing_add_wave_9.src_column_names`
+  ORDER BY wave_name, column_name
+
 ),
 
 -- Create individual tuple strings for each column
 column_tuples AS (
   SELECT 
-    wave_name,
-    wave_number,
-    column_name,
-    CONCAT("('", wave_name, "', '", column_name, "')") AS tuple_string
-  FROM table_columns
-),
+    table_columns.wave_name,
+    table_columns.wave_number,
+    table_columns.column_name,
+    choices.src_column_name,
+    choices.src_question_id,
+    CONCAT("('", table_columns.wave_name, "', '", table_columns.column_name, "')") AS tuple_string_column,
+    CONCAT("('", table_columns.wave_name, "', '", choices.src_question_id, "')") AS tuple_string_question
+  FROM table_columns 
+  LEFT JOIN `gds-bq-reporting.polling_processing_add_wave_9.lookup_question_response_choices` as choices
+  on table_columns.column_name = choices.src_column_name
+)
+,
+
 
 -- Aggregate tuples by wave with proper formatting
 wave_grouped AS (
@@ -35,16 +44,19 @@ wave_grouped AS (
     -- Create nicely formatted string with newlines and indentation
     CONCAT(
       '    ', -- 4 space indent for first tuple
-      STRING_AGG(tuple_string, ',\n    ' ORDER BY column_name)
-    ) AS columns_formatted
+      STRING_AGG(tuple_string_column, ',\n    ' ORDER BY column_name)
+    ) AS columns_formatted,
+    CONCAT(
+      '    ', -- 4 space indent for first tuple
+      STRING_AGG(DISTINCT(tuple_string_question), ',\n    ' ORDER BY tuple_string_question )
+    ) AS questions_formatted
   FROM column_tuples
   GROUP BY wave_name, wave_number
 )
-
 -- Final output with proper formatting
-SELECT 
-  wave_name,
-  columns_formatted AS columns
+SELECT wave_name,
+    wave_number,
+    columns_formatted,
+    questions_formatted 
 FROM wave_grouped
-
-ORDER BY wave_number DESC;
+ORDER BY CAST(wave_number AS INT64) DESC
