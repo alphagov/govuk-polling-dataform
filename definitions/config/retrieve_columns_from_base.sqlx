@@ -14,7 +14,7 @@ WITH table_columns AS (
     -- Extract numeric wave for sorting
     SAFE_CAST(REGEXP_EXTRACT(table_name, r'src_bmg_wave_(\d+)') AS INT64) AS wave_number
 
-  FROM `gds-bq-reporting.polling_processing_add_wave_9.src_column_names`
+  FROM ${ref("src_column_names")}
   ORDER BY wave_name, column_name
 
 ),
@@ -30,7 +30,7 @@ column_tuples AS (
     CONCAT("('", table_columns.wave_name, "', '", table_columns.column_name, "')") AS tuple_string_column,
     CONCAT("('", table_columns.wave_name, "', '", choices.src_question_id, "')") AS tuple_string_question
   FROM table_columns 
-  LEFT JOIN `gds-bq-reporting.polling_processing_add_wave_9.lookup_question_response_choices` as choices
+  LEFT JOIN ${ref("lookup_question_response_choices")} as choices
   on table_columns.column_name = choices.src_column_name
 )
 ,
