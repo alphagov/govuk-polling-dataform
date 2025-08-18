@@ -5,23 +5,7 @@ config {
 }
 
 js {
-  const {allSrcColumns} = require('includes/constants');
-  const bmgWaveTables = [
-    // "src_bmg_wave_1",
-    // "src_bmg_wave_2",
-    // "src_bmg_wave_3",
-    // "src_bmg_wave_4",
-    // "src_bmg_wave_5",
-    // "src_bmg_wave_6",
-    // "src_bmg_wave_7",
-    "src_bmg_wave_8",
-    "src_bmg_wave_9",
-    "src_bmg_wave_10",
-    "src_bmg_wave_11",
-    "src_bmg_wave_12",
-    "src_bmg_wave_13",
-    "src_bmg_wave_14",
-  ];
+  const {allSrcColumns, bmgWaveTables} = require('includes/constants');
 
   global.tableNamesForSql = bmgWaveTables.map(name => `'${name}'`).join(',');
   allSrcColumns.sort();

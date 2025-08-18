@@ -1,4 +1,10 @@
-config {type:"view"}
+config {
+  type: "view",
+}
+js {
+  const {bmgWaveTables} = require('includes/constants');
+  global.tableNamesForSql = bmgWaveTables.map(name => `'${name}'`).join(',');
+  }
 
 SELECT 
     table_name,
@@ -6,4 +12,4 @@ SELECT
     column_name
 FROM
  `govuk-polling.govuk_polling_responses.INFORMATION_SCHEMA.COLUMNS`
- WHERE table_name LIKE "src_bmg_%"
+ WHERE table_name in (${tableNamesForSql})

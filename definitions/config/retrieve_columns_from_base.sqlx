@@ -1,3 +1,8 @@
+js {
+  const {freeTextColumns} = require('includes/constants');
+  global.columnNamesForSql = freeTextColumns.map(name => `'${name}'`).join(',');
+}
+
 /**
 The purpose of this query is to automate the generation of the lookup_survey_wave_questions.sqlx. It currently doesnt work
 Query currently outputs the wave and column name, where as we would want to wave and question. A solution would be to select 
@@ -15,6 +20,7 @@ WITH table_columns AS (
     SAFE_CAST(REGEXP_EXTRACT(table_name, r'src_bmg_wave_(\d+)') AS INT64) AS wave_number
 
   FROM ${ref("src_column_names")}
+  -- WHERE column_name not in (${columnNamesForSql})
   ORDER BY wave_name, column_name
 
 ),

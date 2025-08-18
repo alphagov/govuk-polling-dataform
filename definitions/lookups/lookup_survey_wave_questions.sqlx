@@ -492,6 +492,6 @@ FROM
     ('wave 8', 'ql7a_3'),
     ('wave 8', 'ql7a_4'),
     ('wave 8', 'ql7a_5'),
-    ('wave 8', 'ql7a_6')
+    ('wave 8', 'ql7a_6') 
 
     ] )
