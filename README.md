@@ -116,6 +116,20 @@ Then select the `production` configuration and select `New compliation` which wi
 
 This includes a script used to clean files locally and then upload them to BigQuery (BQ). Place your .csv file in the Python folder; the script will process it and output the result into python/simple_processed, after which it will be uploaded to BQ.
 
+#### Upload BMG wave data
+The script `bmg_polling_data_processor.py` can be used to upload data to BigQuery. Ideally this would be automated. You will need Python installed on your local machine.
+
+### Install
+1. Create a virtual enviroment to install the dependencies using `python -m venv .venv`.
+2. Activate the environment `source .venv/bin/activate`.
+3. Change into the `scripts` directory - `cd scripts`
+3. Install the dependencies `pip install -r requirements.txt`.
+
+#### Prepare the CSV
+You will need to download the `export` sheet of the spreadsheet as a CSV file yo your local machine. 
+
+#### Run
+The script `bmg_polling_data_processor.py` has been useful while we've been iterating but will need some work to productionise. However, you can change values in the Configuration and Setup section to upload a file. Documenting these values here will likely drift for now so use the python file directly for now.
 
 ## Licence
 
