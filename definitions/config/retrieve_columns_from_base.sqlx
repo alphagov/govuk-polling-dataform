@@ -1,5 +1,5 @@
 /**
-The purpose of this query is to automate. the generation of the lookup_survey_wave_questions.sqlx. It currently doesnt work
+The purpose of this query is to automate the generation of the lookup_survey_wave_questions.sqlx. It currently doesnt work
 Query currently outputs the wave and column name, where as we would want to wave and question. A solution would be to select 
 the question names, for which these column_names exist for a particular wave
 **/
