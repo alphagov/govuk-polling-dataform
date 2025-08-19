@@ -1,10 +1,9 @@
 config {
-  type: "view",
+  type: "view"
 }
-
 js {
   const {srcResponseColumns} = require('includes/constants');
-}
+  }
 
 SELECT 
 *

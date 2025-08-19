@@ -21,8 +21,11 @@ const allSrcColumns =["WEIGHT",
 "n1_96",
 "n1_97",
 "n1_98",
+"ql10",
 "ql10mar",
 "ql10mar24",
+"ql10x_1",
+"ql10x_2",
 "ql11",
 "ql12_1",
 "ql12_10",
@@ -331,6 +334,7 @@ const allSrcColumns =["WEIGHT",
 "ql2_6",
 "ql3_1",
 "ql3_2",
+"ql3_3",
 "ql3_4",
 "ql3_95",
 "ql3_96",
@@ -384,6 +388,7 @@ const allSrcColumns =["WEIGHT",
 "ql8a_4",
 "ql8a_95",
 "ql8a_96",
+"ql9",
 "qualification2020",
 "quartile_country",
 "respid",
@@ -401,17 +406,29 @@ const srcDemographicColumns = ['wave_name'
 ,'gor_code'
 ,'ethnicity'
 ,'lang',
-,"WEIGHT"
+,'WEIGHT'
 ];
 
 // this exports the variable to global so other files can use files (would this overwrite existing module.exports?)
 
+  const bmgWaveTables = [
+    "src_bmg_wave_8",
+    "src_bmg_wave_9",
+    "src_bmg_wave_10",
+    "src_bmg_wave_11",
+    "src_bmg_wave_12",
+    "src_bmg_wave_13",
+    "src_bmg_wave_14",
+  ];
+
 // Here use filter for where they are not present in the demographic columns
+
 const srcResponseColumns = allSrcColumns
-  .filter(column => !srcDemographicColumns.includes(column));
+.filter(column => !srcDemographicColumns.includes(column));
 
 
 module.exports = {
   allSrcColumns: allSrcColumns,
-  srcResponseColumns: srcResponseColumns
+  srcResponseColumns: srcResponseColumns,
+  bmgWaveTables: bmgWaveTables
 };

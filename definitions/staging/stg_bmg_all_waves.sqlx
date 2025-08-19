@@ -31,7 +31,7 @@ SELECT
   TRIM(CAST(qualification2020 AS STRING)) AS qualification_code,
   TRIM(CAST(gor_code AS STRING)) AS government_office_region_code,
   TRIM(CAST(ethnicity AS STRING)) AS ethnicity_code,
-  TRIM(CAST(lang AS STRING)) AS is_english_main_language_code,
+  (NULLIF(TRIM(CAST(lang AS STRING)), '')) AS is_english_main_language_code,
 
 -- this calls the cleanAndCastColumn function on every member of SrCResponseColumns to generate 
 -- the desired sql template 

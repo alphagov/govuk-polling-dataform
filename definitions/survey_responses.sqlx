@@ -1,11 +1,16 @@
--- age_group is excluded from the nonNull test as there are some records in the source with missing values for this column
+/**
+Excluded from nonNull Assertions:
+1) age_group is excluded from the nonNull test as there are some records in the source with missing values for this column
+2) is_english_main is excluded as wave 8 does not have a lang is_english_main value, 
+**/
 config {
     type: "table",
     database: "govuk-polling",
     schema: "govuk_polling_responses",
     assertions: {
         uniqueKey: ["survey_response_id"],
-        nonNull: ["survey_response_id", "survey_wave_id", "src_response_id", "weight", "imd_quartile_country", "gender", "qualification", "ethnicity", "government_office_region", "is_english_main_language"]
+        nonNull: ["survey_response_id", "survey_wave_id", "src_response_id", "weight", "imd_quartile_country", "gender", "qualification", "ethnicity", "government_office_region"]
+        //  "is_english_main_language" can be null
     },
 }
 
