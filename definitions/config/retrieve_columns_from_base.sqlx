@@ -1,12 +1,9 @@
-js {
-  const {freeTextColumns} = require('includes/constants');
-  global.columnNamesForSql = freeTextColumns.map(name => `'${name}'`).join(',');
-}
-
 /**
-The purpose of this query is to automate the generation of the lookup_survey_wave_questions.sqlx. It currently doesnt work
-Query currently outputs the wave and column name, where as we would want to wave and question. A solution would be to select 
-the question names, for which these column_names exist for a particular wave
+The purpose of this query is to automate the generation of the lookup_survey_wave_questions.sqlx. This query 
+currently outputs the wave and column name in columns_formatted and wave:question_name in questions_formatted. 
+Its usefull for QA to compare the columns_formatted to the questions_formatted column. 
+
+If satisfied with the questions_formatted you can then add the output to lookup_question_waves
 **/
 
 -- Query to extract all column names grouped by wave with formatted tuple strings for wave_questions_lookup
@@ -20,7 +17,6 @@ WITH table_columns AS (
     SAFE_CAST(REGEXP_EXTRACT(table_name, r'src_bmg_wave_(\d+)') AS INT64) AS wave_number
 
   FROM ${ref("src_column_names")}
-  -- WHERE column_name not in (${columnNamesForSql})
   ORDER BY wave_name, column_name
 
 ),

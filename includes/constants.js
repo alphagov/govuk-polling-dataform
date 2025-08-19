@@ -409,16 +409,6 @@ const srcDemographicColumns = ['wave_name'
 ,'WEIGHT'
 ];
 
-// Free text columns to be removed
-const freeTextColumns = [
-  'ql6', 
-  'ql9',
-  'ql10',
-  'ql11',
-  'ql20',
-  'ql20mar',
-  'ql10mar24'
-];
 // this exports the variable to global so other files can use files (would this overwrite existing module.exports?)
 
   const bmgWaveTables = [
@@ -434,13 +424,11 @@ const freeTextColumns = [
 // Here use filter for where they are not present in the demographic columns
 
 const srcResponseColumns = allSrcColumns
-  .filter(column => !srcDemographicColumns.includes(column))
-  .filter(column => !freeTextColumns.includes(column));
+.filter(column => !srcDemographicColumns.includes(column));
 
 
 module.exports = {
   allSrcColumns: allSrcColumns,
   srcResponseColumns: srcResponseColumns,
-  freeTextColumns: freeTextColumns,
   bmgWaveTables: bmgWaveTables
 };
