@@ -4,23 +4,32 @@
 // pros: has all the code for generating column names in one place, Con: we will no longer have a visible list we can interrogate for debugging
 
 // this is the list that you update with the output of /config/query_actual_column_names.sqlx
-const allSrcColumns =["WEIGHT",
+const allSrcColumns =[
+"WEIGHT",
+"Weight",
 "age",
+"ageint",
+"employmentstatus",
 "ethnicity",
 "gender",
 "gor_code",
 "lang",
 "n1_1",
+"n1_10",
+"n1_11",
 "n1_2",
 "n1_3",
 "n1_4",
 "n1_5",
 "n1_6",
 "n1_7",
+"n1_8",
+"n1_9",
 "n1_95",
 "n1_96",
 "n1_97",
 "n1_98",
+"order",
 "ql10",
 "ql10mar",
 "ql10mar24",
@@ -393,7 +402,8 @@ const allSrcColumns =["WEIGHT",
 "qualification2020",
 "quartile_country",
 "respid",
-"responseid"
+"responseid",
+"socioeconomicgrade"
 ];
 
 const srcDemographicColumns = ['wave_name'
@@ -410,9 +420,15 @@ const srcDemographicColumns = ['wave_name'
 ,'WEIGHT'
 ];
 
+// This reservedColumnNames removes any reserved column names from allSrcColumns
+const reservedColumnNames = [
+  "order"
+]
+
 // this exports the variable to global so other files can use files (would this overwrite existing module.exports?)
 
   const bmgWaveTables = [
+    "src_bmg_wave_4",
     "src_bmg_wave_6",
     "src_bmg_wave_7",
     "src_bmg_wave_8",
@@ -425,13 +441,15 @@ const srcDemographicColumns = ['wave_name'
   ];
 
 // Here use filter for where they are not present in the demographic columns
+const allSrcColumnsFiltered = allSrcColumns.
+filter(column => !reservedColumnNames.includes(column))
 
-const srcResponseColumns = allSrcColumns
+const srcResponseColumns = allSrcColumnsFiltered
 .filter(column => !srcDemographicColumns.includes(column));
 
 
 module.exports = {
-  allSrcColumns: allSrcColumns,
+  allSrcColumnsFiltered: allSrcColumnsFiltered,
   srcResponseColumns: srcResponseColumns,
   bmgWaveTables: bmgWaveTables
 };
