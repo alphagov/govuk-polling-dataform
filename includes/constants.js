@@ -382,6 +382,7 @@ const allSrcColumns =["WEIGHT",
 "ql7a_6",
 "ql7a_7",
 "ql7a_8",
+"ql8",
 "ql8a_1",
 "ql8a_2",
 "ql8a_3",
@@ -412,11 +413,8 @@ const srcDemographicColumns = ['wave_name'
 // this exports the variable to global so other files can use files (would this overwrite existing module.exports?)
 
   const bmgWaveTables = [
-<<<<<<< HEAD
     "src_bmg_wave_6",
-=======
     "src_bmg_wave_7",
->>>>>>> refs/heads/main
     "src_bmg_wave_8",
     "src_bmg_wave_9",
     "src_bmg_wave_10",
