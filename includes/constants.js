@@ -429,6 +429,7 @@ const reservedColumnNames = [
 
   const bmgWaveTables = [
     "src_bmg_wave_4",
+    "src_bmg_wave_5",
     "src_bmg_wave_6",
     "src_bmg_wave_7",
     "src_bmg_wave_8",
