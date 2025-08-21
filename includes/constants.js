@@ -413,6 +413,7 @@ const srcDemographicColumns = ['wave_name'
 // this exports the variable to global so other files can use files (would this overwrite existing module.exports?)
 
   const bmgWaveTables = [
+    "src_bmg_wave_5",
     "src_bmg_wave_6",
     "src_bmg_wave_7",
     "src_bmg_wave_8",
