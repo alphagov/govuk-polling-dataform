@@ -1,14 +1,14 @@
 config {
     type: "assertion",
-    description: "Asserts that src_bmg_all_waves has the expected columns in includes.constants.js array allSrcColumns",
+    description: "Asserts that src_bmg_all_waves has the expected columns in includes.constants.js array allSrcColumnsFiltered",
     dependencies: ["src_bmg_all_waves"]
 }
 
 js {
-    const { allSrcColumns } = require('/includes/constants');
+    const { allSrcColumnsFiltered } = require('/includes/constants');
 
     // 1. Map each column name string to a quoted string
-    const quotedColumns = allSrcColumns.map(col => `'${col}'`);
+    const quotedColumns = allSrcColumnsFiltered.map(col => `'${col}'`);
 
     // 2. Join the quoted strings with commas
     const columnsJoined = quotedColumns.join(', ');

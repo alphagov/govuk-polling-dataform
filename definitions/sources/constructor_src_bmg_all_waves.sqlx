@@ -5,11 +5,18 @@ config {
 }
 
 js {
-  const {allSrcColumns, bmgWaveTables} = require('includes/constants');
+  const {allSrcColumnsFiltered, bmgWaveTables} = require('includes/constants');
 
+  const weightedColumns = ['Weight','WEIGHT']
+
+  const allSrcColumnsFilteredWithoutProcessed = allSrcColumnsFiltered.filter(column => !weightedColumns.includes(column))
   global.tableNamesForSql = bmgWaveTables.map(name => `'${name}'`).join(',');
-  allSrcColumns.sort();
-  global.allColumnsSqlArray = `[${allSrcColumns.map(col => `'${col}'`).join(', ')}]`;
+  allSrcColumnsFilteredWithoutProcessed.sort();
+  global.allColumnsSqlArray = `[${allSrcColumnsFilteredWithoutProcessed.map(col => `'${col}'`).join(', ')}]`;
+
+  const reverseAliasMap = [
+    "Weight","WEIGHT"
+  ];
 }
 
 DECLARE ddl_statement STRING;
@@ -35,7 +42,12 @@ SET ddl_statement = (
           -- This part generates the main list of columns. It will NOT have a trailing comma.
           SELECT
             STRING_AGG(
-              "        CAST(" || IF(master_col IN UNNEST(t.columns_in_this_table), master_col, "NULL") || " AS STRING) AS " || master_col, ",\n"
+              CASE WHEN master_col = 'weight' THEN 
+              "        CAST(COALESCE(weight, weighted, WEIGHTED, Weight, WEIGHT) AS STRING) AS weight"
+              ELSE
+              "        CAST(" || IF(master_col IN UNNEST(t.columns_in_this_table), master_col, "NULL") || " AS STRING) AS `" || master_col || "`"
+              END,
+              ",\n"
             )
           FROM UNNEST(all_columns_array) AS master_col
         )
