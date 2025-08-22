@@ -94,11 +94,11 @@ For example, if your workspace is called `add_wave_15`, then the following datas
 #### Adding a new Wave
 1. Create a new row in `definitions/lookups/lookup_survey_waves.sqlx`.
 2. Upload the source CSV to the `govuk_polling_responses` dataset with the name `src_{provider}_wave_{number}`. For example, `src_bmg_wave_13`.
-3a. For each question, add a new row in the `definitions/lookups/lookup_survey_wave_questions.sqlx` file including the `wave_name` and `src_question_id`.
+3. For each question, add a new row in the `definitions/lookups/lookup_survey_wave_questions.sqlx` file including the `wave_name` and `src_question_id`.
     If this wave has the same questions as previous waves, just copy and paste being sure to update the values in `wave_name`.
-    3b. Optional: You can also generate the {wave_name, src_question_id} tupples using definitions/config/retrieve_columns_from_base.sqlx
-4. Execute `definitions/config/query_actual_column_names.sqlx` and copy the output. Then open `includes/constants.js` and paste in the copied string to update the variable const `allSrcColumns`.
-5. Execute the workflow to ensure `survey_wave_questions` is populated as expected and no tests fail.
+4. (Optional) You can also generate the {wave_name, src_question_id} tupples using definitions/config/retrieve_columns_from_base.sqlx
+5. Execute `definitions/config/query_actual_column_names.sqlx` and copy the output. Then open `includes/constants.js` and paste in the copied string to update the variable const `allSrcColumns`.
+6. Execute the workflow to ensure `survey_wave_questions` is populated as expected and no tests fail.
 
 #### Adding a new Question
 1. Create a new row in `definitions/lookups/lookup_questions.sqlx`.
@@ -116,6 +116,20 @@ Then select the `production` configuration and select `New compliation` which wi
 
 This includes a script used to clean files locally and then upload them to BigQuery (BQ). Place your .csv file in the Python folder; the script will process it and output the result into python/simple_processed, after which it will be uploaded to BQ.
 
+#### Upload BMG wave data
+The script `bmg_polling_data_processor.py` can be used to upload data to BigQuery. Ideally this would be automated. You will need Python>=3.12 installed on your local machine.
+
+### Install
+1. Create a virtual enviroment to install the dependencies using `python -m venv .venv`.
+2. Activate the environment `source .venv/bin/activate`.
+3. Change into the `scripts` directory - `cd scripts`
+3. Install the dependencies `pip install -r requirements.txt`.
+
+#### Prepare the CSV
+You will need to download the `export` sheet of the spreadsheet as a CSV file yo your local machine. 
+
+#### Run
+The script `bmg_polling_data_processor.py` has been useful while we've been iterating but will need some work to productionise. However, you can change values in the Configuration and Setup section to upload a file. Documenting these values here will likely drift for now so use the python file directly for now.
 
 ## Licence
 
