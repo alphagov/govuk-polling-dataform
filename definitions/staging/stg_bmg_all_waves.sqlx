@@ -5,7 +5,7 @@ config {
         nonNull: ["survey_response_id", "survey_wave_id"],
         rowConditions: [
             "age_code IN ('1', '2', '3', '4', '5', '6', '7', '8')",
-            "gender_code IN ('1', '2', '95', '98')",
+            "gender_code IN ('1', '2', '3', '4', '95', '98')",
             "ethnicity_code IN ('1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '95', '98')",
             "qualification_code IN ('1', '2', '3', '4', '5', '6', '7', '8', '9')",
             "government_office_region_code IN ('1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12')",
@@ -39,8 +39,7 @@ SELECT
 -- the desired sql template 
   ${srcResponseColumns.map(cleanAndCastColumn).join(",\n  ")}
 
--- FROM ${ref("src_bmg_all_waves")}
-FROM ${ref("stg_bmg_processing")}
+FROM ${ref("src_bmg_all_waves")}
 )
 SELECT
   -- surrogate keys
