@@ -23,7 +23,7 @@ WITH bmg_all_waves_cleaned AS (
 SELECT
   -- survey response data
   NULLIF(TRIM(CAST(REPLACE(wave_name, '_', ' ') AS STRING)), '') AS wave_name,
-  TRIM(CAST(responseid AS STRING)) AS src_response_id,
+  TRIM(CAST(COALESCE(responseid,respid) AS STRING)) AS src_response_id,
   CAST(WEIGHT AS FLOAT64) AS weight,
   CAST(quartile_country AS INTEGER) AS imd_quartile_country,
   NULLIF(TRIM(CAST(gender AS STRING)), '') AS gender_code,
@@ -32,12 +32,15 @@ SELECT
   TRIM(CAST(gor_code AS STRING)) AS government_office_region_code,
   TRIM(CAST(ethnicity AS STRING)) AS ethnicity_code,
   (NULLIF(TRIM(CAST(lang AS STRING)), '')) AS is_english_main_language_code,
+  NULLIF(TRIM(CAST(employmentstatus AS STRING)), '') AS  employmentstatus,
+  NULLIF(TRIM(CAST(socioeconomicgrade AS STRING)), '') AS socioeconomicgrade,
 
 -- this calls the cleanAndCastColumn function on every member of SrCResponseColumns to generate 
 -- the desired sql template 
   ${srcResponseColumns.map(cleanAndCastColumn).join(",\n  ")}
 
-FROM ${ref("src_bmg_all_waves")}
+-- FROM ${ref("src_bmg_all_waves")}
+FROM ${ref("stg_bmg_processing")}
 )
 SELECT
   -- surrogate keys
