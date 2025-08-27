@@ -44,5 +44,3 @@ LEFT JOIN
     USING (src_column_name, selection_value)
 WHERE
     questions_to_response_selection.question_type IN ('single', 'multi')
-
-

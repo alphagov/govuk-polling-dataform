@@ -2,14 +2,16 @@ config {
   type: "view",
 }
 js {
-  const {bmgWaveTables} = require('includes/constants');
+  const {bmgWaveTables,reservedColumnNames} = require('includes/constants');
   global.tableNamesForSql = bmgWaveTables.map(name => `'${name}'`).join(',');
+  global.reservedColumnNamesforSql = reservedColumnNames.map(name => `'${name}'`).join(',');
   }
 
 SELECT 
     table_name,
     table_catalog,
-    column_name
+    LOWER(column_name) as column_name
 FROM
  `govuk-polling.govuk_polling_responses.INFORMATION_SCHEMA.COLUMNS`
- WHERE table_name in (${tableNamesForSql})
+ WHERE table_name in (${tableNamesForSql}) 
+ AND column_name NOT in (${reservedColumnNamesforSql})

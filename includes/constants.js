@@ -4,29 +4,33 @@
 // pros: has all the code for generating column names in one place, Con: we will no longer have a visible list we can interrogate for debugging
 
 // this is the list that you update with the output of /config/query_actual_column_names.sqlx
-const allSrcColumns =["WEIGHT",
-"age",
+const allSrcColumns =[
+  "age",
+"ageint",
+"employmentstatus",
 "ethnicity",
 "gender",
 "gor_code",
 "lang",
 "n1_1",
+"n1_10",
+"n1_11",
 "n1_2",
 "n1_3",
 "n1_4",
 "n1_5",
 "n1_6",
 "n1_7",
+"n1_8",
+"n1_9",
 "n1_95",
 "n1_96",
 "n1_97",
 "n1_98",
 "ql10",
 "ql10mar",
-"ql10mar24",
 "ql10x_1",
 "ql10x_2",
-"ql11",
 "ql12_1",
 "ql12_10",
 "ql12_11",
@@ -372,7 +376,6 @@ const allSrcColumns =["WEIGHT",
 "ql4b_9",
 "ql4b_95",
 "ql5",
-"ql6",
 "ql7",
 "ql7a_1",
 "ql7a_2",
@@ -393,7 +396,9 @@ const allSrcColumns =["WEIGHT",
 "qualification2020",
 "quartile_country",
 "respid",
-"responseid"
+"responseid",
+"socioeconomicgrade",
+"weight"
 ];
 
 const srcDemographicColumns = ['wave_name'
@@ -403,16 +408,29 @@ const srcDemographicColumns = ['wave_name'
 ,'quartile_country'
 ,'gender'
 ,'age'
+,'ageint'
 ,'qualification2020'
 ,'gor_code'
 ,'ethnicity'
 ,'lang',
 ,'WEIGHT'
+,'weight'
+,'employmentstatus'
+,'socioeconomicgrade'
+,
 ];
+
+// This reservedColumnNames removes any reserved column names from allSrcColumns
+const reservedColumnNames = [
+  "order"
+]
+
+
 
 // this exports the variable to global so other files can use files (would this overwrite existing module.exports?)
 
   const bmgWaveTables = [
+    "src_bmg_wave_4",
     "src_bmg_wave_5",
     "src_bmg_wave_6",
     "src_bmg_wave_7",
@@ -425,14 +443,21 @@ const srcDemographicColumns = ['wave_name'
     "src_bmg_wave_14",
   ];
 
-// Here use filter for where they are not present in the demographic columns
+// convert to set to make unique, then convert to array again so we can use filter commands
+// Im sure there is a more optimal way to do this 
+const allSrcColumnsSet = new Set(allSrcColumns.map(column => column.toLowerCase()));
 
-const srcResponseColumns = allSrcColumns
+const allSrcColumnsUnique = Array.from(allSrcColumnsSet)
+// Here use filter for where they are not present in the demographic columns
+const allSrcColumnsFiltered = allSrcColumnsUnique.
+filter(column => !reservedColumnNames.includes(column));
+
+const srcResponseColumns = allSrcColumnsFiltered
 .filter(column => !srcDemographicColumns.includes(column));
 
-
 module.exports = {
-  allSrcColumns: allSrcColumns,
+  allSrcColumnsFiltered: allSrcColumnsFiltered,
   srcResponseColumns: srcResponseColumns,
-  bmgWaveTables: bmgWaveTables
+  bmgWaveTables: bmgWaveTables,
+  reservedColumnNames: reservedColumnNames
 };

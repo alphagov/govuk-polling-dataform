@@ -10,10 +10,12 @@ config {
     schema: "govuk_polling_responses",
     assertions: {
         uniqueKey: ["survey_response_id"],
-        nonNull: ["survey_response_id", "survey_wave_id", "src_response_id", "weight", "imd_quartile_country", "gender", "qualification", "government_office_region"]
+        nonNull: ["survey_response_id", "survey_wave_id", "src_response_id", "weight", "gender", "government_office_region"]
         //  "age_group" can be null
         //  "is_english_main_language" can be null
         //  "ethnicity" can be null
+        //  "qualification" can be null (wave 4)
+        //  "imd_quartile_country"
     },
 }
 

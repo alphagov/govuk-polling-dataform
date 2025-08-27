@@ -23,7 +23,10 @@ FROM
       -- Rule set for provider 'bmg'
       ('bmg', '1', 'A man (including trans man)'),
       ('bmg', '2', 'A woman (including trans woman)'),
+      ('bmg', '3', 'Other'),
+      ('bmg', '4', 'Prefer not to say'),
       ('bmg', '95', 'Other'),
       ('bmg', '98', 'Prefer not to say')
+
     ]
   )
