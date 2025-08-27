@@ -5,9 +5,7 @@
 
 // this is the list that you update with the output of /config/query_actual_column_names.sqlx
 const allSrcColumns =[
-"WEIGHT",
-"Weight",
-"age",
+  "age",
 "ageint",
 "employmentstatus",
 "ethnicity",
@@ -29,13 +27,10 @@ const allSrcColumns =[
 "n1_96",
 "n1_97",
 "n1_98",
-"order",
 "ql10",
 "ql10mar",
-"ql10mar24",
 "ql10x_1",
 "ql10x_2",
-"ql11",
 "ql12_1",
 "ql12_10",
 "ql12_11",
@@ -381,7 +376,6 @@ const allSrcColumns =[
 "ql4b_9",
 "ql4b_95",
 "ql5",
-"ql6",
 "ql7",
 "ql7a_1",
 "ql7a_2",
@@ -403,7 +397,8 @@ const allSrcColumns =[
 "quartile_country",
 "respid",
 "responseid",
-"socioeconomicgrade"
+"socioeconomicgrade",
+"weight"
 ];
 
 const srcDemographicColumns = ['wave_name'
@@ -413,17 +408,24 @@ const srcDemographicColumns = ['wave_name'
 ,'quartile_country'
 ,'gender'
 ,'age'
+,'ageint'
 ,'qualification2020'
 ,'gor_code'
 ,'ethnicity'
 ,'lang',
 ,'WEIGHT'
+,'weight'
+,'employmentstatus'
+,'socioeconomicgrade'
+,
 ];
 
 // This reservedColumnNames removes any reserved column names from allSrcColumns
 const reservedColumnNames = [
   "order"
 ]
+
+
 
 // this exports the variable to global so other files can use files (would this overwrite existing module.exports?)
 
@@ -441,16 +443,21 @@ const reservedColumnNames = [
     "src_bmg_wave_14",
   ];
 
+// convert to set to make unique, then convert to array again so we can use filter commands
+// Im sure there is a more optimal way to do this 
+const allSrcColumnsSet = new Set(allSrcColumns.map(column => column.toLowerCase()));
+
+const allSrcColumnsUnique = Array.from(allSrcColumnsSet)
 // Here use filter for where they are not present in the demographic columns
-const allSrcColumnsFiltered = allSrcColumns.
-filter(column => !reservedColumnNames.includes(column))
+const allSrcColumnsFiltered = allSrcColumnsUnique.
+filter(column => !reservedColumnNames.includes(column));
 
 const srcResponseColumns = allSrcColumnsFiltered
 .filter(column => !srcDemographicColumns.includes(column));
 
-
 module.exports = {
   allSrcColumnsFiltered: allSrcColumnsFiltered,
   srcResponseColumns: srcResponseColumns,
-  bmgWaveTables: bmgWaveTables
+  bmgWaveTables: bmgWaveTables,
+  reservedColumnNames: reservedColumnNames
 };
