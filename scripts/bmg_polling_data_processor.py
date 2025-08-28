@@ -59,7 +59,7 @@ DATASET_ID = "govuk_polling_responses"
 GCP_LOCATION = "EU"
 
 # Text columns to clear (sensitive data)
-TEXT_COLUMNS = ["ql6", "ql10mar24", "ql11"]
+TEXT_COLUMNS = ["ql6", "ql10mar24", "ql11", "ql8", "ql9", "ql10", "ql10mar", "ql4a_95_other", "ql13mar"]
 
 # Wave numbers to process
 WAVES = [4, 5, 6, 7, 8, 9, 10, 11,12,13,14]
