@@ -1,6 +1,6 @@
 config {
     type: "table",
-    database: "govuk-polling",
+    database: "gds-bq-data",
     schema: "govuk_polling_responses",
     columns: {
       survey_wave_question_id: "Unique identifier for a specific question within a specific wave.",

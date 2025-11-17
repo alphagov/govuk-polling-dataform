@@ -6,7 +6,7 @@ Excluded from nonNull Assertions:
 **/
 config {
     type: "table",
-    database: "govuk-polling",
+    database: "gds-bq-data",
     schema: "govuk_polling_responses",
     assertions: {
         uniqueKey: ["survey_response_id"],
