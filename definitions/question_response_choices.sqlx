@@ -1,6 +1,6 @@
 config {
     type: "table",
-    database: "govuk-polling",
+    database: "gds-bq-data",
     schema: "govuk_polling_responses",
     assertions: {
         uniqueKey: ["question_response_choice_id"],
